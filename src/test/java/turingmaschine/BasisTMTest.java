@@ -1,3 +1,5 @@
+package turingmaschine;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -16,7 +18,7 @@ import turingmaschine.NormalesZeichen;
 import turingmaschine.TuringMaschine;
 import turingmaschine.Zustand;
 
-public class BasisTest {
+public class BasisTMTest {
 	
 	@Before
 	public void setUp() {
