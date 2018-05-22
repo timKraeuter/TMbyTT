@@ -42,8 +42,38 @@ public class Band {
 	}
 	
 	public Band verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung) {
-		// Sonderfälle wenn die position bei 0 oder der Länge der Liste bzw. offset bei 1 ist.
-		throw new UnsupportedOperationException();
+		
+		final List<Zeichen> inhalteDesNeuenBands = new ArrayList<>();
+		inhalteDesNeuenBands.addAll(this.inhalteDesBands);
+		if (this.inhalteDesBands.isEmpty()) {
+			inhalteDesNeuenBands.add(Blank.getInstance());
+		} else {
+			inhalteDesNeuenBands.set(this.positionDesSchreibLeseKopfes, zuSchreibendesZeichen);
+		}
+		
+		final int positionDesNeuenSchreibLeseKopfes;
+		switch (lesekopfBewegung) {
+		case Rechts:
+			positionDesNeuenSchreibLeseKopfes = this.positionDesSchreibLeseKopfes + 1;
+			if (this.inhalteDesBands.size() == positionDesNeuenSchreibLeseKopfes) {
+				inhalteDesNeuenBands.add(Blank.getInstance());
+			}
+			break;
+		case Links:
+			positionDesNeuenSchreibLeseKopfes = this.positionDesSchreibLeseKopfes - 1;
+			if (positionDesNeuenSchreibLeseKopfes == -1) {
+				inhalteDesNeuenBands.add(0, Blank.getInstance());
+			}
+			break;
+		case Neutral:
+			positionDesNeuenSchreibLeseKopfes = this.positionDesSchreibLeseKopfes;
+			break;
+		default:
+			throw new RuntimeException();
+		}
+		
+		return Band.create(inhalteDesNeuenBands, positionDesNeuenSchreibLeseKopfes);
+		// TODO: Sonderfälle wenn die position bei 0 oder der Länge der Liste bzw. offset bei 1 ist.
 	}
 	
 	@Override
@@ -87,6 +117,10 @@ public class Band {
 		this.inhalteDesBands.forEach(z -> s.append(z.getZeichen()).append(" "));
 		return "{ " + "Position des Schreiblesekopfes: " + this.positionDesSchreibLeseKopfes +
 				", Inhalt des Bandes: " + s.toString() + " }";
+	}
+	
+	public Zeichen getAktuellesZeichen() {
+		return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
 	}
 	
 }

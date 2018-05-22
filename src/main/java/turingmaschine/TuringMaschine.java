@@ -1,5 +1,6 @@
 package turingmaschine;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class TuringMaschine {
@@ -36,8 +37,26 @@ public class TuringMaschine {
 	// Wir gehen erstmal von deterministisch aus
 	// Hier wird wild ein Band erzeugt und so ein Gedöns.
 	public Konfiguration simuliere(final String eingabe) {
-		Band.create(eingabe);
-		throw new UnsupportedOperationException();
+		final Band eingabeBand = Band.create(eingabe);
+		
+		Konfiguration laufendeConfig = Konfiguration.create(this.startZustand, eingabeBand, this);
+		while (!laufendeConfig.isEndKonfiguration()) {
+			final Optional<Konfiguration> naechsteConfig = this.step(laufendeConfig);
+			if (!naechsteConfig.isPresent()) {
+				return laufendeConfig;
+			}
+			laufendeConfig = naechsteConfig.get();
+		}
+		return laufendeConfig;
+	}
+	
+	private Optional<Konfiguration> step(final Konfiguration konfiguration) {
+		final Optional<ElementDerUeberfuehrungsfunktion> ueberfuehrung =
+				this.ueberfuehrungsfunktion.stream().filter(e -> e.istPassendeUeberfuehrungZu(konfiguration)).findFirst();
+		if (ueberfuehrung.isPresent()) {
+			return Optional.of(konfiguration.doUeberfuehrung(ueberfuehrung.get()));
+		}
+		return Optional.empty();
 	}
 	
 	public boolean erkenntEingabe(final String eingabe) {
@@ -51,6 +70,10 @@ public class TuringMaschine {
 	
 	public void loadFromFile(final String path) {
 		throw new UnsupportedOperationException();
+	}
+	
+	public boolean isEndzustand(final Zustand moeglicherEndzustand) {
+		return this.endZustaende.contains(moeglicherEndzustand);
 	}
 	
 }

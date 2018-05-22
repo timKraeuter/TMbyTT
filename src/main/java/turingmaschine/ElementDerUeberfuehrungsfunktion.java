@@ -52,4 +52,53 @@ public class ElementDerUeberfuehrungsfunktion {
 		return Objects.hash(this.vonZustand, this.zuZustand, this.eingabe, this.zuSchreibendesZeichen, this.lesekopfBewegung);
 	}
 	
+	public boolean istPassendeUeberfuehrungZu(final Konfiguration konfiguration) {
+		return this.eingabe.equals(konfiguration.getAktuellesZeichen());
+	}
+	
+	/**
+	 * Üblicher Getter für das Attribut zuZustand.
+	 * 
+	 * @return liefert zuZustand.
+	 */
+	public Zustand getZuZustand() {
+		return this.zuZustand;
+	}
+	
+	/**
+	 * Üblicher Getter für das Attribut vonZustand.
+	 * 
+	 * @return liefert vonZustand.
+	 */
+	public Zustand getVonZustand() {
+		return this.vonZustand;
+	}
+	
+	/**
+	 * Üblicher Getter für das Attribut eingabe.
+	 * 
+	 * @return liefert eingabe.
+	 */
+	public Zeichen getEingabe() {
+		return this.eingabe;
+	}
+	
+	/**
+	 * Üblicher Getter für das Attribut zuSchreibendesZeichen.
+	 * 
+	 * @return liefert zuSchreibendesZeichen.
+	 */
+	public Zeichen getZuSchreibendesZeichen() {
+		return this.zuSchreibendesZeichen;
+	}
+	
+	/**
+	 * Üblicher Getter für das Attribut lesekopfBewegung.
+	 * 
+	 * @return liefert lesekopfBewegung.
+	 */
+	public Lesekopfbewegung getLesekopfBewegung() {
+		return this.lesekopfBewegung;
+	}
+	
 }
