@@ -120,7 +120,10 @@ public class Band {
 	}
 	
 	public Zeichen getAktuellesZeichen() {
-		return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
+		if (this.inhalteDesBands.isEmpty()) {
+		    return Blank.getInstance();
+        }
+	    return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
 	}
 	
 }

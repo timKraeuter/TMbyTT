@@ -10,14 +10,6 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import turingmaschine.Blank;
-import turingmaschine.ElementDerUeberfuehrungsfunktion;
-import turingmaschine.LeeresWort;
-import turingmaschine.Lesekopfbewegung;
-import turingmaschine.NormalesZeichen;
-import turingmaschine.TuringMaschine;
-import turingmaschine.Zustand;
-
 public class BasisTMTest {
 	
 	@Before
@@ -28,8 +20,7 @@ public class BasisTMTest {
 	public void leereEingabeWirdErkannt() {
 		final Zustand startZustand = Zustand.create();
 		final Zustand endZustand = Zustand.create();
-		final TuringMaschine turingMaschine = TuringMaschine.create(Collections.singleton(LeeresWort.getInstance()),
-				startZustand,
+		final TuringMaschine turingMaschine = TuringMaschine.create(startZustand,
 				Collections.emptySet(),
 				Collections.singleton(endZustand),
 				Collections.singleton(ElementDerUeberfuehrungsfunktion.create(startZustand,
@@ -80,11 +71,10 @@ public class BasisTMTest {
 				Lesekopfbewegung.Neutral));
 		
 		
-		final TuringMaschine turingMaschine = TuringMaschine.create(Collections.singleton(LeeresWort.getInstance()),
-				startZustand,
-				zustaende,
-				Collections.singleton(endZustand),
-				ueberfuehrungsfunktion);
+		final TuringMaschine turingMaschine = TuringMaschine.create(startZustand,
+				                                                    zustaende,
+				                                                    Collections.singleton(endZustand),
+				                                                    ueberfuehrungsfunktion);
 		
 		assertTrue(turingMaschine.erkenntEingabe("123"));
 		assertFalse(turingMaschine.erkenntEingabe("1"));

@@ -2,11 +2,9 @@ package turingmaschine;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TuringMaschine {
-	
-	// TODO evtl. arbeitsalphabet von eingabealphabet unterscheiden.
-	private final Set<Zeichen> arbeitsalphabet;
 	
 	private final Zustand startZustand;
 	private final Set<Zustand> zustaende;
@@ -14,24 +12,21 @@ public class TuringMaschine {
 	
 	private final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion;
 	
-	private TuringMaschine(final Set<Zeichen> arbeitsalphabet,
-			final Zustand startZustand,
+	private TuringMaschine(final Zustand startZustand,
 			final Set<Zustand> zustaende,
 			final Set<Zustand> endZustaende,
 			final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion) {
-		this.arbeitsalphabet = arbeitsalphabet;
 		this.startZustand = startZustand;
 		this.zustaende = zustaende;
 		this.endZustaende = endZustaende;
 		this.ueberfuehrungsfunktion = ueberfuehrungsfunktion;
 	}
 	
-	public static TuringMaschine create(final Set<Zeichen> arbeitsalphabet,
-			final Zustand startZustand,
+	public static TuringMaschine create(final Zustand startZustand,
 			final Set<Zustand> zustaende,
 			final Set<Zustand> endZustaende,
 			final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion) {
-		return new TuringMaschine(arbeitsalphabet, startZustand, zustaende, endZustaende, ueberfuehrungsfunktion);
+		return new TuringMaschine(startZustand, zustaende, endZustaende, ueberfuehrungsfunktion);
 	}
 	
 	// Wir gehen erstmal von deterministisch aus
@@ -75,5 +70,20 @@ public class TuringMaschine {
 	public boolean isEndzustand(final Zustand moeglicherEndzustand) {
 		return this.endZustaende.contains(moeglicherEndzustand);
 	}
-	
+
+	public Set<Zeichen> getArbeitsalphabet() {
+        final Set<Zeichen> arbeitsalphabet = this.ueberfuehrungsfunktion.stream()
+                .map(ElementDerUeberfuehrungsfunktion::getZuSchreibendesZeichen)
+                .collect(Collectors.toSet());
+        arbeitsalphabet.addAll(this.getEingabealphabet());
+        arbeitsalphabet.add(Blank.getInstance());
+        return arbeitsalphabet;
+    }
+
+	// TODO was bringt das Eingabealphabet und der Blank darf hier eigentlich nicht rein. siehe def. seite 4 und 5
+    public Set<Zeichen> getEingabealphabet() {
+	    return this.ueberfuehrungsfunktion.stream()
+                .map(ElementDerUeberfuehrungsfunktion::getEingabe)
+                .collect(Collectors.toSet());
+    }
 }
