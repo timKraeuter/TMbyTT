@@ -33,4 +33,13 @@ public class Konfiguration {
 				this.tM);
 	}
 	
+	/**
+	 * Üblicher Getter für das Attribut zustand.
+	 * 
+	 * @return liefert zustand.
+	 */
+	public Zustand getZustand() {
+		return this.zustand;
+	}
+	
 }

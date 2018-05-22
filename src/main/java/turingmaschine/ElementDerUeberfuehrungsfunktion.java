@@ -53,7 +53,7 @@ public class ElementDerUeberfuehrungsfunktion {
 	}
 	
 	public boolean istPassendeUeberfuehrungZu(final Konfiguration konfiguration) {
-		return this.eingabe.equals(konfiguration.getAktuellesZeichen());
+		return this.eingabe.equals(konfiguration.getAktuellesZeichen()) && this.vonZustand.equals(konfiguration.getZustand());
 	}
 	
 	/**
