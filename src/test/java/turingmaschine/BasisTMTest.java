@@ -21,13 +21,12 @@ public class BasisTMTest {
 		final Zustand startZustand = Zustand.create();
 		final Zustand endZustand = Zustand.create();
 		final TuringMaschine turingMaschine = TuringMaschine.create(startZustand,
-				Collections.emptySet(),
 				Collections.singleton(endZustand),
 				Collections.singleton(ElementDerUeberfuehrungsfunktion.create(startZustand,
 						endZustand,
 						Blank.getInstance(),
 						Blank.getInstance(),
-						Lesekopfbewegung.Neutral)));
+						Lesekopfbewegung.N)));
 		assertTrue(turingMaschine.erkenntEingabe(""));
 		assertFalse(turingMaschine.erkenntEingabe("a"));
 		assertFalse(turingMaschine.erkenntEingabe("b"));
@@ -43,36 +42,31 @@ public class BasisTMTest {
 		final Zustand z1 = Zustand.create();
 		final Zustand z2 = Zustand.create();
 		final Zustand z3 = Zustand.create();
-		
-		zustaende.add(z1);
-		zustaende.add(z2);
-		zustaende.add(z3);
-		
+
 		final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion = new HashSet<>();
 		ueberfuehrungsfunktion.add(ElementDerUeberfuehrungsfunktion.create(startZustand,
 				z1,
 				NormalesZeichen.create('1'),
 				Blank.getInstance(),
-				Lesekopfbewegung.Rechts));
+				Lesekopfbewegung.R));
 		ueberfuehrungsfunktion.add(ElementDerUeberfuehrungsfunktion.create(z1,
 				z2,
 				NormalesZeichen.create('2'),
 				Blank.getInstance(),
-				Lesekopfbewegung.Rechts));
+				Lesekopfbewegung.R));
 		ueberfuehrungsfunktion.add(ElementDerUeberfuehrungsfunktion.create(z2,
 				z3,
 				NormalesZeichen.create('3'),
 				Blank.getInstance(),
-				Lesekopfbewegung.Rechts));
+				Lesekopfbewegung.R));
 		ueberfuehrungsfunktion.add(ElementDerUeberfuehrungsfunktion.create(z3,
 				endZustand,
 				Blank.getInstance(),
 				Blank.getInstance(),
-				Lesekopfbewegung.Neutral));
+				Lesekopfbewegung.N));
 		
 		
 		final TuringMaschine turingMaschine = TuringMaschine.create(startZustand,
-				                                                    zustaende,
 				                                                    Collections.singleton(endZustand),
 				                                                    ueberfuehrungsfunktion);
 		

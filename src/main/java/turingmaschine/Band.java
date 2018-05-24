@@ -53,19 +53,19 @@ public class Band {
 		
 		final int positionDesNeuenSchreibLeseKopfes;
 		switch (lesekopfBewegung) {
-		case Rechts:
+		case R:
 			positionDesNeuenSchreibLeseKopfes = this.positionDesSchreibLeseKopfes + 1;
 			if (this.inhalteDesBands.size() == positionDesNeuenSchreibLeseKopfes) {
 				inhalteDesNeuenBands.add(Blank.getInstance());
 			}
 			break;
-		case Links:
+		case L:
 			positionDesNeuenSchreibLeseKopfes = this.positionDesSchreibLeseKopfes - 1;
 			if (positionDesNeuenSchreibLeseKopfes == -1) {
 				inhalteDesNeuenBands.add(0, Blank.getInstance());
 			}
 			break;
-		case Neutral:
+		case N:
 			positionDesNeuenSchreibLeseKopfes = this.positionDesSchreibLeseKopfes;
 			break;
 		default:
@@ -110,20 +110,25 @@ public class Band {
 		return true;
 	}
 	
-	@Override
-	public
-	String toString() {
-		final StringBuilder s = new StringBuilder();
-		this.inhalteDesBands.forEach(z -> s.append(z.getZeichen()).append(" "));
-		return "{ " + "Position des Schreiblesekopfes: " + this.positionDesSchreibLeseKopfes +
-				", Inhalt des Bandes: " + s.toString() + " }";
-	}
-	
+
 	public Zeichen getAktuellesZeichen() {
 		if (this.inhalteDesBands.isEmpty()) {
 		    return Blank.getInstance();
         }
 	    return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
 	}
-	
+
+    public boolean bandContains(final String bandInhalt) {
+        return this.toString().contains(bandInhalt);
+    }
+
+	@Override
+	public
+	String toString() {
+        final StringBuilder builder = new StringBuilder();
+	    for (Zeichen zeichen: inhalteDesBands) {
+	        builder.append(zeichen.getZeichen());
+        }
+        return builder.toString();
+	}
 }

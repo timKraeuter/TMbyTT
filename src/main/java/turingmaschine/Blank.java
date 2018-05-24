@@ -17,7 +17,6 @@ public class Blank implements Zeichen{
 	
 	@Override
 	public Character getZeichen() {
-		// TODO: Wir brauchen eine char-Repräsentation denke ich: □
-		return null;
+		return BLANK;
 	}
 }

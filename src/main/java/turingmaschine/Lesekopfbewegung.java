@@ -1,5 +1,5 @@
 package turingmaschine;
 
 public enum Lesekopfbewegung {
-    Rechts, Links, Neutral;
+    R, L, N;
 }

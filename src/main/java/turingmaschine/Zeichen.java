@@ -1,7 +1,16 @@
 package turingmaschine;
 
 public interface Zeichen {
-	
-	Character getZeichen();
+
+    char BLANK = '_';
+
+    static Zeichen create(Character eingabeZeichen) {
+        if (eingabeZeichen.equals(BLANK)) {
+            return Blank.getInstance();
+        }
+        return NormalesZeichen.create(eingabeZeichen);
+    }
+
+    Character getZeichen();
 	
 }

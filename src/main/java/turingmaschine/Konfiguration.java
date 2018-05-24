@@ -41,5 +41,8 @@ public class Konfiguration {
 	public Zustand getZustand() {
 		return this.zustand;
 	}
-	
+
+    public boolean bandContains(final String bandInhalt) {
+        return this.band.bandContains(bandInhalt);
+    }
 }
