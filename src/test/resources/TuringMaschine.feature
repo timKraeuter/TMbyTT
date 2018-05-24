@@ -9,7 +9,7 @@ Feature: Verschiedene Turingmaschinen werden getestet.
     And die Turingmaschine mit dem Namen Testgedöns hat den Endzustand Ze
     When das Wort a in die Turingmaschine mit dem Namen Testgedöns eingegeben wird
     Then wurde das Wort a erkannt
-    And das Band enthält bei Eingabe von a ♥
+    And bei Eingabe von a enthält das Band ♥
 
 
   Scenario: Turingmaschine kann die Sprache a^xb^y erkennen. x und y element aus N >= 1.
