@@ -9,6 +9,7 @@ import cucumber.api.java.en.When;
 import turingmaschine.ElementDerUeberfuehrungsfunktion;
 import turingmaschine.Konfiguration;
 import turingmaschine.Lesekopfbewegung;
+import turingmaschine.TuringMaschine;
 import turingmaschine.TuringMaschinenBuilder;
 import turingmaschine.Zeichen;
 import turingmaschine.Zustand;
@@ -27,35 +28,33 @@ public class TMStepdefs {
 
     private Map<String, TuringMaschinenBuilder> turingMaschinen;
     private Map<String, Zustand> zustaende;
-    private Map<String, Set<Konfiguration>> ergebnisseBeiWorteingabe;
 
 
     @Before
     public void beforeScenario() {
         turingMaschinen = new HashMap<>();
         zustaende = new HashMap<>();
-        ergebnisseBeiWorteingabe = new HashMap<>();
     }
 
-    @Given("eine Turingmaschine mit dem Namen (.+)")
+    @Given("eine TM mit dem Namen (.+)")
     public void eineTuringmaschineMitDemNamen(String nameDerTM) {
         turingMaschinen.put(nameDerTM, TuringMaschinenBuilder.create());
     }
 
-    @Given("die Turingmaschine mit dem Namen (.+) hat den Startzustand (.+)")
+    @Given("die TM mit dem Namen (.+) hat den Startzustand (.+)")
     public void dieTuringmaschineMitDemNamenHatDenStartzustand(String nameDerTM, String nameDesStartzustandes){
         final Zustand startZustand = Zustand.create(nameDesStartzustandes);
         zustaende.put(nameDesStartzustandes, startZustand);
         this.getTM(nameDerTM).startZustand(startZustand);
     }
 
-    @Given("die Turingmaschine mit dem Namen (.+) hat den Endzustand (.+)")
+    @Given("die TM mit dem Namen (.+) hat den Endzustand (.+)")
     public void dieTuringmaschineMitDemNamenHatDenEndzustand(String nameDerTM, String nameEinesEndzustands) {
         final Zustand endZustand = getOrCreateZustand(nameEinesEndzustands);
         this.getTM(nameDerTM).addEndZustand(endZustand);
     }
 
-    @Given("die Turingmaschine mit dem Namen (.+) hat die Überführungsfunktion:")
+    @Given("die TM mit dem Namen (.+) hat die Überführungsfunktion:")
     public void dieTuringmaschineMitDemNamenHatDieUeberfuehrungsfunktion(String nameDerTM, List<UeberfuehrungsDAO> ueberfuehrungen) {
         this.getTM(nameDerTM).ueberfuehrungsfunktion(this.parseUeberfuhrungsfunktion(ueberfuehrungen));
     }
@@ -96,20 +95,21 @@ public class TMStepdefs {
         return ElementDerUeberfuehrungsfunktion.create(vonZustand, zuZustand, eingabe, zuSchreibendesZeichen, lesekopfbewegung);
     }
 
-    @When("das Wort (.+) in die Turingmaschine mit dem Namen (.+) eingegeben wird")
-    public void dasWortInDieTuringmaschineMitDemNamenEingegebenWird(String eingabe, String nameDerTM) {
-        this.ergebnisseBeiWorteingabe.put(eingabe, this.getTM(nameDerTM).build().simuliere(eingabe));
-    }
-
-    @Then("wurde das Wort (.+) erkannt")
-    public void wurdeDasWortErkannt(String eingabe) {
-        assertTrue(! this.ergebnisseBeiWorteingabe.get(eingabe).isEmpty());
-    }
-
-    @Then("bei Eingabe von (.+) enthält das Band (.+)")
-    public void dasBandEnthaeltBeiEingabeVon(String eingabe, String bandInhalt) {
-        assertTrue(this.ergebnisseBeiWorteingabe.get(eingabe).stream()
+    @Then("bei Eingabe von (.+) bei der TM (.+) enthält das Band (.+)")
+    public void dasBandEnthaeltBeiEingabeVon(String eingabe, String nameDerTM, String bandInhalt) {
+        assertTrue(this.getTM(nameDerTM).build().simuliere(eingabe).stream()
         .anyMatch(konfiguration -> konfiguration.bandContains(bandInhalt)));
     }
 
+    @Then("die TM (.+) erkennt die Wörter:")
+    public void dieTuringmaschineErkenntDieWoerter(String nameDerTM, List<String> eingaben) {
+        final TuringMaschine tm = this.getTM(nameDerTM).build();
+        assertTrue(eingaben.stream().allMatch(tm::erkenntEingabe));
+    }
+
+    @Then("die TM (.+) erkennt nicht die Wörter:")
+    public void dieTMErkenntNichtDieWoerter(String nameDerTM, List<String> eingaben) {
+        final TuringMaschine tm = this.getTM(nameDerTM).build();
+        assertTrue(eingaben.stream().noneMatch(tm::erkenntEingabe));
+    }
 }
