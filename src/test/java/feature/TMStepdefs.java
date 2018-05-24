@@ -106,7 +106,7 @@ public class TMStepdefs {
         assertTrue(! this.ergebnisseBeiWorteingabe.get(eingabe).isEmpty());
     }
 
-    @Then("das Band enthält bei Eingabe von (.+) (.+)")
+    @Then("bei Eingabe von (.+) enthält das Band (.+)")
     public void dasBandEnthaeltBeiEingabeVon(String eingabe, String bandInhalt) {
         assertTrue(this.ergebnisseBeiWorteingabe.get(eingabe).stream()
         .anyMatch(konfiguration -> konfiguration.bandContains(bandInhalt)));

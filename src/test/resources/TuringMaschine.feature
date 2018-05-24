@@ -26,4 +26,4 @@ Feature: Verschiedene Turingmaschinen werden getestet.
     When das Wort ab in die Turingmaschine mit dem Namen AB eingegeben wird
     When das Wort aba in die Turingmaschine mit dem Namen AB eingegeben wird
     Then wurde das Wort ab erkannt
-    And das Band enthält bei Eingabe von ab ♥♥
+    And bei Eingabe von ab enthält das Band ♥♥
