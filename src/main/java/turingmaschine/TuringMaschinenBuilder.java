@@ -5,42 +5,54 @@ import java.util.Objects;
 import java.util.Set;
 
 public class TuringMaschinenBuilder {
-
-    private Zustand startZustand;
-    private Set<Zustand> endZustaende;
-    private Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion;
-
-    private TuringMaschinenBuilder() {
-        this.endZustaende = new HashSet<>();
-    }
-
-    public static TuringMaschinenBuilder create() {
-        return new TuringMaschinenBuilder();
-    }
-
-    public TuringMaschine build() {
-        if (Objects.isNull(startZustand)) {
-           throw new RuntimeException("Bitte Startzustand der TM setzen.");
-        }
-        if (endZustaende.isEmpty()) {
-           throw new RuntimeException("Bitte Endzustände der TM setzen.");
-        }
-        if (Objects.isNull(ueberfuehrungsfunktion)) {
-           throw new RuntimeException("Bitte Überführungsfunktion der TM setzen.");
-        }
-        return TuringMaschine.create(startZustand, endZustaende, ueberfuehrungsfunktion);
-    }
-
-    public void startZustand(final Zustand startZustand) {
-        this.startZustand = startZustand;
-    }
-
-    public void addEndZustand(final Zustand endZustaend) {
-        this.endZustaende.add(endZustaend);
-    }
-
-    public void ueberfuehrungsfunktion(final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion) {
-        this.ueberfuehrungsfunktion = ueberfuehrungsfunktion;
-    }
-
+	
+	private Zustand startZustand;
+	private final Set<Zustand> endZustaende;
+	private Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion;
+	private int anzahlDerBaender;
+	
+	private TuringMaschinenBuilder() {
+		this.endZustaende = new HashSet<>();
+	}
+	
+	public static TuringMaschinenBuilder create() {
+		return new TuringMaschinenBuilder();
+	}
+	
+	public TuringMaschine build() {
+		if (Objects.isNull(this.startZustand)) {
+			throw new RuntimeException("Bitte Startzustand der TM setzen.");
+		}
+		if (this.endZustaende.isEmpty()) {
+			throw new RuntimeException("Bitte Endzustände der TM setzen.");
+		}
+		if (Objects.isNull(this.ueberfuehrungsfunktion)) {
+			throw new RuntimeException("Bitte Überführungsfunktion der TM setzen.");
+		}
+		if (Objects.isNull(this.anzahlDerBaender)) {
+			throw new RuntimeException("Bitte Anzahl der Bänder der TM setzen.");
+		}
+		return TuringMaschine.create(this.startZustand, this.endZustaende, this.ueberfuehrungsfunktion, this.anzahlDerBaender);
+	}
+	
+	public TuringMaschinenBuilder startZustand(final Zustand startZustand) {
+		this.startZustand = startZustand;
+		return this;
+	}
+	
+	public TuringMaschinenBuilder addEndZustand(final Zustand endZustaend) {
+		this.endZustaende.add(endZustaend);
+		return this;
+	}
+	
+	public TuringMaschinenBuilder ueberfuehrungsfunktion(final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion) {
+		this.ueberfuehrungsfunktion = ueberfuehrungsfunktion;
+		return this;
+	}
+	
+	public TuringMaschinenBuilder anzahlDerBaender(final int anzahlDerBaender) {
+		this.anzahlDerBaender = anzahlDerBaender;
+		return this;
+	}
+	
 }

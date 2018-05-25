@@ -46,12 +46,12 @@ public class Band {
 		final List<Zeichen> inhalteDesNeuenBands = new ArrayList<>();
 		inhalteDesNeuenBands.addAll(this.inhalteDesBands);
 		if (this.inhalteDesBands.isEmpty()) {
-			inhalteDesNeuenBands.add(Blank.getInstance());
+			inhalteDesNeuenBands.add(0, zuSchreibendesZeichen);
 		} else {
 			inhalteDesNeuenBands.set(this.positionDesSchreibLeseKopfes, zuSchreibendesZeichen);
 		}
 		
-		final int positionDesNeuenSchreibLeseKopfes;
+		int positionDesNeuenSchreibLeseKopfes;
 		switch (lesekopfBewegung) {
 		case R:
 			positionDesNeuenSchreibLeseKopfes = this.positionDesSchreibLeseKopfes + 1;
@@ -63,6 +63,7 @@ public class Band {
 			positionDesNeuenSchreibLeseKopfes = this.positionDesSchreibLeseKopfes - 1;
 			if (positionDesNeuenSchreibLeseKopfes == -1) {
 				inhalteDesNeuenBands.add(0, Blank.getInstance());
+				positionDesNeuenSchreibLeseKopfes = 0;
 			}
 			break;
 		case N:
@@ -110,25 +111,25 @@ public class Band {
 		return true;
 	}
 	
-
+	
 	public Zeichen getAktuellesZeichen() {
 		if (this.inhalteDesBands.isEmpty()) {
-		    return Blank.getInstance();
-        }
-	    return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
+			return Blank.getInstance();
+		}
+		return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
 	}
-
-    public boolean bandContains(final String bandInhalt) {
-        return this.toString().contains(bandInhalt);
-    }
-
+	
+	public boolean bandContains(final String bandInhalt) {
+		return this.toString().contains(bandInhalt);
+	}
+	
 	@Override
 	public
 	String toString() {
-        final StringBuilder builder = new StringBuilder();
-	    for (Zeichen zeichen: inhalteDesBands) {
-	        builder.append(zeichen.getZeichen());
-        }
-        return builder.toString();
+		final StringBuilder builder = new StringBuilder();
+		for (final Zeichen zeichen: this.inhalteDesBands) {
+			builder.append(zeichen.getZeichen());
+		}
+		return builder.toString();
 	}
 }
