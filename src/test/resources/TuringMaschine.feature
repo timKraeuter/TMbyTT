@@ -40,4 +40,6 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | b |
       | bb |
       | irgendwas |
+      | aba |
+      | aabba |
     And bei Eingabe von ab bei der TM AB enthält das Band ♥♥
