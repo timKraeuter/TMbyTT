@@ -42,10 +42,10 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | irgendwas |
     And bei Eingabe von ab bei der TM AB enthält das Band ♥♥
 
-  Scenario: Turingmaschine kann die Sprache a^nb^n erkennen. n element aus N >= 1.
-    Given eine TM mit dem Namen AB und 1 Bändern
-    And die TM mit dem Namen AB hat den Startzustand Start
-    And die TM mit dem Namen AB hat die Überführungsfunktion:
+  Scenario: Turingmaschine kann die Sprache 0^n1^n erkennen. n element aus N >= 1.
+    Given eine TM mit dem Namen 0^n1^n und 1 Bändern
+    And die TM mit dem Namen 0^n1^n hat den Startzustand Start
+    And die TM mit dem Namen 0^n1^n hat die Überführungsfunktion:
       | vonZustand | zuZustand  | eingabeZeichen | zuSchreibendeZeichen | schreibLesekopfBewegungen |
       | Start      | OK         | _              | _                    | N                         |
       | Start      | SucheMitte |              0 |                    0 | N                         |
@@ -59,14 +59,14 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | Lösche1    | Lösche0    |              1 | X                    | L                         |
       | Kontrolle  | Kontrolle  | X              | X                    | R                         |
       | Kontrolle  | OK         | _              | _                    | N                         |
-    And die TM mit dem Namen AB hat den Endzustand OK
-    Then die TM AB erkennt die Wörter:
+    And die TM mit dem Namen 0^n1^n hat den Endzustand OK
+    Then die TM 0^n1^n erkennt die Wörter:
       |          |
       |       01 |
       |     0011 |
       |   000111 |
       | 00001111 |
-    And die TM AB erkennt nicht die Wörter:
+    And die TM 0^n1^n erkennt nicht die Wörter:
       |         0 |
       |        00 |
       |         1 |

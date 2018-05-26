@@ -1,25 +1,13 @@
 package feature;
 
+import com.google.common.base.Splitter;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import turingmaschine.ElementDerUeberfuehrungsfunktion;
-import turingmaschine.Lesekopfbewegung;
-import turingmaschine.TuringMaschine;
-import turingmaschine.TuringMaschinenBuilder;
-import turingmaschine.Zeichen;
-import turingmaschine.Zustand;
+import turingmaschine.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-
-import com.google.common.base.Splitter;
 
 import static org.junit.Assert.assertTrue;
 
@@ -93,7 +81,7 @@ public class TMStepdefs {
 				.map(string -> Zeichen.create(string.charAt(0))).collect(Collectors.toList());
 		
 		final List<Lesekopfbewegung> lesekopfbewegungen = this.splitSemikolon(ueberfuehrungsDAO.getSchreibLesekopfBewegungen()).stream()
-				.map(string -> Lesekopfbewegung.valueOf(string)).collect(Collectors.toList());
+				.map(Lesekopfbewegung::valueOf).collect(Collectors.toList());
 		
 		return ElementDerUeberfuehrungsfunktion.create(vonZustand, zuZustand, eingabe, zuSchreibendeZeichen, lesekopfbewegungen);
 	}
@@ -136,7 +124,7 @@ public class TMStepdefs {
 	
 	private List<String> splitSemikolon(final String eingabe) {
 		final List<String> result = new ArrayList<>();
-		Splitter.on(SEMIKOLOn).split(eingabe).forEach(string -> result.add(string));
+		Splitter.on(SEMIKOLOn).split(eingabe).forEach(result::add);
 		return result;
 	}
 }
