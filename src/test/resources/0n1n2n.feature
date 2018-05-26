@@ -17,6 +17,7 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | z3         | ok        | X              | X                    | N                         |
       | z3         | z4        | 2              | X                    | L                         |
       | z4         | z5        | 1              | 2                    | L                         |
+      | z4         | z4        | 2              | 2                    | L                         |
       | z5         | z5        | 0              | 0                    | L                         |
       | z5         | z5        | 1              | 1                    | L                         |
       | z5         | z5        | 2              | 2                    | L                         |

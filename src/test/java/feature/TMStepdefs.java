@@ -101,8 +101,12 @@ public class TMStepdefs {
 	
 	@Then("die TM (.+) erkennt nicht die Wörter:")
 	public void dieTMErkenntNichtDieWoerter(final String nameDerTM, final List<String> eingaben) {
-		final TuringMaschine tm = this.getTM(nameDerTM).build();
-		assertTrue(eingaben.stream().noneMatch(tm::erkenntEingabe));
+	    final TuringMaschine tm = this.getTM(nameDerTM).build();
+        for( String eingabe : eingaben) {
+            Set<Konfiguration> resultat = tm.simuliere(Collections.singletonList(eingabe));
+            System.out.println(resultat);
+        }
+	    assertTrue(eingaben.stream().noneMatch(tm::erkenntEingabe));
 	}
 	
 	@Then("die TM mit dem Namen (.+) hat bei folgender Eingabe die folgende Ausgabe auf Band (\\d+):")
