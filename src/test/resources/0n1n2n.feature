@@ -13,8 +13,8 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | z1         | z2        | X              | X                    | L                         |
       | z1         | z2        | _              | _                    | L                         |
       | z2         | z3        | 2              | X                    | L                         |
-      | z3         | z3        | 1              | X                    | L                         |
-      | z3         | ok        | X              | X                    | N                         |
+      | z3         | z6        | 1              | X                    | L                         |
+      | z6         | ok        | X              | X                    | N                         |
       | z3         | z4        | 2              | X                    | L                         |
       | z4         | z5        | 1              | 2                    | L                         |
       | z4         | z4        | 2              | 2                    | L                         |
