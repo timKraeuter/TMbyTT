@@ -25,7 +25,7 @@ public class Band {
 	
 	public static Band create(final String eingabe) {
 		final Band band = new Band(new ArrayList<>(), 0);
-		eingabe.chars().forEach(c -> band.addZeichen(NormalesZeichen.create((char) c)));
+		eingabe.chars().forEach(c -> band.addZeichen(Zeichen.create((char) c)));
 		return band;
 	}
 	

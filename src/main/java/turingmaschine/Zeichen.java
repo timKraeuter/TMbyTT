@@ -4,8 +4,8 @@ public interface Zeichen {
 
     char BLANK = '_';
 
-    static Zeichen create(Character eingabeZeichen) {
-        if (eingabeZeichen.equals(BLANK)) {
+    static Zeichen create(char eingabeZeichen) {
+        if (eingabeZeichen == BLANK) {
             return Blank.getInstance();
         }
         return NormalesZeichen.create(eingabeZeichen);

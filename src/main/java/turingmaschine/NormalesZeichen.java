@@ -7,11 +7,14 @@ public class NormalesZeichen implements Zeichen {
 	public NormalesZeichen(final Character zeichen) {
 		this.zeichen = zeichen;
 	}
-	
-	public static NormalesZeichen create(final Character zeichen) {
+
+	static NormalesZeichen create(final char zeichen) {
+		if (zeichen == BLANK) {
+			throw new RuntimeException("Normales Zeichen darf nicht Blank sein!");
+		}
 		return new NormalesZeichen(zeichen);
 	}
-	
+
 	@Override
 	public Character getZeichen() {
 		return this.zeichen;
@@ -46,5 +49,9 @@ public class NormalesZeichen implements Zeichen {
 		}
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return zeichen.toString();
+	}
 }
