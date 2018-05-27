@@ -5,11 +5,11 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import turingmaschine.ElementDerUeberfuehrungsfunktion;
-import turingmaschine.Lesekopfbewegung;
 import turingmaschine.TuringMaschine;
 import turingmaschine.TuringMaschinenBuilder;
-import turingmaschine.Zeichen;
 import turingmaschine.Zustand;
+import turingmaschine.band.Lesekopfbewegung;
+import turingmaschine.band.zeichen.Zeichen;
 
 import java.util.ArrayList;
 import java.util.Collections;

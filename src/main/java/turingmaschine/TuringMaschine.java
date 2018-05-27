@@ -1,5 +1,9 @@
 package turingmaschine;
 
+import turingmaschine.band.Band;
+import turingmaschine.band.zeichen.Blank;
+import turingmaschine.band.zeichen.Zeichen;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -87,6 +91,12 @@ public class TuringMaschine {
         return this.endZustaende.contains(moeglicherEndzustand);
     }
 
+
+    public TuringMaschine sequence(TuringMaschine t2) {
+        // TODO implementieren
+        throw new UnsupportedOperationException();
+    }
+
     public Set<Zeichen> getArbeitsalphabet() {
         final Set<Zeichen> arbeitsalphabet = this.ueberfuehrungsfunktion.stream()
                 .flatMap(elementDerUeberfuehrungsfunktion -> elementDerUeberfuehrungsfunktion.getZuSchreibendeZeichen().stream())
@@ -119,70 +129,5 @@ public class TuringMaschine {
 
     public static TuringMaschinenBuilder builder() {
         return TuringMaschinenBuilder.create();
-    }
-
-    /**
-     * Erstellt eine Turingmaschine, welche bei Ausführung die Bänder sum1 und sum2
-     * addiert und dabei das Ergebnis in das result-Band schreibt.
-     *
-     * @param sum1   zu addierendes Band.
-     * @param sum2   zu addierendes Band.
-     * @param result Band, auf welches bei Ausführung der TuringMaschine das Ergebnis
-     *               geschrieben wird.
-     * @return Additions-Turingmaschine.
-     */
-    public static TuringMaschine createAdd(final Band sum1, final Band sum2, final Band result) {
-        return null;
-    }
-
-    /**
-     * Erstellt eine Turingmaschine, welche bei Ausführung die Bänder sub und min
-     * voneinander subtrahiert und dabei das Ergebnis in das result-Band schreibt.
-     *
-     * @param sub    subtrahend-Band.
-     * @param min    minuend-Band.
-     * @param result Band, auf welches bei Ausführung der TuringMaschine das Ergebnis
-     *               geschrieben wird.
-     * @return Subtraktions-Turingmaschine.
-     */
-    public static TuringMaschine createSub(final Band sub, final Band min, final Band result) {
-        return null;
-    }
-
-    /**
-     * Erstellt eine Turingmaschine, welche bei Ausführung die Inhalte des
-     * from-Bandes auf das into-Band schreibt.
-     *
-     * @param from zu Kopierendes Band.
-     * @param into Band in welches Kopiert werden soll.
-     * @return Kopier-Turingmaschine.
-     */
-    public static TuringMaschine createCopy(final Band from, final Band into) {
-        return null;
-    }
-
-    /**
-     * Erstellt eine Turingmaschine, welche die TuringMaschine tm solang ausführt,
-     * bis das Condition-Band den Wert 0 hat.
-     *
-     * @param condition zu überprüfende Condition. tm wird solang wiederholt ausgeführt,
-     *                  bis das Condition-Band den Wert 0 hat.
-     * @param tm        wiederholt auszuführende Turingmaschine.
-     * @return While-Turingmaschine.
-     */
-    public static TuringMaschine createWhile(final Band condition, final TuringMaschine tm) {
-        return null;
-    }
-
-    /**
-     * Erstellt eine Turingmaschine, welche die TuringMaschine t1 und t2
-     * hintereinander ausführen kann.
-     *
-     * @param t1 erste auszuführende Turingmaschine.
-     * @param t2 zweite auszuführende Turingmaschine.
-     * @return Sequenz-Turingmaschine.
-     */
-    public static TuringMaschine createSeq(final TuringMaschine t1, final TuringMaschine t2) {
-        return null;
     }
 }

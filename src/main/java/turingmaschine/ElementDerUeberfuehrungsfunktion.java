@@ -1,5 +1,8 @@
 package turingmaschine;
 
+import turingmaschine.band.Lesekopfbewegung;
+import turingmaschine.band.zeichen.Zeichen;
+
 import java.util.List;
 import java.util.Objects;
 

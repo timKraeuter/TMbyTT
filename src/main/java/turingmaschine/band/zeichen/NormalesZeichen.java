@@ -1,4 +1,4 @@
-package turingmaschine;
+package turingmaschine.band.zeichen;
 
 public class NormalesZeichen implements Zeichen {
 	
@@ -41,14 +41,9 @@ public class NormalesZeichen implements Zeichen {
 		}
 		final NormalesZeichen other = (NormalesZeichen) obj;
 		if (this.zeichen == null) {
-			if (other.zeichen != null) {
-				return false;
-			}
-		} else if (!this.zeichen.equals(other.zeichen)) {
-			return false;
-		}
-		return true;
-	}
+            return other.zeichen == null;
+		} else return this.zeichen.equals(other.zeichen);
+    }
 
 	@Override
 	public String toString() {

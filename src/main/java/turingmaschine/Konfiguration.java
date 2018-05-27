@@ -1,5 +1,8 @@
 package turingmaschine;
 
+import turingmaschine.band.Band;
+import turingmaschine.band.zeichen.Zeichen;
+
 import java.util.ArrayList;
 import java.util.List;
 

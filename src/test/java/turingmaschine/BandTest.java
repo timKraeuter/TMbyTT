@@ -1,11 +1,10 @@
 package turingmaschine;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
+import turingmaschine.band.Band;
+import turingmaschine.band.zeichen.Zeichen;
 
-import turingmaschine.Band;
-import turingmaschine.NormalesZeichen;
+import static org.junit.Assert.assertEquals;
 
 public class BandTest {
 	
@@ -22,9 +21,9 @@ public class BandTest {
 		
 		final Band actualBand = Band.create("abc");
 		final Band expectedBand = Band.create();
-		expectedBand.addZeichen(NormalesZeichen.create('a'));
-		expectedBand.addZeichen(NormalesZeichen.create('b'));
-		expectedBand.addZeichen(NormalesZeichen.create('c'));
+		expectedBand.addZeichen(Zeichen.create('a'));
+		expectedBand.addZeichen(Zeichen.create('b'));
+		expectedBand.addZeichen(Zeichen.create('c'));
 		assertEquals(expectedBand, actualBand);
 	}
 }

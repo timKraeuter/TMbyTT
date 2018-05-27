@@ -1,4 +1,7 @@
-package turingmaschine;
+package turingmaschine.band;
+
+import turingmaschine.band.zeichen.Blank;
+import turingmaschine.band.zeichen.Zeichen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +45,8 @@ public class Band {
 	}
 	
 	public Band verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung) {
-		
-		final List<Zeichen> inhalteDesNeuenBands = new ArrayList<>();
-		inhalteDesNeuenBands.addAll(this.inhalteDesBands);
+
+        final List<Zeichen> inhalteDesNeuenBands = new ArrayList<>(this.inhalteDesBands);
 		if (this.inhalteDesBands.isEmpty()) {
 			inhalteDesNeuenBands.add(0, zuSchreibendesZeichen);
 		} else {
@@ -105,11 +107,8 @@ public class Band {
 		} else if (!this.inhalteDesBands.equals(other.inhalteDesBands)) {
 			return false;
 		}
-		if (this.positionDesSchreibLeseKopfes != other.positionDesSchreibLeseKopfes) {
-			return false;
-		}
-		return true;
-	}
+        return this.positionDesSchreibLeseKopfes == other.positionDesSchreibLeseKopfes;
+    }
 	
 	
 	public Zeichen getAktuellesZeichen() {

@@ -1,4 +1,4 @@
-package turingmaschine;
+package turingmaschine.band.zeichen;
 
 import java.util.Objects;
 
