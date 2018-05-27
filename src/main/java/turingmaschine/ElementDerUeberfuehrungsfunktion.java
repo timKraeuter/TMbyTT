@@ -47,7 +47,8 @@ public class ElementDerUeberfuehrungsfunktion {
 		return Objects.equals(this.vonZustand, that.vonZustand) &&
 				Objects.equals(this.zuZustand, that.zuZustand) &&
 				Objects.equals(this.eingaben, that.eingaben) &&
-				Objects.equals(this.zuSchreibendeZeichen, that.zuSchreibendeZeichen) && this.lesekopfBewegungen == that.lesekopfBewegungen;
+				Objects.equals(this.zuSchreibendeZeichen, that.zuSchreibendeZeichen)
+				&& Objects.equals(this.lesekopfBewegungen, that.lesekopfBewegungen);
 	}
 	
 	@Override

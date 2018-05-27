@@ -39,6 +39,12 @@
 			<artifactId>guava</artifactId>
 			<version>23.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.10</version>
+		</dependency>
 
 
 

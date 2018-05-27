@@ -4,6 +4,7 @@ import com.google.common.base.Splitter;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import persistenz.Persistierer;
 import turingmaschine.ElementDerUeberfuehrungsfunktion;
 import turingmaschine.TuringMaschine;
 import turingmaschine.TuringMaschinenBuilder;
@@ -55,6 +56,14 @@ public class TMStepdefs {
 	@Given("die TM mit dem Namen (.+) hat die Überführungsfunktion:")
 	public void dieTuringmaschineMitDemNamenHatDieUeberfuehrungsfunktion(final String nameDerTM, final List<UeberfuehrungsDAO> ueberfuehrungen) {
 		this.getTM(nameDerTM).ueberfuehrungsfunktion(this.parseUeberfuhrungsfunktion(ueberfuehrungen));
+	}
+	
+	@Given("die TM mit dem Namen (.+) wird persistiert und wieder geladen")
+	public void dieTMMitDemNamenWirdPersistiertUndWiederGeladen(final String nameDerTM) {
+		// final File saveLocation = File.createTempFile("output", ".xml");
+		final String xml = Persistierer.getInstance().zuXML(this.turingMaschinen.get(nameDerTM));
+		final TuringMaschinenBuilder geladeneTuringMaschine = (TuringMaschinenBuilder) Persistierer.getInstance().vonXML(xml);
+		this.turingMaschinen.put(nameDerTM, geladeneTuringMaschine);
 	}
 	
 	private TuringMaschinenBuilder getTM(final String nameDerTM) {
@@ -112,8 +121,8 @@ public class TMStepdefs {
 	
 	@Then("die TM (.+) erkennt nicht die Wörter:")
 	public void dieTMErkenntNichtDieWoerter(final String nameDerTM, final List<String> eingaben) {
-	    final TuringMaschine tm = this.getTM(nameDerTM).build();
-	    assertTrue(eingaben.stream().noneMatch(tm::erkenntEingabe));
+		final TuringMaschine tm = this.getTM(nameDerTM).build();
+		assertTrue(eingaben.stream().noneMatch(tm::erkenntEingabe));
 	}
 	
 	@Then("die TM mit dem Namen (.+) hat bei folgender Eingabe die folgende Ausgabe auf Band (\\d+):")
@@ -121,7 +130,7 @@ public class TMStepdefs {
 			final int nummerDesAusgabeBandes,
 			final List<EingabeAusgabeDAO> eingabenAusgaben) {
 		final TuringMaschine tm = this.getTM(nameDerTM).build();
-        /*for (EingabeAusgabeDAO eingabe : eingabenAusgaben) {
+		/*for (EingabeAusgabeDAO eingabe : eingabenAusgaben) {
             final List<String> eingaben = new ArrayList<>(this.splitSemikolon(eingabe.getEingabe()));
             System.out.println(eingabe.getEingabe());
             final Set<Konfiguration> simuliere = tm.simuliere(eingaben);
