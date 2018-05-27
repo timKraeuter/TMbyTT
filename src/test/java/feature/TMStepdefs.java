@@ -4,9 +4,20 @@ import com.google.common.base.Splitter;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import turingmaschine.*;
+import turingmaschine.ElementDerUeberfuehrungsfunktion;
+import turingmaschine.Lesekopfbewegung;
+import turingmaschine.TuringMaschine;
+import turingmaschine.TuringMaschinenBuilder;
+import turingmaschine.Zeichen;
+import turingmaschine.Zustand;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
@@ -110,6 +121,12 @@ public class TMStepdefs {
 			final int nummerDesAusgabeBandes,
 			final List<EingabeAusgabeDAO> eingabenAusgaben) {
 		final TuringMaschine tm = this.getTM(nameDerTM).build();
+        /*for (EingabeAusgabeDAO eingabe : eingabenAusgaben) {
+            final List<String> eingaben = new ArrayList<>(this.splitSemikolon(eingabe.getEingabe()));
+            System.out.println(eingabe.getEingabe());
+            final Set<Konfiguration> simuliere = tm.simuliere(eingaben);
+            System.out.println(simuliere);
+        }*/
 		assertTrue(
 				eingabenAusgaben.stream()
 				.allMatch(eingabeAusgabe -> this.zurEingabeGibtEsPassendeAusgabe(tm, eingabeAusgabe, nummerDesAusgabeBandes)));

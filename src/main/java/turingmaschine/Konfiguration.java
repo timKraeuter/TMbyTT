@@ -19,15 +19,15 @@ public class Konfiguration {
 		return new Konfiguration(zustand, baender, tM);
 	}
 	
-	public boolean isEndKonfiguration() {
+	boolean isEndKonfiguration() {
 		return this.tM.isEndzustand(this.zustand);
 	}
 	
-	public Zeichen getAktuellesZeichen(final int bandNummer) {
+	Zeichen getAktuellesZeichen(final int bandNummer) {
 		return this.baender.get(bandNummer).getAktuellesZeichen();
 	}
 	
-	public Konfiguration doUeberfuehrung(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion) {
+	Konfiguration doUeberfuehrung(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion) {
 		final List<Band> neueBaender = new ArrayList<>();
 		final Zustand zuZustand = elementDerUeberfuehrungsfunktion.getZuZustand();
 		for (int bandNummer = 0; bandNummer < this.baender.size(); bandNummer++) {
@@ -44,11 +44,17 @@ public class Konfiguration {
 	 * 
 	 * @return liefert zustand.
 	 */
-	public Zustand getZustand() {
+	 Zustand getZustand() {
 		return this.zustand;
 	}
 	
 	public boolean bandContains(final String bandInhalt, final int nummerDesBandes) {
 		return this.baender.get(nummerDesBandes).bandContains(bandInhalt);
 	}
+
+    @Override
+    public String toString() {
+        return "zustand=" + zustand +
+                ", baender=" + baender;
+    }
 }
