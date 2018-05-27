@@ -108,7 +108,13 @@ public class TuringMaschine {
      * @return alle Zustände des Automaten einschließlich Anfangs- und Endzustand.
      */
     public Set<Zustand> getZustaende() {
-        throw new UnsupportedOperationException();
+        final Set<Zustand> result = new HashSet<>(this.endZustaende);
+        result.add(startZustand);
+        for ( ElementDerUeberfuehrungsfunktion e : ueberfuehrungsfunktion) {
+            result.add(e.getVonZustand());
+            result.add(e.getZuZustand());
+        }
+        return result;
     }
 
     public static TuringMaschinenBuilder builder() {

@@ -36,7 +36,7 @@ public class TMStepdefs {
 	
 	@Given("eine TM mit dem Namen (.+) und (\\d+) Bändern")
 	public void eineTuringmaschineMitDemNamen(final String nameDerTM, final int anzahlDerBaender) {
-		this.turingMaschinen.put(nameDerTM, TuringMaschinenBuilder.create().anzahlDerBaender(anzahlDerBaender));
+		this.turingMaschinen.put(nameDerTM, TuringMaschine.builder().anzahlDerBaender(anzahlDerBaender));
 	}
 	
 	@Given("die TM mit dem Namen (.+) hat den Startzustand (.+)")
