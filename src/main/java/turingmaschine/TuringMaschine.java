@@ -21,7 +21,7 @@ public class TuringMaschine {
         this.startZustand = startZustand;
         this.endZustaende = endZustaende;
         this.anzahlDerBaender = anzahlDerBaender;
-        if (! parameterDerUeberfuhrungKorrekt(ueberfuehrungsfunktion)) {
+        if (!parameterDerUeberfuhrungKorrekt(ueberfuehrungsfunktion)) {
             throw new RuntimeException(String.format("Bei einer Anzahl von %s Bändern, muss die Überführungsfunktion immer komplett definiert sein", this.anzahlDerBaender));
         }
         this.ueberfuehrungsfunktion = ueberfuehrungsfunktion;
@@ -88,20 +88,20 @@ public class TuringMaschine {
     }
 
     public Set<Zeichen> getArbeitsalphabet() {
-        // final Set<Zeichen> arbeitsalphabet = this.ueberfuehrungsfunktion.stream()
-        // .flatMap(ElementDerUeberfuehrungsfunktion::getZuSchreibendeZeichen).collect(Collectors.toSet());
-        // arbeitsalphabet.addAll(this.getEingabealphabet());
-        // arbeitsalphabet.add(Blank.getInstance());
-        // return arbeitsalphabet;
-        return null;
+        final Set<Zeichen> arbeitsalphabet = this.ueberfuehrungsfunktion.stream()
+                .flatMap(elementDerUeberfuehrungsfunktion -> elementDerUeberfuehrungsfunktion.getZuSchreibendeZeichen().stream())
+                .collect(Collectors.toSet());
+        arbeitsalphabet.addAll(this.getEingabealphabet());
+        arbeitsalphabet.add(Blank.getInstance());
+        return arbeitsalphabet;
     }
 
     // TODO was bringt das Eingabealphabet und der Blank darf hier eigentlich nicht
     // rein. siehe def. seite 4 und 5
     public Set<Zeichen> getEingabealphabet() {
-        // return this.ueberfuehrungsfunktion.stream().map(ElementDerUeberfuehrungsfunktion::getEingabe)
-        // .collect(Collectors.toSet());
-        return null;
+        return this.ueberfuehrungsfunktion.stream()
+                .flatMap(elementDerUeberfuehrungsfunktion -> elementDerUeberfuehrungsfunktion.getEingaben().stream())
+                .collect(Collectors.toSet());
     }
 
     /**
