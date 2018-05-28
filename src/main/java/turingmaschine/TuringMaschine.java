@@ -86,6 +86,10 @@ public class TuringMaschine {
 		return startConfig;
 	}
 
+	public Konfiguration simuliereDeterministisch(final List<String> eingaben) {
+		return simuliereDeterministisch(eingaben.stream().toArray(String[]::new));
+	}
+
 	public Konfiguration simuliereDeterministisch(final String... eingaben) {
 		// TODO überlegen, ob man hier noch prüft, dass nur eine Konfiguration
 		// herauskommt und falls nicht, ne exception?
@@ -105,13 +109,13 @@ public class TuringMaschine {
 		throw new UnsupportedOperationException();
 	}
 
-    public TuringMaschine sequence(final TuringMaschine t2) {
-        final TuringMaschinenBuilder builder = TuringMaschine.builder();
-        builder.startZustand(this.startZustand); // Startzustand der 1 Maschine
-        t2.endZustaende.forEach(builder::addEndZustand); // Endzustände  der 2 Maschine
+	public TuringMaschine sequence(final TuringMaschine t2) {
+		final TuringMaschinenBuilder builder = TuringMaschine.builder();
+		builder.startZustand(this.startZustand); // Startzustand der 1 Maschine
+		t2.endZustaende.forEach(builder::addEndZustand); // Endzustände der 2 Maschine
 
-        return builder.build();
-    }
+		return builder.build();
+	}
 
 	boolean isEndzustand(final Zustand moeglicherEndzustand) {
 		return this.endZustaende.contains(moeglicherEndzustand);
