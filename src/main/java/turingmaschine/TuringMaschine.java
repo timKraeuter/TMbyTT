@@ -4,6 +4,7 @@ import turingmaschine.band.Band;
 import turingmaschine.band.zeichen.Blank;
 import turingmaschine.band.zeichen.Zeichen;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -44,12 +45,12 @@ public class TuringMaschine {
                                         final int anzahlDerBaender) {
         return new TuringMaschine(startZustand, endZustaende, ueberfuehrungsfunktion, anzahlDerBaender);
     }
-
+    
     // Wir gehen erstmal von deterministisch aus
     // Hier wird wild ein Band erzeugt und so ein Gedöns.
-    public Set<Konfiguration> simuliere(final List<String> eingaben) {
+    public Set<Konfiguration> simuliere(String... eingaben) {
 
-        final List<Band> eingabeBaender = eingaben.stream().map(Band::create).collect(Collectors.toList());
+        final List<Band> eingabeBaender = Arrays.stream(eingaben).map(Band::create).collect(Collectors.toList());
         final Konfiguration startConfig = Konfiguration.create(this.startZustand, eingabeBaender, this);
         Set<Konfiguration> naechsteKonfigurationen = Collections.singleton(startConfig);
 
@@ -76,7 +77,7 @@ public class TuringMaschine {
     }
 
     public boolean erkenntEingabe(final String eingabe) {
-        return !this.simuliere(Collections.singletonList(eingabe)).isEmpty();
+        return !this.simuliere(eingabe).isEmpty();
     }
 
     public void persistToFile(final String path) {

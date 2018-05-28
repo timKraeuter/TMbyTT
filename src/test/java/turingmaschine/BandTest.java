@@ -18,7 +18,6 @@ public class BandTest {
 	
 	@Test
 	public void testBandCreation() {
-		
 		final Band actualBand = Band.create("abc");
 		final Band expectedBand = Band.create();
 		expectedBand.addZeichen(Zeichen.create('a'));
