@@ -50,6 +50,10 @@ public class TuringMaschine {
     public Set<Konfiguration> simuliere(final String... eingaben) {
 
         final List<Band> eingabeBaender = Arrays.stream(eingaben).map(Band::create).collect(Collectors.toList());
+        if (eingabeBaender.size() != this.anzahlDerBaender) {
+            throw new RuntimeException(String.format("Nur %s Eingabebänder erkannt, aber %s Eingabebänder sind gefordert!", eingabeBaender.size(), this.anzahlDerBaender));
+        }
+
         final Konfiguration startConfig = Konfiguration.create(this.startZustand, eingabeBaender, this);
         Set<Konfiguration> naechsteKonfigurationen = Collections.singleton(startConfig);
 
