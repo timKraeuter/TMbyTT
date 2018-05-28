@@ -12,6 +12,8 @@ import turingmaschine.Zustand;
 import turingmaschine.band.Lesekopfbewegung;
 import turingmaschine.band.zeichen.Zeichen;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -133,6 +135,11 @@ public class TMStepdefs {
     public void dieTMMitDemNamenHatBeiFolgenderEingabeDieFolgendeAusgabeAufBand(final String nameDerTM,
                                                                                 final int nummerDesAusgabeBandes, final List<EingabeAusgabeDAO> eingabenAusgaben) {
         final TuringMaschine tm = this.getTM(nameDerTM).build();
+        try {
+            TMPersistierer.getInstance().persistiere(tm, new File("src/main/resources/turingmaschinen/decimalAdditionTM.xml"));
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
         assertTrue(eingabenAusgaben.stream().allMatch(
                 eingabeAusgabe -> this.zurEingabeGibtEsPassendeAusgabe(tm, eingabeAusgabe, nummerDesAusgabeBandes)));
     }

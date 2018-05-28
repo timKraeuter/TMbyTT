@@ -9,6 +9,9 @@ public interface Zeichen {
         if (eingabeZeichen == Zeichen.BLANK) {
             return Blank.getInstance();
         }
+        if (eingabeZeichen == Zeichen.BELIEBIGES_ZEICHEN) {
+            return BeliebigesZeichen.getInstance();
+        }
         return NormalesZeichen.create(eingabeZeichen);
     }
 

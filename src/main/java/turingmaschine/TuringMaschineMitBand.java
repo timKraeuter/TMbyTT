@@ -1,33 +1,44 @@
 package turingmaschine;
 
+import turingmaschine.band.Band;
+import turingmaschine.band.ChangeableBand;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import turingmaschine.band.Band;
-import turingmaschine.band.ChangeableBand;
-
 public class TuringMaschineMitBand {
 
-	private TuringMaschine machine;
-	private List<ChangeableBand> bands;
+	private final TuringMaschine maschine;
+	private final List<ChangeableBand> baender;
 
-	public TuringMaschineMitBand(TuringMaschine machine, ChangeableBand[] bands) {
-		this.machine = machine;
-		this.bands = Arrays.asList(bands);
+	private TuringMaschineMitBand(final TuringMaschine machine, final List<ChangeableBand> baender) {
+		this.maschine = machine;
+		this.baender = baender;
 
 	}
 
-	public static TuringMaschineMitBand create(TuringMaschine machine, ChangeableBand... bands) {
-		return new TuringMaschineMitBand(machine, bands);
+	public static TuringMaschineMitBand create(final TuringMaschine machine, final ChangeableBand... bands) {
+		return new TuringMaschineMitBand(machine, Arrays.asList(bands));
 	}
+
+    public static TuringMaschineMitBand create(final TuringMaschine machine, final List<ChangeableBand> baender) {
+        return new TuringMaschineMitBand(machine, baender);
+    }
 
 	public void simuliere() {
-		List<Band> baender = machine.simuliereDeterministisch(
-				this.bands.stream().map(ChangeableBand::toString).collect(Collectors.toList())).getBaender();
+        final List<String> eingaben = this.baender.stream().map(ChangeableBand::toString).collect(Collectors.toList());
+        final List<Band> baender = this.maschine.simuliereDeterministisch(
+                eingaben).getBaender();
 
-		IntStream.range(0, baender.size()).forEach(i -> bands.get(i).update(baender.get(i)));
+		IntStream.range(0, baender.size()).forEach(i -> this.baender.get(i).update(baender.get(i)));
 	}
 
+    public TuringMaschineMitBand sequence(final TuringMaschineMitBand turingMaschineMitBand) {
+        final ArrayList<ChangeableBand> changeableBaender = new ArrayList<>(this.baender);
+        changeableBaender.addAll(turingMaschineMitBand.baender);
+        return TuringMaschineMitBand.create(this.maschine.sequence(turingMaschineMitBand.maschine),changeableBaender);
+    }
 }

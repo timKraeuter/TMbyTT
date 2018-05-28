@@ -22,8 +22,8 @@ public class TuringMaschinen {
 	 *
 	 * @return Additions-Turingmaschine für Dezimalzahlen.
 	 */
-	public static TuringMaschineMitBand createAdd(ChangeableBand sum1, ChangeableBand sum2, ChangeableBand result) {
-		return TuringMaschineMitBand.create(addiererMaschine(), sum1, sum2, result);
+	public static TuringMaschineMitBand createAdd(final ChangeableBand sum1, final ChangeableBand sum2, final ChangeableBand result) {
+		return TuringMaschineMitBand.create(TuringMaschinen.addiererMaschine(), sum1, sum2, result);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class TuringMaschinen {
 	 * @return Sequenz-Turingmaschine.
 	 */
 	public static TuringMaschineMitBand createSeq(final TuringMaschineMitBand t1, final TuringMaschineMitBand t2) {
-		return null;
+		return t1.sequence(2);
 
 	}
 

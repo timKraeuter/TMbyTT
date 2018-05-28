@@ -50,8 +50,8 @@ public class TuringMaschine {
 	}
 
 	public Set<Konfiguration> simuliere(final String... eingaben) {
-		final Konfiguration startConfig = createStartKonfiguration(eingaben);
-		return lasseMaschineLaufen(startConfig);
+		final Konfiguration startConfig = this.createStartKonfiguration(eingaben);
+		return this.lasseMaschineLaufen(startConfig);
 	}
 
 	public Set<Konfiguration> lasseMaschineLaufen(final Konfiguration startConfig) {
@@ -87,13 +87,14 @@ public class TuringMaschine {
 	}
 
 	public Konfiguration simuliereDeterministisch(final List<String> eingaben) {
-		return simuliereDeterministisch(eingaben.stream().toArray(String[]::new));
+		return this.simuliereDeterministisch(eingaben.stream().toArray(String[]::new));
 	}
 
 	public Konfiguration simuliereDeterministisch(final String... eingaben) {
 		// TODO überlegen, ob man hier noch prüft, dass nur eine Konfiguration
 		// herauskommt und falls nicht, ne exception?
-		return this.simuliere(eingaben).iterator().next();
+        final Set<Konfiguration> konfigurationSet = this.simuliere(eingaben);
+        return konfigurationSet.iterator().next();
 	}
 
 	private Set<Konfiguration> step(final Konfiguration konfiguration) {

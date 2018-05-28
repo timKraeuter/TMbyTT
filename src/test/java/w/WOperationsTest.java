@@ -1,18 +1,17 @@
 package w;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
-
 import turingmaschine.TuringMaschineMitBand;
 import turingmaschine.TuringMaschinen;
 import turingmaschine.band.ChangeableBand;
+
+import static org.junit.Assert.assertEquals;
 
 public class WOperationsTest {
 
 	@Test
 	public void testAddierer() {
-		ChangeableBand result = ChangeableBand.create();
+		final ChangeableBand result = ChangeableBand.create();
 		TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("3"), result).simuliere();
 		assertEquals("8", result.toString());
 
@@ -23,10 +22,10 @@ public class WOperationsTest {
 	 */
 	@Test
 	public void testAddiererMaschineMitRecycletemBand() {
-		ChangeableBand result = ChangeableBand.create();
+		final ChangeableBand result = ChangeableBand.create();
 		TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("3"), result).simuliere();
 		TuringMaschinen.createAdd(ChangeableBand.create("5"), result, result).simuliere();
-		assertEquals(13, result.toString());
+		assertEquals("13", result.toString());
 
 		// x = TuringMaschinen.createAdd().simuliereDeterministisch("5", "3",
 		// "").getLetztesBand().toString();
@@ -37,11 +36,11 @@ public class WOperationsTest {
 
 	@Test
 	public void testSequence() {
-		ChangeableBand x = ChangeableBand.create();
-		ChangeableBand y = ChangeableBand.create();
-		TuringMaschineMitBand xMachine = TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("3"), x);
-		TuringMaschineMitBand yMachine = TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("5"), y);
-		TuringMaschineMitBand seqMachine = TuringMaschinen.createSeq(xMachine, yMachine);
+		final ChangeableBand x = ChangeableBand.create();
+		final ChangeableBand y = ChangeableBand.create();
+		final TuringMaschineMitBand xMachine = TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("3"), x);
+		final TuringMaschineMitBand yMachine = TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("5"), y);
+		final TuringMaschineMitBand seqMachine = TuringMaschinen.createSeq(xMachine, yMachine);
 		seqMachine.simuliere();
 		assertEquals("8", x.toString());
 		assertEquals("10", y.toString());
