@@ -5,7 +5,7 @@ import java.math.BigInteger;
 public class Zustand {
 	
 	private static BigInteger counter = BigInteger.ZERO;
-	private final String name;
+	private String name;
 	
 	private Zustand(final String name) {
 		this.name = name;
@@ -46,6 +46,10 @@ public class Zustand {
 		} else {
             return this.name.equals(other.name);
         }
+    }
+
+    void addToName(final String appendix) {
+	    this.name = this.name + appendix;
     }
 
     @Override

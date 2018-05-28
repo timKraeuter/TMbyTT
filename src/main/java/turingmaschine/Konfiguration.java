@@ -1,12 +1,12 @@
 package turingmaschine;
 
+import turingmaschine.band.Band;
+import turingmaschine.band.zeichen.Zeichen;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import turingmaschine.band.Band;
-import turingmaschine.band.zeichen.Zeichen;
 
 public class Konfiguration {
 
@@ -68,11 +68,11 @@ public class Konfiguration {
 	}
 
 	public List<Band> getBaender() {
-		return baender;
+		return this.baender;
 	}
 
 	public Band getLetztesBand() {
-		return baender.get(baender.size() - 1);
+		return this.baender.get(this.baender.size() - 1);
 	}
 
 	public List<String> getBaenderAsStrings() {

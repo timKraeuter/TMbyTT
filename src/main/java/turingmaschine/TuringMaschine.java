@@ -2,6 +2,7 @@ package turingmaschine;
 
 import com.google.common.base.Objects;
 import turingmaschine.band.Band;
+import turingmaschine.band.ImmutableBand;
 import turingmaschine.band.Lesekopfbewegung;
 import turingmaschine.band.zeichen.BeliebigesZeichen;
 import turingmaschine.band.zeichen.Blank;
@@ -54,7 +55,7 @@ public class TuringMaschine {
     }
 
     public Set<Konfiguration> simuliere(final String... eingaben) {
-        final Konfiguration startConfig = this.createStartKonfiguration(eingaben);
+        final Konfiguration startConfig = this.createStartKonfiguration(Arrays.stream(eingaben).map(ImmutableBand::create).collect(Collectors.toList()));
         return this.lasseMaschineLaufen(startConfig);
     }
 
@@ -78,8 +79,7 @@ public class TuringMaschine {
         return endKonfigurationen;
     }
 
-    public Konfiguration createStartKonfiguration(final String... eingaben) {
-        final List<Band> eingabeBaender = Arrays.stream(eingaben).map(Band::create).collect(Collectors.toList());
+    public Konfiguration createStartKonfiguration(final List<Band> eingabeBaender) {
         if (eingabeBaender.size() != this.anzahlDerBaender) {
             throw new RuntimeException(
                     String.format("Nur %s Eingabebänder erkannt, aber %s Eingabebänder sind gefordert!",
@@ -90,15 +90,17 @@ public class TuringMaschine {
         return startConfig;
     }
 
-    public Konfiguration simuliereDeterministisch(final List<String> eingaben) {
-        return this.simuliereDeterministisch(eingaben.stream().toArray(String[]::new));
-    }
-
     public Konfiguration simuliereDeterministisch(final String... eingaben) {
         // TODO überlegen, ob man hier noch prüft, dass nur eine Konfiguration
         // herauskommt und falls nicht, ne exception?
         final Set<Konfiguration> konfigurationSet = this.simuliere(eingaben);
         return konfigurationSet.iterator().next();
+    }
+
+    public Konfiguration simuliereDeterministisch(final List<Band> baender) {
+        final Konfiguration startKonfiguration = this.createStartKonfiguration(baender);
+        return this.lasseMaschineLaufen(startKonfiguration).iterator().next();
+
     }
 
     private Set<Konfiguration> step(final Konfiguration konfiguration) {
@@ -108,10 +110,6 @@ public class TuringMaschine {
 
     public boolean erkenntEingabe(final String eingabe) {
         return !this.simuliere(eingabe).isEmpty();
-    }
-
-    public void persistToFile(final String path) {
-        throw new UnsupportedOperationException();
     }
 
     public TuringMaschine sequence(final TuringMaschine t2) {
@@ -126,6 +124,11 @@ public class TuringMaschine {
     }
 
     private Set<ElementDerUeberfuehrungsfunktion> berechneSequenzUeberfuehrung(final TuringMaschine t2) {
+        // Change Names for Debugging
+        this.getZustaende().forEach(zustand -> zustand.addToName("1"));
+        t2.getZustaende().forEach(zustand -> zustand.addToName("2"));
+
+
         final Set<ElementDerUeberfuehrungsfunktion> result = new HashSet<>();
         final List<Zeichen> beliebigeZeichenFuerT1 = new ArrayList<>();
         IntStream.range(0, this.anzahlDerBaender).forEach(i -> beliebigeZeichenFuerT1.add(BeliebigesZeichen.getInstance()));
@@ -154,7 +157,8 @@ public class TuringMaschine {
         return result;
     }
 
-    private ElementDerUeberfuehrungsfunktion erstelleUeberfuhrungMitBeliebigenZeichenVorne(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion, final List<Zeichen> beliebigeZeichenFuerT2) {
+    private ElementDerUeberfuehrungsfunktion erstelleUeberfuhrungMitBeliebigenZeichenVorne(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion,
+                                                                                           final List<Zeichen> beliebigeZeichenFuerT2) {
         final List<Zeichen> eingaben = elementDerUeberfuehrungsfunktion.getEingaben();
         eingaben.addAll(0, beliebigeZeichenFuerT2);
 
@@ -171,7 +175,8 @@ public class TuringMaschine {
                 lesekopfBewegungen);
     }
 
-    private ElementDerUeberfuehrungsfunktion erstelleUeberfuhrungMitBeliebigenZeichenHinten(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion, final List<Zeichen> beliebigeZeichenFuerT1) {
+    private ElementDerUeberfuehrungsfunktion erstelleUeberfuhrungMitBeliebigenZeichenHinten(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion,
+                                                                                            final List<Zeichen> beliebigeZeichenFuerT1) {
         final List<Zeichen> eingaben = elementDerUeberfuehrungsfunktion.getEingaben();
         eingaben.addAll(beliebigeZeichenFuerT1);
 

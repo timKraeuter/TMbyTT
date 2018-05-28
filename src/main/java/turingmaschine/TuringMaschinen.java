@@ -1,8 +1,8 @@
 package turingmaschine;
 
 import persistenz.TMPersistierer;
-import turingmaschine.band.Band;
 import turingmaschine.band.ChangeableBand;
+import turingmaschine.band.ImmutableBand;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ public class TuringMaschinen {
 
 	/**
 	 * Erstellt eine Turingmaschine mit 3 Bändern, welche bei Ausführung die Bänder
-	 * 1 und 2 addiert und dabei das Ergebnis in das Band 3 schreibt.
+	 * 1 und 2 addiert und dabei das Ergebnis in das ImmutableBand 3 schreibt.
 	 *
 	 * @return Additions-Turingmaschine für Dezimalzahlen.
 	 */
@@ -31,7 +31,7 @@ public class TuringMaschinen {
 
     /**
      * Erstellt eine Turingmaschine mit 2 Bändern, welche bei Ausführung den Inhalte
-     * des 1 Bandes auf das 2 Band schreibt.
+     * des 1 Bandes auf das 2 ImmutableBand schreibt.
      *
      * @return Kopier-Turingmaschine.
      */
@@ -41,11 +41,11 @@ public class TuringMaschinen {
 
 	/**
 	 * Erstellt eine Turingmaschine mit 3 Bändern, welche bei Ausführung die Bänder
-	 * 1 und 2 subtrahiert und dabei das Ergebnis in das Band 3 schreibt.
+	 * 1 und 2 subtrahiert und dabei das Ergebnis in das ImmutableBand 3 schreibt.
 	 *
 	 * @return Subtraktions-Turingmaschine für Dezimalzahlen.
 	 */
-	public static TuringMaschineMitBand createSub(final Band sub, final Band min, final Band result) {
+	public static TuringMaschineMitBand createSub(final ImmutableBand sub, final ImmutableBand min, final ImmutableBand result) {
 		// TODO Maschine erstellen testen und hier laden.
 		return null;
 	}
@@ -53,16 +53,16 @@ public class TuringMaschinen {
 
 	/**
 	 * Erstellt eine Turingmaschine, welche die TuringMaschine tm solang ausführt,
-	 * bis das Condition-Band den Wert 0 hat.
+	 * bis das Condition-ImmutableBand den Wert 0 hat.
 	 *
 	 * @param condition
 	 *            zu überprüfende Condition. tm wird solang wiederholt ausgeführt,
-	 *            bis das Condition-Band den Wert 0 hat.
+	 *            bis das Condition-ImmutableBand den Wert 0 hat.
 	 * @param tm
 	 *            wiederholt auszuführende Turingmaschine.
 	 * @return While-Turingmaschine.
 	 */
-	public static TuringMaschineMitBand createWhile(final Band condition, final TuringMaschineMitBand tm) {
+	public static TuringMaschineMitBand createWhile(final ImmutableBand condition, final TuringMaschineMitBand tm) {
 		// TODO noch nicht angeguckt
 		return null;
 	}

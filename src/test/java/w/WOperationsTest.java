@@ -50,19 +50,19 @@ public class WOperationsTest {
     public void testCopyAndCopySequence() {
         final ChangeableBand x = ChangeableBand.create();
         final ChangeableBand y = ChangeableBand.create();
-        final TuringMaschineMitBand xGleich5 = TuringMaschinen.createCopy(ChangeableBand.create("55"), x);
+        final TuringMaschineMitBand xGleich5 = TuringMaschinen.createCopy(ChangeableBand.create("5"), x);
         xGleich5.simuliere();
-        assertEquals("55", x.toString());
+        assertEquals("5", x.toString());
         final TuringMaschineMitBand yGleichX = TuringMaschinen.createCopy(x, y);
         yGleichX.simuliere();
-        assertEquals("55", y.toString());
+        assertEquals("5", y.toString());
 
         x.wipe();
         y.wipe();
         final TuringMaschineMitBand yGleichXGleich5 = TuringMaschinen.createSeq(xGleich5, yGleichX);
         yGleichXGleich5.simuliere();
-        assertEquals("55", x.toString());
-        assertEquals("55", y.toString());
+        assertEquals("5", x.toString());
+        assertEquals("5", y.toString());
     }
 
     @Test

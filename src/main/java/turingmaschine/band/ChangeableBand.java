@@ -1,31 +1,44 @@
 package turingmaschine.band;
 
-public class ChangeableBand {
+import turingmaschine.band.zeichen.Zeichen;
 
-	private Band band;
+public class ChangeableBand implements Band {
 
-	public ChangeableBand(final Band band) {
+	private ImmutableBand band;
+
+	public ChangeableBand(final ImmutableBand band) {
 		this.band = band;
 	}
 
 	public static ChangeableBand create(final String eingabe) {
-		return new ChangeableBand(Band.create(eingabe));
+		return new ChangeableBand(ImmutableBand.create(eingabe));
 	}
 
-	@Override
-	public String toString() {
-		return this.band.toString();
-	}
+    public static ChangeableBand create() {
+        return ChangeableBand.create("");
+    }
 
-	public void update(final Band band) {
+	public void update(final ImmutableBand band) {
 		this.band = band;
 	}
 
-	public static ChangeableBand create() {
-		return ChangeableBand.create("");
-	}
-
     public void wipe() {
-	    this.band = Band.create("");
+	    this.band = ImmutableBand.create("");
+    }
+
+    @Override
+    public Band verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung, final Zeichen gelesenesZeichen) {
+	    this.band = this.band.verarbeite(zuSchreibendesZeichen, lesekopfBewegung, gelesenesZeichen);
+        return this;
+    }
+
+    @Override
+    public Zeichen getAktuellesZeichen() {
+        return this.band.getAktuellesZeichen();
+    }
+
+    @Override
+    public String toString() {
+        return this.band.toString();
     }
 }
