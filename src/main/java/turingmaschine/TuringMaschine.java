@@ -46,8 +46,6 @@ public class TuringMaschine {
         return new TuringMaschine(startZustand, endZustaende, ueberfuehrungsfunktion, anzahlDerBaender);
     }
     
-    // Wir gehen erstmal von deterministisch aus
-    // Hier wird wild ein Band erzeugt und so ein Gedöns.
     public Set<Konfiguration> simuliere(String... eingaben) {
 
         final List<Band> eingabeBaender = Arrays.stream(eingaben).map(Band::create).collect(Collectors.toList());
