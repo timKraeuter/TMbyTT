@@ -105,16 +105,16 @@ public class TuringMaschine {
 		throw new UnsupportedOperationException();
 	}
 
-	public void loadFromFile(final String path) {
-		throw new UnsupportedOperationException();
-	}
+    public TuringMaschine sequence(final TuringMaschine t2) {
+        final TuringMaschinenBuilder builder = TuringMaschine.builder();
+        builder.startZustand(this.startZustand); // Startzustand der 1 Maschine
+        t2.endZustaende.forEach(builder::addEndZustand); // Endzustände  der 2 Maschine
+
+        return builder.build();
+    }
 
 	boolean isEndzustand(final Zustand moeglicherEndzustand) {
 		return this.endZustaende.contains(moeglicherEndzustand);
-	}
-
-	public TuringMaschine sequence(final TuringMaschine t2) {
-		throw new UnsupportedOperationException();
 	}
 
 	public Set<Zeichen> getArbeitsalphabet() {

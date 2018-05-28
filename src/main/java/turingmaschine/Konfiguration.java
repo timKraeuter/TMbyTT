@@ -36,9 +36,11 @@ public class Konfiguration {
 		final List<Band> neueBaender = new ArrayList<>();
 		final Zustand zuZustand = elementDerUeberfuehrungsfunktion.getZuZustand();
 		for (int bandNummer = 0; bandNummer < this.baender.size(); bandNummer++) {
-			neueBaender.add(this.baender.get(bandNummer).verarbeite(
-					elementDerUeberfuehrungsfunktion.getZuSchreibendesZeichen(bandNummer),
-					elementDerUeberfuehrungsfunktion.getLesekopfBewegung(bandNummer)));
+			neueBaender.add(
+					this.baender.get(bandNummer).verarbeite(
+							elementDerUeberfuehrungsfunktion.getZuSchreibendesZeichen(bandNummer),
+							elementDerUeberfuehrungsfunktion.getLesekopfBewegung(bandNummer),
+                            this.baender.get(bandNummer).getAktuellesZeichen()));
 		}
 		return Konfiguration.create(zuZustand, neueBaender, this.tM);
 	}

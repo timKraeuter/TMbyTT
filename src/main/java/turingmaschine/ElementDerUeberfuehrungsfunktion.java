@@ -93,6 +93,10 @@ public class ElementDerUeberfuehrungsfunktion {
 	public Zeichen getZuSchreibendesZeichen(final int bandNummer) {
 		return this.zuSchreibendeZeichen.get(bandNummer);
 	}
+
+    public Zeichen getEingabe(final int bandNummer) {
+        return this.getEingaben().get(bandNummer);
+    }
 	
 	public Lesekopfbewegung getLesekopfBewegung(final int bandNummer) {
 		return this.lesekopfBewegungen.get(bandNummer);

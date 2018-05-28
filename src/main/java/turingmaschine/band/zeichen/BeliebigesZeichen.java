@@ -14,7 +14,7 @@ public class BeliebigesZeichen implements Zeichen{
 	private BeliebigesZeichen() {
 	}
 	
-	public static Zeichen getInstance() {
+	public static BeliebigesZeichen getInstance() {
 		if(Objects.isNull(BeliebigesZeichen.instance)) {
             BeliebigesZeichen.instance = new BeliebigesZeichen();
 		}
