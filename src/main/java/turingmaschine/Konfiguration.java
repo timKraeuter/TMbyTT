@@ -37,7 +37,8 @@ public class Konfiguration {
 			neueBaender.add(
 					this.baender.get(bandNummer).verarbeite(
 							elementDerUeberfuehrungsfunktion.getZuSchreibendesZeichen(bandNummer),
-							elementDerUeberfuehrungsfunktion.getLesekopfBewegung(bandNummer)));
+							elementDerUeberfuehrungsfunktion.getLesekopfBewegung(bandNummer),
+                            this.baender.get(bandNummer).getAktuellesZeichen()));
 		}
 		return Konfiguration.create(zuZustand, neueBaender, this.tM);
 	}

@@ -97,7 +97,11 @@ public class TuringMaschine {
 
 
     public TuringMaschine sequence(final TuringMaschine t2) {
-        throw new UnsupportedOperationException();
+        final TuringMaschinenBuilder builder = TuringMaschine.builder();
+        builder.startZustand(this.startZustand); // Startzustand der 1 Maschine
+        t2.endZustaende.forEach(builder::addEndZustand); // Endzustände  der 2 Maschine
+
+        return builder.build();
     }
 
     public Set<Zeichen> getArbeitsalphabet() {

@@ -14,7 +14,7 @@ public class Blank implements Zeichen{
 	private Blank() {
 	}
 	
-	public static Zeichen getInstance() {
+	public static Blank getInstance() {
 		if(Objects.isNull(Blank.instance)) {
             Blank.instance = new Blank();
 		}

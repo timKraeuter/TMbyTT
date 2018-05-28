@@ -47,13 +47,13 @@ public class Band {
         this.inhalteDesBands.add(zeichenToAdd);
     }
 
-    public Band verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung) {
+    public Band verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung, final Zeichen gelesenesZeichen) {
 
         final List<Zeichen> inhalteDesNeuenBands = new ArrayList<>(this.inhalteDesBands);
         if (this.inhalteDesBands.isEmpty()) {
             inhalteDesNeuenBands.add(0, zuSchreibendesZeichen);
         } else {
-            inhalteDesNeuenBands.set(this.positionDesSchreibLeseKopfes, zuSchreibendesZeichen);
+            this.schreibeZeichen(inhalteDesNeuenBands, zuSchreibendesZeichen, gelesenesZeichen);
         }
 
         int positionDesNeuenSchreibLeseKopfes;
@@ -80,6 +80,28 @@ public class Band {
 
         return Band.create(inhalteDesNeuenBands, positionDesNeuenSchreibLeseKopfes);
         // TODO: Sonderfälle wenn die position bei 0 oder der Länge der Liste bzw. offset bei 1 ist.
+    }
+
+    private void schreibeZeichen(final List<Zeichen> inhalteDesNeuenBands, final Zeichen zuSchreibendesZeichen, final Zeichen gelesenesZeichen) {
+        zuSchreibendesZeichen.accept(new ZeichenVisitor<Void>() {
+            @Override
+            public Void handle(final NormalesZeichen normalesZeichen) {
+                inhalteDesNeuenBands.set(Band.this.positionDesSchreibLeseKopfes, normalesZeichen);
+                return null;
+            }
+
+            @Override
+            public Void handle(final BeliebigesZeichen beliebigesZeichen) {
+                inhalteDesNeuenBands.set(Band.this.positionDesSchreibLeseKopfes, gelesenesZeichen);
+                return null;
+            }
+
+            @Override
+            public Void handle(final Blank blank) {
+                inhalteDesNeuenBands.set(Band.this.positionDesSchreibLeseKopfes, blank);
+                return null;
+            }
+        });
     }
 
     @Override
