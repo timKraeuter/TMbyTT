@@ -69,4 +69,9 @@ public class BeliebigesZeichen implements Zeichen{
             return BeliebigesZeichen.getInstance();
         }
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(Zeichen.BELIEBIGES_ZEICHEN);
+    }
 }

@@ -84,4 +84,9 @@ public class Blank implements Zeichen{
             return Blank.getInstance();
         }
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(Zeichen.BLANK);
+    }
 }

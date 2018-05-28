@@ -9,7 +9,7 @@ public class TuringMaschinenBuilder {
 	private Zustand startZustand;
 	private final Set<Zustand> endZustaende;
 	private Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion;
-	private int anzahlDerBaender;
+	private Integer anzahlDerBaender;
 	
 	private TuringMaschinenBuilder() {
 		this.endZustaende = new HashSet<>();

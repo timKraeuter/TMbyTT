@@ -50,8 +50,6 @@ public class Zustand {
 
     @Override
     public String toString() {
-        return "Zustand{" +
-                "name='" + this.name + '\'' +
-                '}';
+        return this.name ;
     }
 }

@@ -4,24 +4,28 @@ public class ChangeableBand {
 
 	private Band band;
 
-	public ChangeableBand(Band band) {
+	public ChangeableBand(final Band band) {
 		this.band = band;
 	}
 
-	public static ChangeableBand create(String eingabe) {
+	public static ChangeableBand create(final String eingabe) {
 		return new ChangeableBand(Band.create(eingabe));
 	}
 
 	@Override
 	public String toString() {
-		return band.toString();
+		return this.band.toString();
 	}
 
-	public void update(Band band) {
+	public void update(final Band band) {
 		this.band = band;
 	}
 
 	public static ChangeableBand create() {
 		return ChangeableBand.create("");
 	}
+
+    public void wipe() {
+	    this.band = Band.create("");
+    }
 }

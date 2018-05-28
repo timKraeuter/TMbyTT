@@ -8,8 +8,6 @@ import java.io.File;
 
 public class TuringMaschinen {
 	private static final String PATH_TO_TMs = "src/main/resources/turingmaschinen/";
-	// return (TuringMaschine) TMPersistierer.getInstance().lade(new
-	// File(TuringMaschinen.PATH_TO_TMs + "copyTM.xml"));
 
 	private final static TuringMaschine addiererMaschine() {
 		return (TuringMaschine) TMPersistierer.getInstance()
@@ -26,6 +24,21 @@ public class TuringMaschinen {
 		return TuringMaschineMitBand.create(TuringMaschinen.addiererMaschine(), sum1, sum2, result);
 	}
 
+    private final static TuringMaschine copyMaschine() {
+        return (TuringMaschine) TMPersistierer.getInstance()
+                .lade(new File(TuringMaschinen.PATH_TO_TMs + "copyTM.xml"));
+    }
+
+    /**
+     * Erstellt eine Turingmaschine mit 2 Bändern, welche bei Ausführung den Inhalte
+     * des 1 Bandes auf das 2 Band schreibt.
+     *
+     * @return Kopier-Turingmaschine.
+     */
+    public static TuringMaschineMitBand createCopy(final ChangeableBand from, final ChangeableBand to) {
+        return TuringMaschineMitBand.create(TuringMaschinen.copyMaschine(),from, to);
+    }
+
 	/**
 	 * Erstellt eine Turingmaschine mit 3 Bändern, welche bei Ausführung die Bänder
 	 * 1 und 2 subtrahiert und dabei das Ergebnis in das Band 3 schreibt.
@@ -37,15 +50,6 @@ public class TuringMaschinen {
 		return null;
 	}
 
-	/**
-	 * Erstellt eine Turingmaschine mit 2 Bändern, welche bei Ausführung den Inhalte
-	 * des 1 Bandes auf das 2 Band schreibt.
-	 *
-	 * @return Kopier-Turingmaschine.
-	 */
-	public static TuringMaschineMitBand createCopy() {
-		return null;
-	}
 
 	/**
 	 * Erstellt eine Turingmaschine, welche die TuringMaschine tm solang ausführt,
@@ -74,7 +78,7 @@ public class TuringMaschinen {
 	 * @return Sequenz-Turingmaschine.
 	 */
 	public static TuringMaschineMitBand createSeq(final TuringMaschineMitBand t1, final TuringMaschineMitBand t2) {
-		return t1.sequence(2);
+		return t1.sequence(t2);
 
 	}
 

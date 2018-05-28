@@ -136,7 +136,7 @@ public class TMStepdefs {
                                                                                 final int nummerDesAusgabeBandes, final List<EingabeAusgabeDAO> eingabenAusgaben) {
         final TuringMaschine tm = this.getTM(nameDerTM).build();
         try {
-            TMPersistierer.getInstance().persistiere(tm, new File("src/main/resources/turingmaschinen/decimalAdditionTM.xml"));
+            TMPersistierer.getInstance().persistiere(tm, new File("src/main/resources/turingmaschinen/copyTM.xml"));
         } catch (final IOException e) {
             e.printStackTrace();
         }

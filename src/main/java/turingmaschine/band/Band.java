@@ -140,6 +140,9 @@ public class Band {
         if (this.inhalteDesBands.isEmpty()) {
             return Blank.getInstance();
         }
+        if (this.positionDesSchreibLeseKopfes >= this.inhalteDesBands.size()) {
+            this.inhalteDesBands.add(Blank.getInstance());
+        }
         return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
     }
 
