@@ -1,10 +1,10 @@
 package turingmaschine;
 
+import com.google.common.base.Objects;
 import turingmaschine.band.Lesekopfbewegung;
 import turingmaschine.band.zeichen.Zeichen;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ElementDerUeberfuehrungsfunktion {
 	
@@ -23,8 +23,8 @@ public class ElementDerUeberfuehrungsfunktion {
 		this.vonZustand = vonZustand;
 		this.zuZustand = zuZustand;
 		this.eingaben = eingaben;
-		this.zuSchreibendeZeichen = zuSchreibendesZeichen;
-		this.lesekopfBewegungen = lesekopfbewegungen;
+        this.zuSchreibendeZeichen = zuSchreibendesZeichen;
+        this.lesekopfBewegungen = lesekopfbewegungen;
 	}
 	
 	public static ElementDerUeberfuehrungsfunktion create(final Zustand vonZustand,
@@ -34,29 +34,8 @@ public class ElementDerUeberfuehrungsfunktion {
 			final List<Lesekopfbewegung> lesekopfBewegungen) {
 		return new ElementDerUeberfuehrungsfunktion(vonZustand, zuZustand, eingaben, zuSchreibendeZeichen, lesekopfBewegungen);
 	}
-	
-	@Override
-	public boolean equals(final Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || this.getClass() != o.getClass()) {
-			return false;
-		}
-		final ElementDerUeberfuehrungsfunktion that = (ElementDerUeberfuehrungsfunktion) o;
-		return Objects.equals(this.vonZustand, that.vonZustand) &&
-				Objects.equals(this.zuZustand, that.zuZustand) &&
-				Objects.equals(this.eingaben, that.eingaben) &&
-				Objects.equals(this.zuSchreibendeZeichen, that.zuSchreibendeZeichen)
-				&& Objects.equals(this.lesekopfBewegungen, that.lesekopfBewegungen);
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(this.vonZustand, this.zuZustand, this.eingaben, this.zuSchreibendeZeichen, this.lesekopfBewegungen);
-	}
-	
-	public boolean istPassendeUeberfuehrungZu(final Konfiguration konfiguration) {
+
+    public boolean istPassendeUeberfuehrungZu(final Konfiguration konfiguration) {
 		return this.vonZustand.equals(konfiguration.getZustand()) && this.passendeEingaben(konfiguration);
 	}
 	
@@ -118,6 +97,36 @@ public class ElementDerUeberfuehrungsfunktion {
 	public Lesekopfbewegung getLesekopfBewegung(final int bandNummer) {
 		return this.lesekopfBewegungen.get(bandNummer);
 	}
-	
-	
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ElementDerUeberfuehrungsfunktion)) {
+            return false;
+        }
+        final ElementDerUeberfuehrungsfunktion that = (ElementDerUeberfuehrungsfunktion) o;
+        return Objects.equal(this.vonZustand, that.vonZustand) &&
+                Objects.equal(this.zuZustand, that.zuZustand) &&
+                Objects.equal(this.eingaben, that.eingaben) &&
+                Objects.equal(this.zuSchreibendeZeichen, that.zuSchreibendeZeichen) &&
+                Objects.equal(this.lesekopfBewegungen, that.lesekopfBewegungen);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.vonZustand, this.zuZustand, this.eingaben, this.zuSchreibendeZeichen, this.lesekopfBewegungen);
+    }
+
+    @Override
+    public String toString() {
+        return "Ueberfuehrungsfunktion{" +
+                "von=" + this.vonZustand +
+                ", zu=" + this.zuZustand +
+                ", eingaben=" + this.eingaben +
+                ", zuSchreibendeZeichen=" + this.zuSchreibendeZeichen +
+                ", lesekopfBewegungen=" + this.lesekopfBewegungen +
+                '}';
+    }
 }

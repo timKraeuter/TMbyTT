@@ -1,5 +1,6 @@
 package turingmaschine;
 
+import com.google.common.base.Objects;
 import turingmaschine.band.Band;
 import turingmaschine.band.zeichen.Blank;
 import turingmaschine.band.zeichen.Zeichen;
@@ -26,13 +27,13 @@ public class TuringMaschine {
         this.startZustand = startZustand;
         this.endZustaende = endZustaende;
         this.anzahlDerBaender = anzahlDerBaender;
-        if (!parameterDerUeberfuhrungKorrekt(ueberfuehrungsfunktion)) {
+        if (!this.parameterDerUeberfuhrungKorrekt(ueberfuehrungsfunktion)) {
             throw new RuntimeException(String.format("Bei einer Anzahl von %s Bändern, muss die Überführungsfunktion immer komplett definiert sein", this.anzahlDerBaender));
         }
         this.ueberfuehrungsfunktion = ueberfuehrungsfunktion;
     }
 
-    private boolean parameterDerUeberfuhrungKorrekt(Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion) {
+    private boolean parameterDerUeberfuhrungKorrekt(final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion) {
         return ueberfuehrungsfunktion.stream()
                 .allMatch(elementDerUeberfuehrungsfunktion -> elementDerUeberfuehrungsfunktion.getLesekopfBewegungen().size() == this.anzahlDerBaender &&
                         elementDerUeberfuehrungsfunktion.getZuSchreibendeZeichen().size() == this.anzahlDerBaender &&
@@ -46,7 +47,7 @@ public class TuringMaschine {
         return new TuringMaschine(startZustand, endZustaende, ueberfuehrungsfunktion, anzahlDerBaender);
     }
     
-    public Set<Konfiguration> simuliere(String... eingaben) {
+    public Set<Konfiguration> simuliere(final String... eingaben) {
 
         final List<Band> eingabeBaender = Arrays.stream(eingaben).map(Band::create).collect(Collectors.toList());
         final Konfiguration startConfig = Konfiguration.create(this.startZustand, eingabeBaender, this);
@@ -91,7 +92,7 @@ public class TuringMaschine {
     }
 
 
-    public TuringMaschine sequence(TuringMaschine t2) {
+    public TuringMaschine sequence(final TuringMaschine t2) {
         throw new UnsupportedOperationException();
     }
 
@@ -117,8 +118,8 @@ public class TuringMaschine {
      */
     public Set<Zustand> getZustaende() {
         final Set<Zustand> result = new HashSet<>(this.endZustaende);
-        result.add(startZustand);
-        for ( ElementDerUeberfuehrungsfunktion e : ueberfuehrungsfunktion) {
+        result.add(this.startZustand);
+        for ( final ElementDerUeberfuehrungsfunktion e : this.ueberfuehrungsfunktion) {
             result.add(e.getVonZustand());
             result.add(e.getZuZustand());
         }
@@ -127,5 +128,25 @@ public class TuringMaschine {
 
     public static TuringMaschinenBuilder builder() {
         return TuringMaschinenBuilder.create();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TuringMaschine)) {
+            return false;
+        }
+        final TuringMaschine that = (TuringMaschine) o;
+        return this.anzahlDerBaender == that.anzahlDerBaender &&
+                Objects.equal(this.startZustand, that.startZustand) &&
+                Objects.equal(this.endZustaende, that.endZustaende) &&
+                Objects.equal(this.ueberfuehrungsfunktion, that.ueberfuehrungsfunktion);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.startZustand, this.endZustaende, this.ueberfuehrungsfunktion, this.anzahlDerBaender);
     }
 }

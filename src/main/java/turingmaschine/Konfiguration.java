@@ -52,12 +52,12 @@ public class Konfiguration {
 	}
 	
 	public boolean bandContains(final String bandInhalt, final int nummerDesBandes) {
-		return this.baender.get(nummerDesBandes).bandContains(bandInhalt);
+		return this.baender.get(nummerDesBandes - 1).bandContains(bandInhalt);
 	}
 
     @Override
     public String toString() {
-        return "zustand=" + zustand +
-                ", baender=" + baender;
+        return "zustand=" + this.zustand +
+                ", baender=" + this.baender;
     }
 }

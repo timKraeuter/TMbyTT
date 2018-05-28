@@ -1,6 +1,9 @@
 package turingmaschine;
 
+import persistenz.TMPersistierer;
 import turingmaschine.band.Band;
+
+import java.io.File;
 
 public class TuringMaschinen {
     /**
@@ -10,8 +13,7 @@ public class TuringMaschinen {
      * @return Additions-Turingmaschine für Dezimalzahlen.
      */
     public static TuringMaschine createAdd() {
-        // TODO Maschine aus Testfall persistieren und dann hier laden.
-        return null;
+        return (TuringMaschine) TMPersistierer.getInstance().lade(new File("src/main/resources/turingmaschinen/decimalAdditionTM.xml"));
     }
 
     /**
@@ -32,8 +34,7 @@ public class TuringMaschinen {
      * @return Kopier-Turingmaschine.
      */
     public static TuringMaschine createCopy() {
-        // TODO Maschine aus Testfall persistieren und dann hier laden.
-        return null;
+        return (TuringMaschine) TMPersistierer.getInstance().lade(new File("src/main/resources/turingmaschinen/copyTM.xml"));
     }
 
     /**

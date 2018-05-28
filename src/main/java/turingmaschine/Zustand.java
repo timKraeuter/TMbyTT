@@ -16,8 +16,8 @@ public class Zustand {
 	}
 	
 	public static Zustand create() {
-		final String generierterName = "z" + counter;
-		counter = counter.add(BigInteger.ONE);
+		final String generierterName = "z" + Zustand.counter;
+        Zustand.counter = Zustand.counter.add(BigInteger.ONE);
 		return new Zustand(generierterName);
 	}
 	
@@ -42,13 +42,16 @@ public class Zustand {
 		}
 		final Zustand other = (Zustand) obj;
 		if (this.name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		} else if (!this.name.equals(other.name)) {
-			return false;
-		}
-		return true;
-	}
-	
+            return other.name == null;
+		} else {
+            return this.name.equals(other.name);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Zustand{" +
+                "name='" + this.name + '\'' +
+                '}';
+    }
 }
