@@ -6,6 +6,8 @@ import turingmaschine.band.Band;
 import java.io.File;
 
 public class TuringMaschinen {
+    private static final String PATH_TO_TMs = "src/main/resources/turingmaschinen/";
+
     /**
      * Erstellt eine Turingmaschine mit 3 Bändern, welche bei Ausführung die Bänder 1 und 2
      * addiert und dabei das Ergebnis in das Band 3 schreibt.
@@ -13,7 +15,7 @@ public class TuringMaschinen {
      * @return Additions-Turingmaschine für Dezimalzahlen.
      */
     public static TuringMaschine createAdd() {
-        return (TuringMaschine) TMPersistierer.getInstance().lade(new File("src/main/resources/turingmaschinen/decimalAdditionTM.xml"));
+        return (TuringMaschine) TMPersistierer.getInstance().lade(new File(PATH_TO_TMs + "decimalAdditionTM.xml"));
     }
 
     /**
@@ -34,7 +36,7 @@ public class TuringMaschinen {
      * @return Kopier-Turingmaschine.
      */
     public static TuringMaschine createCopy() {
-        return (TuringMaschine) TMPersistierer.getInstance().lade(new File("src/main/resources/turingmaschinen/copyTM.xml"));
+        return (TuringMaschine) TMPersistierer.getInstance().lade(new File(PATH_TO_TMs + "copyTM.xml"));
     }
 
     /**
