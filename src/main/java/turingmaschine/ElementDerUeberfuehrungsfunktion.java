@@ -42,7 +42,7 @@ public class ElementDerUeberfuehrungsfunktion {
 	// TODO evtl. schöner machen irgendwie
 	private boolean passendeEingaben(final Konfiguration konfiguration) {
 		for (int i = 0; i < this.eingaben.size(); i++) {
-			if (!this.eingaben.get(i).equals(konfiguration.getAktuellesZeichen(i))) {
+			if (!this.eingaben.get(i).matches(konfiguration.getAktuellesZeichen(i))) {
 				return false;
 			}
 		}
