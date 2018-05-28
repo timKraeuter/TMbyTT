@@ -11,8 +11,10 @@ public class TuringMaschinen {
 	// return (TuringMaschine) TMPersistierer.getInstance().lade(new
 	// File(TuringMaschinen.PATH_TO_TMs + "copyTM.xml"));
 
-	private final static TuringMaschine addiererMaschine = (TuringMaschine) TMPersistierer.getInstance()
-			.lade(new File(TuringMaschinen.PATH_TO_TMs + "decimalAdditionTM.xml"));
+	private final static TuringMaschine addiererMaschine() {
+		return (TuringMaschine) TMPersistierer.getInstance()
+				.lade(new File(TuringMaschinen.PATH_TO_TMs + "decimalAdditionTM.xml"));
+	}
 
 	/**
 	 * Erstellt eine Turingmaschine mit 3 Bändern, welche bei Ausführung die Bänder
@@ -21,7 +23,7 @@ public class TuringMaschinen {
 	 * @return Additions-Turingmaschine für Dezimalzahlen.
 	 */
 	public static TuringMaschineMitBand createAdd(ChangeableBand sum1, ChangeableBand sum2, ChangeableBand result) {
-		return TuringMaschineMitBand.create(addiererMaschine, sum1, sum2, result);
+		return TuringMaschineMitBand.create(addiererMaschine(), sum1, sum2, result);
 	}
 
 	/**
