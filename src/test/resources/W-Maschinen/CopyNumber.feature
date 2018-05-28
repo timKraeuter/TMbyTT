@@ -21,7 +21,7 @@ Feature: Verschiedene Turingmaschinen werden getestet.
     Then die TM mit dem Namen CopyNumbers hat bei folgender Eingabe die folgende Ausgabe auf Band 2:
     # Testfälle ohne Übertrag
       | eingabe     | ausgabe   |
-      | _;_         | _         |
+      | _;_         |           |
       | 1;_         | 1         |
       | 2;_         | 2         |
       | 3;_         | 3         |

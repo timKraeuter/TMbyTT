@@ -411,7 +411,7 @@ Feature: Verschiedene Turingmaschinen werden getestet.
     Then die TM mit dem Namen DezimalAddierer hat bei folgender Eingabe die folgende Ausgabe auf Band 3:
     # Testfälle ohne Übertrag
       | eingabe          | ausgabe |
-      | _;_;_            | _       |
+      | _;_;_            |         |
       | 0;0;_            | 0       |
       | 0;1;_            | 1       |
       | 0;2;_            | 2       |
