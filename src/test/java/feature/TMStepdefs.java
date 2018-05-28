@@ -114,7 +114,7 @@ public class TMStepdefs {
     @Then("bei Eingabe von (.+) bei der TM (.+) enthält das Band (.+)")
     public void dasBandEnthaeltBeiEingabeVon(final String eingabe, final String nameDerTM, final String bandInhalt) {
         assertTrue(this.getTM(nameDerTM).build().simuliere(eingabe).stream()
-                .anyMatch(konfiguration -> konfiguration.bandContains(bandInhalt, 0)));
+                .anyMatch(konfiguration -> konfiguration.bandContains(bandInhalt, 1)));
     }
 
     @Then("die TM (.+) erkennt die Wörter:")

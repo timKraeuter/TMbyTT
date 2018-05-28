@@ -15,7 +15,7 @@ public class TuringMaschinen {
      * @return Additions-Turingmaschine für Dezimalzahlen.
      */
     public static TuringMaschine createAdd() {
-        return (TuringMaschine) TMPersistierer.getInstance().lade(new File(PATH_TO_TMs + "decimalAdditionTM.xml"));
+        return (TuringMaschine) TMPersistierer.getInstance().lade(new File(TuringMaschinen.PATH_TO_TMs + "decimalAdditionTM.xml"));
     }
 
     /**
@@ -36,7 +36,7 @@ public class TuringMaschinen {
      * @return Kopier-Turingmaschine.
      */
     public static TuringMaschine createCopy() {
-        return (TuringMaschine) TMPersistierer.getInstance().lade(new File(PATH_TO_TMs + "copyTM.xml"));
+        return (TuringMaschine) TMPersistierer.getInstance().lade(new File(TuringMaschinen.PATH_TO_TMs + "copyTM.xml"));
     }
 
     /**

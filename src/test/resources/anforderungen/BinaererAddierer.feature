@@ -33,7 +33,7 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | uebertrag     | keinUebertrag | 0;0;_          | 0;0;1                | L;L;L                     |
       | uebertrag     | Ze            | _;_;_          | _;_;1                | N;N;N                     |
     And die TM mit dem Namen BinärerAddierer hat den Endzustand Ze
-    Then die TM mit dem Namen BinärerAddierer hat bei folgender Eingabe die folgende Ausgabe auf Band 2:
+    Then die TM mit dem Namen BinärerAddierer hat bei folgender Eingabe die folgende Ausgabe auf Band 3:
       | eingabe     | ausgabe |
       | 1;0;_       | 1       |
       | 101;100;_   | 1001    |
