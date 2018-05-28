@@ -18,7 +18,7 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | z0         | Ze        | _;_            | _;_                  | N;N                       |
 
     And die TM mit dem Namen CopyNumbers hat den Endzustand Ze
-    Then die TM mit dem Namen CopyNumbers hat bei folgender Eingabe die folgende Ausgabe auf Band 1:
+    Then die TM mit dem Namen CopyNumbers hat bei folgender Eingabe die folgende Ausgabe auf Band 2:
     # Testfälle ohne Übertrag
       | eingabe     | ausgabe   |
       | _;_         | _         |

@@ -1,13 +1,14 @@
-import static org.junit.Assert.assertEquals;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Test;
-
-import persistenz.Persistierer;
+import persistenz.TMPersistierer;
 import turingmaschine.ElementDerUeberfuehrungsfunktion;
 import turingmaschine.Zustand;
 import turingmaschine.band.Lesekopfbewegung;
 import turingmaschine.band.zeichen.Zeichen;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class PersistenzTest {
 	
@@ -28,8 +29,7 @@ public class PersistenzTest {
 		final ElementDerUeberfuehrungsfunktion e =
 				ElementDerUeberfuehrungsfunktion.create(vonZustand, endZustand, zuLesendeZeichen, zuSchreibendeZeichen, lesekopfBewegungen);
 		final ElementDerUeberfuehrungsfunktion eVonXML =
-				(ElementDerUeberfuehrungsfunktion) Persistierer.getInstance().vonXML(Persistierer.getInstance().zuXML(e));
-		
+				(ElementDerUeberfuehrungsfunktion) TMPersistierer.getInstance().vonXML(TMPersistierer.getInstance().zuXML(e));
 		assertEquals(e, eVonXML);
 	}
 	
