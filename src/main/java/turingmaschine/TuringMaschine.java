@@ -94,7 +94,6 @@ public class TuringMaschine {
 
 
     public TuringMaschine sequence(TuringMaschine t2) {
-        // TODO implementieren
         throw new UnsupportedOperationException();
     }
 
