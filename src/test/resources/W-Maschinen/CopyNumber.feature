@@ -4,18 +4,31 @@ Feature: Verschiedene Turingmaschinen werden getestet.
     Given eine TM mit dem Namen CopyNumbers und 2 Bändern
     And die TM mit dem Namen CopyNumbers hat den Startzustand z0
     And die TM mit dem Namen CopyNumbers hat die Überführungsfunktion:
-      | vonZustand | zuZustand | eingabeZeichen | zuSchreibendeZeichen | schreibLesekopfBewegungen |
-      | z0         | z0        | 0;_            | 0;0                  | R;R                       |
-      | z0         | z0        | 1;_            | 1;1                  | R;R                       |
-      | z0         | z0        | 2;_            | 2;2                  | R;R                       |
-      | z0         | z0        | 3;_            | 3;3                  | R;R                       |
-      | z0         | z0        | 4;_            | 4;4                  | R;R                       |
-      | z0         | z0        | 5;_            | 5;5                  | R;R                       |
-      | z0         | z0        | 6;_            | 6;6                  | R;R                       |
-      | z0         | z0        | 7;_            | 7;7                  | R;R                       |
-      | z0         | z0        | 8;_            | 8;8                  | R;R                       |
-      | z0         | z0        | 9;_            | 9;9                  | R;R                       |
-      | z0         | Ze        | _;_            | _;_                  | N;N                       |
+      | vonZustand    | zuZustand     | eingabeZeichen | zuSchreibendeZeichen | schreibLesekopfBewegungen |
+      | z0            | z0            | 0;_            | 0;0                  | R;R                       |
+      | z0            | z0            | 1;_            | 1;1                  | R;R                       |
+      | z0            | z0            | 2;_            | 2;2                  | R;R                       |
+      | z0            | z0            | 3;_            | 3;3                  | R;R                       |
+      | z0            | z0            | 4;_            | 4;4                  | R;R                       |
+      | z0            | z0            | 5;_            | 5;5                  | R;R                       |
+      | z0            | z0            | 6;_            | 6;6                  | R;R                       |
+      | z0            | z0            | 7;_            | 7;7                  | R;R                       |
+      | z0            | z0            | 8;_            | 8;8                  | R;R                       |
+      | z0            | z0            | 9;_            | 9;9                  | R;R                       |
+
+      | z0            | geheNachLinks | _;_            | _;_                  | L;L                       |
+      | geheNachLinks | geheNachLinks | 0;*            | 0;*                  | L;L                       |
+      | geheNachLinks | geheNachLinks | 1;*            | 1;*                  | L;L                       |
+      | geheNachLinks | geheNachLinks | 2;*            | 2;*                  | L;L                       |
+      | geheNachLinks | geheNachLinks | 3;*            | 3;*                  | L;L                       |
+      | geheNachLinks | geheNachLinks | 4;*            | 4;*                  | L;L                       |
+      | geheNachLinks | geheNachLinks | 5;*            | 5;*                  | L;L                       |
+      | geheNachLinks | geheNachLinks | 6;*            | 6;*                  | L;L                       |
+      | geheNachLinks | geheNachLinks | 7;*            | 7;*                  | L;L                       |
+      | geheNachLinks | geheNachLinks | 8;*            | 8;*                  | L;L                       |
+      | geheNachLinks | geheNachLinks | 9;*            | 9;*                  | L;L                       |
+
+      | geheNachLinks | Ze            | _;_            | _;_                  | R;R                       |
 
     And die TM mit dem Namen CopyNumbers hat den Endzustand Ze
     Then die TM mit dem Namen CopyNumbers hat bei folgender Eingabe die folgende Ausgabe auf Band 2:

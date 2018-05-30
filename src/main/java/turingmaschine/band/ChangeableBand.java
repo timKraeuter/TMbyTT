@@ -6,9 +6,13 @@ public class ChangeableBand implements Band {
 
 	private ImmutableBand band;
 
-	public ChangeableBand(final ImmutableBand band) {
+	private ChangeableBand(final ImmutableBand band) {
 		this.band = band;
 	}
+
+	public static ChangeableBand create(ImmutableBand band) {
+	    return new ChangeableBand(band);
+    }
 
 	public static ChangeableBand create(final String eingabe) {
 		return new ChangeableBand(ImmutableBand.create(eingabe));
@@ -28,7 +32,7 @@ public class ChangeableBand implements Band {
 
     @Override
     public Band verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung, final Zeichen gelesenesZeichen) {
-	    this.band = this.band.verarbeite(zuSchreibendesZeichen, lesekopfBewegung, gelesenesZeichen);
+	    this.update(this.band.verarbeite(zuSchreibendesZeichen, lesekopfBewegung, gelesenesZeichen));
         return this;
     }
 

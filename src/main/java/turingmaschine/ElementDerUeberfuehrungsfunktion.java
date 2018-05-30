@@ -41,9 +41,6 @@ public class ElementDerUeberfuehrungsfunktion {
 
     private boolean passendeEingaben(final Konfiguration konfiguration) {
         for (int i = 0; i < this.eingaben.size(); i++) {
-            System.out.println("Eingabe:" + this.eingaben.get(i));
-            System.out.println("Aktuelles Zeichen:" + konfiguration.getAktuellesZeichen(i));
-            System.out.println("i:" + i);
             if (!this.eingaben.get(i).matches(konfiguration.getAktuellesZeichen(i))) {
                 return false;
             }
