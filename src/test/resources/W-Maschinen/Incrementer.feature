@@ -41,3 +41,4 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 99       | 100       |
       | 99999999 | 100000000 |
       | 99989999 | 99990000  |
+      | 99979999 | 99980000  |
