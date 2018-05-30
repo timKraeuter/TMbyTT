@@ -9,273 +9,273 @@
   </endZustaende>
   <ueberfuehrungsfunktion id="5">
     <turingmaschine.ElementDerUeberfuehrungsfunktion id="6">
-      <vonZustand id="7">
+      <vonZustand reference="2"/>
+      <zuZustand reference="2"/>
+      <eingaben id="7">
+        <turingmaschine.band.zeichen.NormalesZeichen id="8">
+          <zeichen>5</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.Blank id="9"/>
+      </eingaben>
+      <zuSchreibendeZeichen id="10">
+        <turingmaschine.band.zeichen.NormalesZeichen id="11">
+          <zeichen>5</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.NormalesZeichen id="12">
+          <zeichen>5</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+      </zuSchreibendeZeichen>
+      <lesekopfBewegungen id="13">
+        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
+        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
+      </lesekopfBewegungen>
+    </turingmaschine.ElementDerUeberfuehrungsfunktion>
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="14">
+      <vonZustand reference="2"/>
+      <zuZustand reference="2"/>
+      <eingaben id="15">
+        <turingmaschine.band.zeichen.NormalesZeichen id="16">
+          <zeichen>6</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+      </eingaben>
+      <zuSchreibendeZeichen id="17">
+        <turingmaschine.band.zeichen.NormalesZeichen id="18">
+          <zeichen>6</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.NormalesZeichen id="19">
+          <zeichen>6</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+      </zuSchreibendeZeichen>
+      <lesekopfBewegungen id="20">
+        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
+        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
+      </lesekopfBewegungen>
+    </turingmaschine.ElementDerUeberfuehrungsfunktion>
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="21">
+      <vonZustand reference="2"/>
+      <zuZustand reference="2"/>
+      <eingaben id="22">
+        <turingmaschine.band.zeichen.NormalesZeichen id="23">
+          <zeichen>8</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+      </eingaben>
+      <zuSchreibendeZeichen id="24">
+        <turingmaschine.band.zeichen.NormalesZeichen id="25">
+          <zeichen>8</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.NormalesZeichen id="26">
+          <zeichen>8</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+      </zuSchreibendeZeichen>
+      <lesekopfBewegungen id="27">
+        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
+        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
+      </lesekopfBewegungen>
+    </turingmaschine.ElementDerUeberfuehrungsfunktion>
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="28">
+      <vonZustand reference="2"/>
+      <zuZustand reference="2"/>
+      <eingaben id="29">
+        <turingmaschine.band.zeichen.NormalesZeichen id="30">
+          <zeichen>7</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+      </eingaben>
+      <zuSchreibendeZeichen id="31">
+        <turingmaschine.band.zeichen.NormalesZeichen id="32">
+          <zeichen>7</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.NormalesZeichen id="33">
+          <zeichen>7</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+      </zuSchreibendeZeichen>
+      <lesekopfBewegungen id="34">
+        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
+        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
+      </lesekopfBewegungen>
+    </turingmaschine.ElementDerUeberfuehrungsfunktion>
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="35">
+      <vonZustand id="36">
         <name>geheNachLinks</name>
       </vonZustand>
       <zuZustand reference="4"/>
-      <eingaben id="8">
-        <turingmaschine.band.zeichen.Blank id="9"/>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-      </eingaben>
-      <zuSchreibendeZeichen id="10">
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-      </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="11">
-        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
-        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
-      </lesekopfBewegungen>
-    </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="12">
-      <vonZustand reference="2"/>
-      <zuZustand reference="7"/>
-      <eingaben id="13">
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-      </eingaben>
-      <zuSchreibendeZeichen id="14">
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-      </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="15">
-        <turingmaschine.band.Lesekopfbewegung>L</turingmaschine.band.Lesekopfbewegung>
-        <turingmaschine.band.Lesekopfbewegung>L</turingmaschine.band.Lesekopfbewegung>
-      </lesekopfBewegungen>
-    </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="16">
-      <vonZustand reference="7"/>
-      <zuZustand reference="7"/>
-      <eingaben id="17">
-        <turingmaschine.band.zeichen.BeliebigesZeichenOhneBlank id="18"/>
-        <turingmaschine.band.zeichen.BeliebigesZeichen id="19"/>
-      </eingaben>
-      <zuSchreibendeZeichen id="20">
-        <turingmaschine.band.zeichen.BeliebigesZeichenOhneBlank reference="18"/>
-        <turingmaschine.band.zeichen.BeliebigesZeichen reference="19"/>
-      </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="21">
-        <turingmaschine.band.Lesekopfbewegung>L</turingmaschine.band.Lesekopfbewegung>
-        <turingmaschine.band.Lesekopfbewegung>L</turingmaschine.band.Lesekopfbewegung>
-      </lesekopfBewegungen>
-    </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="22">
-      <vonZustand reference="2"/>
-      <zuZustand reference="2"/>
-      <eingaben id="23">
-        <turingmaschine.band.zeichen.NormalesZeichen id="24">
-          <zeichen>2</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-      </eingaben>
-      <zuSchreibendeZeichen id="25">
-        <turingmaschine.band.zeichen.NormalesZeichen id="26">
-          <zeichen>2</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.NormalesZeichen id="27">
-          <zeichen>2</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-      </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="28">
-        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
-        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
-      </lesekopfBewegungen>
-    </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="29">
-      <vonZustand reference="2"/>
-      <zuZustand reference="2"/>
-      <eingaben id="30">
-        <turingmaschine.band.zeichen.NormalesZeichen id="31">
-          <zeichen>5</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-      </eingaben>
-      <zuSchreibendeZeichen id="32">
-        <turingmaschine.band.zeichen.NormalesZeichen id="33">
-          <zeichen>5</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.NormalesZeichen id="34">
-          <zeichen>5</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-      </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="35">
-        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
-        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
-      </lesekopfBewegungen>
-    </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="36">
-      <vonZustand reference="2"/>
-      <zuZustand reference="2"/>
       <eingaben id="37">
-        <turingmaschine.band.zeichen.NormalesZeichen id="38">
-          <zeichen>3</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
         <turingmaschine.band.zeichen.Blank reference="9"/>
       </eingaben>
-      <zuSchreibendeZeichen id="39">
-        <turingmaschine.band.zeichen.NormalesZeichen id="40">
-          <zeichen>3</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.NormalesZeichen id="41">
-          <zeichen>3</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
+      <zuSchreibendeZeichen id="38">
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
       </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="42">
+      <lesekopfBewegungen id="39">
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
       </lesekopfBewegungen>
     </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="43">
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="40">
       <vonZustand reference="2"/>
       <zuZustand reference="2"/>
-      <eingaben id="44">
+      <eingaben id="41">
+        <turingmaschine.band.zeichen.NormalesZeichen id="42">
+          <zeichen>1</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+      </eingaben>
+      <zuSchreibendeZeichen id="43">
+        <turingmaschine.band.zeichen.NormalesZeichen id="44">
+          <zeichen>1</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
         <turingmaschine.band.zeichen.NormalesZeichen id="45">
-          <zeichen>4</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-      </eingaben>
-      <zuSchreibendeZeichen id="46">
-        <turingmaschine.band.zeichen.NormalesZeichen id="47">
-          <zeichen>4</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.NormalesZeichen id="48">
-          <zeichen>4</zeichen>
+          <zeichen>1</zeichen>
         </turingmaschine.band.zeichen.NormalesZeichen>
       </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="49">
+      <lesekopfBewegungen id="46">
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
       </lesekopfBewegungen>
     </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="50">
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="47">
       <vonZustand reference="2"/>
       <zuZustand reference="2"/>
-      <eingaben id="51">
+      <eingaben id="48">
+        <turingmaschine.band.zeichen.NormalesZeichen id="49">
+          <zeichen>4</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+      </eingaben>
+      <zuSchreibendeZeichen id="50">
+        <turingmaschine.band.zeichen.NormalesZeichen id="51">
+          <zeichen>4</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
         <turingmaschine.band.zeichen.NormalesZeichen id="52">
-          <zeichen>1</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-      </eingaben>
-      <zuSchreibendeZeichen id="53">
-        <turingmaschine.band.zeichen.NormalesZeichen id="54">
-          <zeichen>1</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.NormalesZeichen id="55">
-          <zeichen>1</zeichen>
+          <zeichen>4</zeichen>
         </turingmaschine.band.zeichen.NormalesZeichen>
       </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="56">
+      <lesekopfBewegungen id="53">
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
       </lesekopfBewegungen>
     </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="57">
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="54">
       <vonZustand reference="2"/>
       <zuZustand reference="2"/>
-      <eingaben id="58">
+      <eingaben id="55">
+        <turingmaschine.band.zeichen.NormalesZeichen id="56">
+          <zeichen>2</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+      </eingaben>
+      <zuSchreibendeZeichen id="57">
+        <turingmaschine.band.zeichen.NormalesZeichen id="58">
+          <zeichen>2</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
         <turingmaschine.band.zeichen.NormalesZeichen id="59">
-          <zeichen>0</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-      </eingaben>
-      <zuSchreibendeZeichen id="60">
-        <turingmaschine.band.zeichen.NormalesZeichen id="61">
-          <zeichen>0</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.NormalesZeichen id="62">
-          <zeichen>0</zeichen>
+          <zeichen>2</zeichen>
         </turingmaschine.band.zeichen.NormalesZeichen>
       </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="63">
+      <lesekopfBewegungen id="60">
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
       </lesekopfBewegungen>
     </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="64">
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="61">
       <vonZustand reference="2"/>
       <zuZustand reference="2"/>
-      <eingaben id="65">
+      <eingaben id="62">
+        <turingmaschine.band.zeichen.NormalesZeichen id="63">
+          <zeichen>3</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+      </eingaben>
+      <zuSchreibendeZeichen id="64">
+        <turingmaschine.band.zeichen.NormalesZeichen id="65">
+          <zeichen>3</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
         <turingmaschine.band.zeichen.NormalesZeichen id="66">
-          <zeichen>9</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
-      </eingaben>
-      <zuSchreibendeZeichen id="67">
-        <turingmaschine.band.zeichen.NormalesZeichen id="68">
-          <zeichen>9</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.NormalesZeichen id="69">
-          <zeichen>9</zeichen>
+          <zeichen>3</zeichen>
         </turingmaschine.band.zeichen.NormalesZeichen>
       </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="70">
+      <lesekopfBewegungen id="67">
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
       </lesekopfBewegungen>
     </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="71">
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="68">
+      <vonZustand reference="2"/>
+      <zuZustand reference="36"/>
+      <eingaben id="69">
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+      </eingaben>
+      <zuSchreibendeZeichen id="70">
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+        <turingmaschine.band.zeichen.Blank reference="9"/>
+      </zuSchreibendeZeichen>
+      <lesekopfBewegungen id="71">
+        <turingmaschine.band.Lesekopfbewegung>L</turingmaschine.band.Lesekopfbewegung>
+        <turingmaschine.band.Lesekopfbewegung>L</turingmaschine.band.Lesekopfbewegung>
+      </lesekopfBewegungen>
+    </turingmaschine.ElementDerUeberfuehrungsfunktion>
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="72">
       <vonZustand reference="2"/>
       <zuZustand reference="2"/>
-      <eingaben id="72">
-        <turingmaschine.band.zeichen.NormalesZeichen id="73">
-          <zeichen>8</zeichen>
+      <eingaben id="73">
+        <turingmaschine.band.zeichen.NormalesZeichen id="74">
+          <zeichen>9</zeichen>
         </turingmaschine.band.zeichen.NormalesZeichen>
         <turingmaschine.band.zeichen.Blank reference="9"/>
       </eingaben>
-      <zuSchreibendeZeichen id="74">
-        <turingmaschine.band.zeichen.NormalesZeichen id="75">
-          <zeichen>8</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
+      <zuSchreibendeZeichen id="75">
         <turingmaschine.band.zeichen.NormalesZeichen id="76">
-          <zeichen>8</zeichen>
+          <zeichen>9</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.NormalesZeichen id="77">
+          <zeichen>9</zeichen>
         </turingmaschine.band.zeichen.NormalesZeichen>
       </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="77">
+      <lesekopfBewegungen id="78">
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
       </lesekopfBewegungen>
     </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="78">
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="79">
       <vonZustand reference="2"/>
       <zuZustand reference="2"/>
-      <eingaben id="79">
-        <turingmaschine.band.zeichen.NormalesZeichen id="80">
-          <zeichen>6</zeichen>
+      <eingaben id="80">
+        <turingmaschine.band.zeichen.NormalesZeichen id="81">
+          <zeichen>0</zeichen>
         </turingmaschine.band.zeichen.NormalesZeichen>
         <turingmaschine.band.zeichen.Blank reference="9"/>
       </eingaben>
-      <zuSchreibendeZeichen id="81">
-        <turingmaschine.band.zeichen.NormalesZeichen id="82">
-          <zeichen>6</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
+      <zuSchreibendeZeichen id="82">
         <turingmaschine.band.zeichen.NormalesZeichen id="83">
-          <zeichen>6</zeichen>
+          <zeichen>0</zeichen>
+        </turingmaschine.band.zeichen.NormalesZeichen>
+        <turingmaschine.band.zeichen.NormalesZeichen id="84">
+          <zeichen>0</zeichen>
         </turingmaschine.band.zeichen.NormalesZeichen>
       </zuSchreibendeZeichen>
-      <lesekopfBewegungen id="84">
+      <lesekopfBewegungen id="85">
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
         <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
       </lesekopfBewegungen>
     </turingmaschine.ElementDerUeberfuehrungsfunktion>
-    <turingmaschine.ElementDerUeberfuehrungsfunktion id="85">
-      <vonZustand reference="2"/>
-      <zuZustand reference="2"/>
-      <eingaben id="86">
-        <turingmaschine.band.zeichen.NormalesZeichen id="87">
-          <zeichen>7</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.Blank reference="9"/>
+    <turingmaschine.ElementDerUeberfuehrungsfunktion id="86">
+      <vonZustand reference="36"/>
+      <zuZustand reference="36"/>
+      <eingaben id="87">
+        <turingmaschine.band.zeichen.BeliebigesZeichenOhneBlank id="88"/>
+        <turingmaschine.band.zeichen.BeliebigesZeichen id="89"/>
       </eingaben>
-      <zuSchreibendeZeichen id="88">
-        <turingmaschine.band.zeichen.NormalesZeichen id="89">
-          <zeichen>7</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
-        <turingmaschine.band.zeichen.NormalesZeichen id="90">
-          <zeichen>7</zeichen>
-        </turingmaschine.band.zeichen.NormalesZeichen>
+      <zuSchreibendeZeichen id="90">
+        <turingmaschine.band.zeichen.BeliebigesZeichenOhneBlank reference="88"/>
+        <turingmaschine.band.zeichen.BeliebigesZeichen reference="89"/>
       </zuSchreibendeZeichen>
       <lesekopfBewegungen id="91">
-        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
-        <turingmaschine.band.Lesekopfbewegung>R</turingmaschine.band.Lesekopfbewegung>
+        <turingmaschine.band.Lesekopfbewegung>L</turingmaschine.band.Lesekopfbewegung>
+        <turingmaschine.band.Lesekopfbewegung>L</turingmaschine.band.Lesekopfbewegung>
       </lesekopfBewegungen>
     </turingmaschine.ElementDerUeberfuehrungsfunktion>
   </ueberfuehrungsfunktion>

@@ -348,4 +348,4 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 1349;15667;_     | 17016   |
       | 1564567;173349;_ | 1737916 |
       | 173349;1564567;_ | 1737916 |
-    And persistiere die TM DezimalAddierer to decimalAdditionTM
+#    And persistiere die TM DezimalAddierer to decimalAdditionTM
