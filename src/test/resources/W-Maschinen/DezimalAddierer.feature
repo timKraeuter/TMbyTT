@@ -5,138 +5,9 @@ Feature: Verschiedene Turingmaschinen werden getestet.
     And die TM mit dem Namen DezimalAddierer hat den Startzustand z0
     And die TM mit dem Namen DezimalAddierer hat die Überführungsfunktion:
       | vonZustand    | zuZustand     | eingabeZeichen | zuSchreibendeZeichen | schreibLesekopfBewegungen |
-      | z0            | z0            | 0;0;*          | 0;0;_                | R;R;N                     |
-      | z0            | z0            | 0;1;*          | 0;1;_                | R;R;N                     |
-      | z0            | z0            | 0;2;*          | 0;2;_                | R;R;N                     |
-      | z0            | z0            | 0;3;*          | 0;3;_                | R;R;N                     |
-      | z0            | z0            | 0;4;*          | 0;4;_                | R;R;N                     |
-      | z0            | z0            | 0;5;*          | 0;5;_                | R;R;N                     |
-      | z0            | z0            | 0;6;*          | 0;6;_                | R;R;N                     |
-      | z0            | z0            | 0;7;*          | 0;7;_                | R;R;N                     |
-      | z0            | z0            | 0;8;*          | 0;8;_                | R;R;N                     |
-      | z0            | z0            | 0;9;*          | 0;9;_                | R;R;N                     |
-      | z0            | z0            | 0;_;*          | 0;_;_                | R;N;N                     |
-
-
-      | z0            | z0            | _;0;*          | _;0;_                | N;R;N                     |
-      | z0            | z0            | _;1;*          | _;1;_                | N;R;N                     |
-      | z0            | z0            | _;2;*          | _;2;_                | N;R;N                     |
-      | z0            | z0            | _;3;*          | _;3;_                | N;R;N                     |
-      | z0            | z0            | _;4;*          | _;4;_                | N;R;N                     |
-      | z0            | z0            | _;5;*          | _;5;_                | N;R;N                     |
-      | z0            | z0            | _;6;*          | _;6;_                | N;R;N                     |
-      | z0            | z0            | _;7;*          | _;7;_                | N;R;N                     |
-      | z0            | z0            | _;8;*          | _;8;_                | N;R;N                     |
-      | z0            | z0            | _;9;*          | _;9;_                | N;R;N                     |
-
-      | z0            | z0            | 1;0;*          | 1;0;_                | R;R;N                     |
-      | z0            | z0            | 1;1;*          | 1;1;_                | R;R;N                     |
-      | z0            | z0            | 1;2;*          | 1;2;_                | R;R;N                     |
-      | z0            | z0            | 1;3;*          | 1;3;_                | R;R;N                     |
-      | z0            | z0            | 1;4;*          | 1;4;_                | R;R;N                     |
-      | z0            | z0            | 1;5;*          | 1;5;_                | R;R;N                     |
-      | z0            | z0            | 1;6;*          | 1;6;_                | R;R;N                     |
-      | z0            | z0            | 1;7;*          | 1;7;_                | R;R;N                     |
-      | z0            | z0            | 1;8;*          | 1;8;_                | R;R;N                     |
-      | z0            | z0            | 1;9;*          | 1;9;_                | R;R;N                     |
-      | z0            | z0            | 1;_;*          | 1;_;_                | R;N;N                     |
-
-
-      | z0            | z0            | 2;0;*          | 2;0;_                | R;R;N                     |
-      | z0            | z0            | 2;1;*          | 2;1;_                | R;R;N                     |
-      | z0            | z0            | 2;2;*          | 2;2;_                | R;R;N                     |
-      | z0            | z0            | 2;3;*          | 2;3;_                | R;R;N                     |
-      | z0            | z0            | 2;4;*          | 2;4;_                | R;R;N                     |
-      | z0            | z0            | 2;5;*          | 2;5;_                | R;R;N                     |
-      | z0            | z0            | 2;6;*          | 2;6;_                | R;R;N                     |
-      | z0            | z0            | 2;7;*          | 2;7;_                | R;R;N                     |
-      | z0            | z0            | 2;8;*          | 2;8;_                | R;R;N                     |
-      | z0            | z0            | 2;9;*          | 2;9;_                | R;R;N                     |
-      | z0            | z0            | 2;_;*          | 2;_;_                | R;N;N                     |
-
-      | z0            | z0            | 3;0;*          | 3;0;_                | R;R;N                     |
-      | z0            | z0            | 3;1;*          | 3;1;_                | R;R;N                     |
-      | z0            | z0            | 3;2;*          | 3;2;_                | R;R;N                     |
-      | z0            | z0            | 3;3;*          | 3;3;_                | R;R;N                     |
-      | z0            | z0            | 3;4;*          | 3;4;_                | R;R;N                     |
-      | z0            | z0            | 3;5;*          | 3;5;_                | R;R;N                     |
-      | z0            | z0            | 3;6;*          | 3;6;_                | R;R;N                     |
-      | z0            | z0            | 3;7;*          | 3;7;_                | R;R;N                     |
-      | z0            | z0            | 3;8;*          | 3;8;_                | R;R;N                     |
-      | z0            | z0            | 3;9;*          | 3;9;_                | R;R;N                     |
-      | z0            | z0            | 3;_;*          | 3;_;_                | R;N;N                     |
-
-      | z0            | z0            | 4;0;*          | 4;0;_                | R;R;N                     |
-      | z0            | z0            | 4;1;*          | 4;1;_                | R;R;N                     |
-      | z0            | z0            | 4;2;*          | 4;2;_                | R;R;N                     |
-      | z0            | z0            | 4;3;*          | 4;3;_                | R;R;N                     |
-      | z0            | z0            | 4;4;*          | 4;4;_                | R;R;N                     |
-      | z0            | z0            | 4;5;*          | 4;5;_                | R;R;N                     |
-      | z0            | z0            | 4;6;*          | 4;6;_                | R;R;N                     |
-      | z0            | z0            | 4;7;*          | 4;7;_                | R;R;N                     |
-      | z0            | z0            | 4;8;*          | 4;8;_                | R;R;N                     |
-      | z0            | z0            | 4;9;*          | 4;9;_                | R;R;N                     |
-      | z0            | z0            | 4;_;*          | 4;_;_                | R;N;N                     |
-
-      | z0            | z0            | 5;0;*          | 5;0;_                | R;R;N                     |
-      | z0            | z0            | 5;1;*          | 5;1;_                | R;R;N                     |
-      | z0            | z0            | 5;2;*          | 5;2;_                | R;R;N                     |
-      | z0            | z0            | 5;3;*          | 5;3;_                | R;R;N                     |
-      | z0            | z0            | 5;4;*          | 5;4;_                | R;R;N                     |
-      | z0            | z0            | 5;5;*          | 5;5;_                | R;R;N                     |
-      | z0            | z0            | 5;6;*          | 5;6;_                | R;R;N                     |
-      | z0            | z0            | 5;7;*          | 5;7;_                | R;R;N                     |
-      | z0            | z0            | 5;8;*          | 5;8;_                | R;R;N                     |
-      | z0            | z0            | 5;9;*          | 5;9;_                | R;R;N                     |
-      | z0            | z0            | 5;_;*          | 5;_;_                | R;N;N                     |
-
-      | z0            | z0            | 6;0;*          | 6;0;_                | R;R;N                     |
-      | z0            | z0            | 6;1;*          | 6;1;_                | R;R;N                     |
-      | z0            | z0            | 6;2;*          | 6;2;_                | R;R;N                     |
-      | z0            | z0            | 6;3;*          | 6;3;_                | R;R;N                     |
-      | z0            | z0            | 6;4;*          | 6;4;_                | R;R;N                     |
-      | z0            | z0            | 6;5;*          | 6;5;_                | R;R;N                     |
-      | z0            | z0            | 6;6;*          | 6;6;_                | R;R;N                     |
-      | z0            | z0            | 6;7;*          | 6;7;_                | R;R;N                     |
-      | z0            | z0            | 6;8;*          | 6;8;_                | R;R;N                     |
-      | z0            | z0            | 6;9;*          | 6;9;_                | R;R;N                     |
-      | z0            | z0            | 6;_;*          | 6;_;_                | R;N;N                     |
-
-      | z0            | z0            | 7;0;*          | 7;0;_                | R;R;N                     |
-      | z0            | z0            | 7;1;*          | 7;1;_                | R;R;N                     |
-      | z0            | z0            | 7;2;*          | 7;2;_                | R;R;N                     |
-      | z0            | z0            | 7;3;*          | 7;3;_                | R;R;N                     |
-      | z0            | z0            | 7;4;*          | 7;4;_                | R;R;N                     |
-      | z0            | z0            | 7;5;*          | 7;5;_                | R;R;N                     |
-      | z0            | z0            | 7;6;*          | 7;6;_                | R;R;N                     |
-      | z0            | z0            | 7;7;*          | 7;7;_                | R;R;N                     |
-      | z0            | z0            | 7;8;*          | 7;8;_                | R;R;N                     |
-      | z0            | z0            | 7;9;*          | 7;9;_                | R;R;N                     |
-      | z0            | z0            | 7;_;*          | 7;_;_                | R;N;N                     |
-
-      | z0            | z0            | 8;0;*          | 8;0;_                | R;R;N                     |
-      | z0            | z0            | 8;1;*          | 8;1;_                | R;R;N                     |
-      | z0            | z0            | 8;2;*          | 8;2;_                | R;R;N                     |
-      | z0            | z0            | 8;3;*          | 8;3;_                | R;R;N                     |
-      | z0            | z0            | 8;4;*          | 8;4;_                | R;R;N                     |
-      | z0            | z0            | 8;5;*          | 8;5;_                | R;R;N                     |
-      | z0            | z0            | 8;6;*          | 8;6;_                | R;R;N                     |
-      | z0            | z0            | 8;7;*          | 8;7;_                | R;R;N                     |
-      | z0            | z0            | 8;8;*          | 8;8;_                | R;R;N                     |
-      | z0            | z0            | 8;9;*          | 8;9;_                | R;R;N                     |
-      | z0            | z0            | 8;_;*          | 8;_;_                | R;N;N                     |
-
-      | z0            | z0            | 9;0;*          | 9;0;_                | R;R;N                     |
-      | z0            | z0            | 9;1;*          | 9;1;_                | R;R;N                     |
-      | z0            | z0            | 9;2;*          | 9;2;_                | R;R;N                     |
-      | z0            | z0            | 9;3;*          | 9;3;_                | R;R;N                     |
-      | z0            | z0            | 9;4;*          | 9;4;_                | R;R;N                     |
-      | z0            | z0            | 9;5;*          | 9;5;_                | R;R;N                     |
-      | z0            | z0            | 9;6;*          | 9;6;_                | R;R;N                     |
-      | z0            | z0            | 9;7;*          | 9;7;_                | R;R;N                     |
-      | z0            | z0            | 9;8;*          | 9;8;_                | R;R;N                     |
-      | z0            | z0            | 9;9;*          | 9;9;_                | R;R;N                     |
-      | z0            | z0            | 9;_;*          | 9;_;_                | R;N;N                     |
+      | z0            | z0            | ~;~;*          | ~;~;_                | R;R;N                     |
+      | z0            | z0            | ~;_;*          | ~;_;_                | R;N;N                     |
+      | z0            | z0            | _;~;*          | _;~;_                | N;R;N                     |
 
       | z0            | keinUebertrag | _;_;*          | _;_;_                | L;L;N                     |
     # Nun steht man auf den ersten beiden Rechten zeichen
@@ -404,20 +275,14 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | uebertrag     | uebertrag     | 9;_;_          | 9;_;0                | L;L;L                     |
 
     # Endzustand, wenn keine zeichen mehr da sind auf beiden Bändern
-      | keinUebertrag | geheNachLinks | _;_;_          | _;_;_                | L;L;L                     |
-      | uebertrag     | geheNachLinks | _;_;_          | _;_;1                | L;L;L                     |
-    # Nach Links gehen
-      | geheNachLinks | geheNachLinks | ~;~;~          | ~;~;~                | L;L;L                     |
-      | geheNachLinks | geheNachLinks | _;~;~          | _;~;~                | N;L;L                     |
-      | geheNachLinks | geheNachLinks | ~;_;~          | ~;_;~                | L;N;L                     |
-      | geheNachLinks | geheNachLinks | ~;~;_          | ~;~;_                | L;L;N                     |
-
-      | geheNachLinks | Ze            | _;_;_          | _;_;_                | R;R;R                       |
+      | keinUebertrag | Ze | _;_;_          | _;_;_                | R;R;R                     |
+      | uebertrag     | Ze | _;_;_          | _;_;1                | R;R;N                     |
 
     And die TM mit dem Namen DezimalAddierer hat den Endzustand Ze
     Then die TM mit dem Namen DezimalAddierer hat bei folgender Eingabe die folgende Ausgabe auf Band 3:
     # Testfälle ohne Übertrag
       | eingabe          | ausgabe |
+      | 5;3;_            | 8       |
       | _;_;_            |         |
       | 0;0;_            | 0       |
       | 0;1;_            | 1       |
@@ -483,3 +348,4 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 1349;15667;_     | 17016   |
       | 1564567;173349;_ | 1737916 |
       | 173349;1564567;_ | 1737916 |
+#    And persistiere die TM DezimalAddierer to decimalAdditionTM

@@ -1,10 +1,18 @@
 package turingmaschine;
 
-import java.io.File;
-
 import persistenz.TMPersistierer;
 import turingmaschine.band.ChangeableBand;
 import turingmaschine.band.ImmutableBand;
+import turingmaschine.band.Lesekopfbewegung;
+import turingmaschine.band.zeichen.Blank;
+import turingmaschine.band.zeichen.Zeichen;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class TuringMaschinen {
 	private static final String PATH_TO_TMs = "src/main/resources/turingmaschinen/";
@@ -12,11 +20,6 @@ public class TuringMaschinen {
 	private final static TuringMaschine addiererMaschine() {
 		return (TuringMaschine) TMPersistierer.getInstance()
 				.lade(new File(TuringMaschinen.PATH_TO_TMs + "decimalAdditionTM.xml"));
-	}
-
-	public static TuringMaschine incrementMaschine() {
-		return (TuringMaschine) TMPersistierer.getInstance()
-				.lade(new File(TuringMaschinen.PATH_TO_TMs + "incrementerTM.xml"));
 	}
 
 	/**

@@ -44,4 +44,5 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 0000;0000;_ | 0000    |
       | 100;1000;_  | 1100    |
       | 110;1100;_  | 10010   |
+    And persistiere die TM BinärerAddierer to binaryAddition
 

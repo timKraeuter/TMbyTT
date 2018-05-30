@@ -36,4 +36,12 @@ public class TuringMaschineMitBand {
 	public void simuliere() {
         this.maschine.simuliereDeterministisch(this.baender);
 	}
+
+    public TuringMaschine getMaschine() {
+        return maschine;
+    }
+
+    public List<Band> getBaender() {
+        return baender;
+    }
 }

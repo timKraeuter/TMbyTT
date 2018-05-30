@@ -72,13 +72,13 @@ public class WOperationsTest {
 	public void testSequenceAddReusingVars() {
 		final ChangeableBand x = ChangeableBand.create();
 		final ChangeableBand y = ChangeableBand.create();
-		final TuringMaschineMitBand xMachine = TuringMaschinen.createAdd(ChangeableBand.create("5"),
-				ChangeableBand.create("3"), x);
-		final TuringMaschineMitBand yMachine = TuringMaschinen.createAdd(x, ChangeableBand.create("5"), y);
+		final TuringMaschineMitBand xMachine = TuringMaschinen.createAdd(ChangeableBand.create("288"),
+				ChangeableBand.create("88"), x);
+		final TuringMaschineMitBand yMachine = TuringMaschinen.createAdd(x, ChangeableBand.create("888"), y);
 		final TuringMaschineMitBand seqMachine = TuringMaschinen.createSeq(xMachine, yMachine);
 		seqMachine.simuliere();
-		assertEquals("8", x.toString());
-		assertEquals("13", y.toString());
+		assertEquals("376", x.toString());
+		assertEquals("1264", y.toString());
 	}
 
 	@Test
