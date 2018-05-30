@@ -27,7 +27,13 @@ public class TuringMaschinen {
 	 */
 	public static TuringMaschineMitBand createAdd(final ChangeableBand sum1, final ChangeableBand sum2,
 			final ChangeableBand result) {
-		return TuringMaschineMitBand.create(TuringMaschinen.addiererMaschine(), sum1, sum2, result);
+		ChangeableBand sum11 = ChangeableBand.create();
+		ChangeableBand sum21 = ChangeableBand.create();
+		TuringMaschineMitBand m1 = TuringMaschinen.createCopy(sum1, sum11);
+		TuringMaschineMitBand m2 = TuringMaschinen.createCopy(sum2, sum21);
+		TuringMaschineMitBand m3 = TuringMaschineMitBand.create(TuringMaschinen.addiererMaschine(), sum11, sum21,
+				result);
+		return TuringMaschinen.createSeq(m1, TuringMaschinen.createSeq(m2, m3));
 	}
 
 	private final static TuringMaschine copyMaschine() {
