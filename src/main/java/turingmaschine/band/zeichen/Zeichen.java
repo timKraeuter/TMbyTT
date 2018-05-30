@@ -1,5 +1,7 @@
 package turingmaschine.band.zeichen;
 
+import java.util.List;
+
 public interface Zeichen {
 
     char BLANK = '_';
