@@ -17,7 +17,7 @@ public class ImmutableBand implements Band {
 
 
     private ImmutableBand(final List<Zeichen> inhalteDesBands, final int positionDesSchreibLeseKopfes) {
-        this.inhalteDesBands = inhalteDesBands;
+        this.inhalteDesBands = new ArrayList<>(inhalteDesBands);
         this.positionDesSchreibLeseKopfes = positionDesSchreibLeseKopfes;
     }
 
@@ -41,7 +41,6 @@ public class ImmutableBand implements Band {
 
     @Override
     public ImmutableBand verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung, final Zeichen gelesenesZeichen) {
-
         final List<Zeichen> inhalteDesNeuenBands = new ArrayList<>(this.inhalteDesBands);
         if (this.inhalteDesBands.isEmpty()) {
             inhalteDesNeuenBands.add(0, zuSchreibendesZeichen);
@@ -135,6 +134,7 @@ public class ImmutableBand implements Band {
             return Blank.getInstance();
         }
         if (this.positionDesSchreibLeseKopfes >= this.inhalteDesBands.size()) {
+            System.out.println("lel");
             this.inhalteDesBands.add(Blank.getInstance());
         }
         return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);

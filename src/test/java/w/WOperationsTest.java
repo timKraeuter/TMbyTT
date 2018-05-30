@@ -76,16 +76,4 @@ public class WOperationsTest {
         assertEquals("5", x.toString());
         assertEquals("5", y.toString());
     }
-
-    @Test
-    public void testCopy() {
-        // assertTrue(TuringMaschinen.createCopy().simuliere("5",
-        // "_").iterator().next().bandContains("5", 2));
-        // assertTrue(TuringMaschinen.createCopy().simuliere("",
-        // "_").iterator().next().bandContains("", 2));
-        // assertTrue(TuringMaschinen.createCopy().simuliere("1234567890",
-        // "_").iterator().next()
-        // .bandContains("1234567890", 2));
-    }
-
 }
