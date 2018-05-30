@@ -46,3 +46,4 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 10;_         | 1       |
       | 123456789;_  | 1       |
       | 436801243;_  | 1       |
+    And persistiere die TM Pruefe0 to pruefe0Maschine

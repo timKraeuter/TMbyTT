@@ -38,3 +38,4 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 10;_        | 10        |
       | 123456789;_ | 123456789 |
       | 436801243;_ | 436801243 |
+    And persistiere die TM CopyNumbers to copyTM
