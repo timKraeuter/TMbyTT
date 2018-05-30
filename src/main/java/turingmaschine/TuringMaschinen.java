@@ -22,6 +22,16 @@ public class TuringMaschinen {
 				.lade(new File(TuringMaschinen.PATH_TO_TMs + "decimalAdditionTM.xml"));
 	}
 
+	private final static TuringMaschine incrementMaschine() {
+		return (TuringMaschine) TMPersistierer.getInstance()
+				.lade(new File(TuringMaschinen.PATH_TO_TMs + "incrementerTM.xml"));
+	}
+
+	private final static TuringMaschine decrementMaschine() {
+		return (TuringMaschine) TMPersistierer.getInstance()
+				.lade(new File(TuringMaschinen.PATH_TO_TMs + "decrementerTM.xml"));
+	}
+
 	/**
 	 * Erstellt eine Turingmaschine mit 3 Bändern, welche bei Ausführung die Bänder
 	 * 1 und 2 addiert und dabei das Ergebnis in das ImmutableBand 3 schreibt.
