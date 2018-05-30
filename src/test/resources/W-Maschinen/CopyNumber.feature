@@ -17,16 +17,7 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | z0            | z0            | 9;_            | 9;9                  | R;R                       |
 
       | z0            | geheNachLinks | _;_            | _;_                  | L;L                       |
-      | geheNachLinks | geheNachLinks | 0;*            | 0;*                  | L;L                       |
-      | geheNachLinks | geheNachLinks | 1;*            | 1;*                  | L;L                       |
-      | geheNachLinks | geheNachLinks | 2;*            | 2;*                  | L;L                       |
-      | geheNachLinks | geheNachLinks | 3;*            | 3;*                  | L;L                       |
-      | geheNachLinks | geheNachLinks | 4;*            | 4;*                  | L;L                       |
-      | geheNachLinks | geheNachLinks | 5;*            | 5;*                  | L;L                       |
-      | geheNachLinks | geheNachLinks | 6;*            | 6;*                  | L;L                       |
-      | geheNachLinks | geheNachLinks | 7;*            | 7;*                  | L;L                       |
-      | geheNachLinks | geheNachLinks | 8;*            | 8;*                  | L;L                       |
-      | geheNachLinks | geheNachLinks | 9;*            | 9;*                  | L;L                       |
+      | geheNachLinks | geheNachLinks | ~;*            | ~;*                  | L;L                       |
 
       | geheNachLinks | Ze            | _;_            | _;_                  | R;R                       |
 

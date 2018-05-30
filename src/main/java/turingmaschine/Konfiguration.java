@@ -5,8 +5,6 @@ import turingmaschine.band.zeichen.Zeichen;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Konfiguration {
 
@@ -24,14 +22,6 @@ public class Konfiguration {
 		return new Konfiguration(zustand, baender, tM);
 	}
 
-	boolean isEndKonfiguration() {
-		return this.tM.isEndzustand(this.zustand);
-	}
-
-	Zeichen getAktuellesZeichen(final int bandNummer) {
-		return this.baender.get(bandNummer).getAktuellesZeichen();
-	}
-
 	Konfiguration doUeberfuehrung(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion) {
 		final List<Band> neueBaender = new ArrayList<>();
 		final Zustand zuZustand = elementDerUeberfuehrungsfunktion.getZuZustand();
@@ -45,37 +35,29 @@ public class Konfiguration {
 		return Konfiguration.create(zuZustand, neueBaender, this.tM);
 	}
 
-	public Set<Konfiguration> laufeBisEnde() {
-		return this.tM.lasseMaschineLaufen(this);
-	}
-
-	/**
-	 * Üblicher Getter für das Attribut zustand.
-	 * 
-	 * @return liefert zustand.
-	 */
-	Zustand getZustand() {
-		return this.zustand;
+	boolean isEndKonfiguration() {
+		return this.tM.isEndzustand(this.zustand);
 	}
 
 	public boolean bandContains(final String bandInhalt, final int nummerDesBandes) {
 		return this.baender.get(nummerDesBandes - 1).bandContains(bandInhalt);
 	}
 
+	/**
+	 * Üblicher Getter für das Attribut zustand.
+	 *
+	 * @return liefert zustand.
+	 */
+	Zustand getZustand() {
+		return this.zustand;
+	}
+
+	Zeichen getAktuellesZeichen(final int bandNummer) {
+		return this.baender.get(bandNummer).getAktuellesZeichen();
+	}
+
 	@Override
 	public String toString() {
 		return "zustand=" + this.zustand + ", baender=" + this.baender;
-	}
-
-	public List<Band> getBaender() {
-		return this.baender;
-	}
-
-	public Band getLetztesBand() {
-		return this.baender.get(this.baender.size() - 1);
-	}
-
-	public List<String> getBaenderAsStrings() {
-		return this.baender.stream().map(Band::toString).map(String::trim).collect(Collectors.toList());
 	}
 }

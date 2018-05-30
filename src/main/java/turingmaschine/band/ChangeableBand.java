@@ -22,18 +22,18 @@ public class ChangeableBand implements Band {
         return ChangeableBand.create("");
     }
 
+    @Override
+    public Band verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung, final Zeichen gelesenesZeichen) {
+	    this.update(this.band.verarbeite(zuSchreibendesZeichen, lesekopfBewegung, gelesenesZeichen));
+        return this;
+    }
+
 	public void update(final ImmutableBand band) {
 		this.band = band;
 	}
 
     public void wipe() {
 	    this.band = ImmutableBand.create("");
-    }
-
-    @Override
-    public Band verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung, final Zeichen gelesenesZeichen) {
-	    this.update(this.band.verarbeite(zuSchreibendesZeichen, lesekopfBewegung, gelesenesZeichen));
-        return this;
     }
 
     @Override

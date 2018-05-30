@@ -26,13 +26,14 @@ public class TuringMaschineMitBand {
         return new TuringMaschineMitBand(machine, baender);
     }
 
-	public void simuliere() {
-        this.maschine.simuliereDeterministisch(this.baender);
-	}
 
     public TuringMaschineMitBand sequence(final TuringMaschineMitBand turingMaschineMitBand) {
         final List<Band> changeableBaender = new ArrayList<>(this.baender);
         changeableBaender.addAll(turingMaschineMitBand.baender);
         return TuringMaschineMitBand.create(this.maschine.sequence(turingMaschineMitBand.maschine),changeableBaender);
     }
+
+	public void simuliere() {
+        this.maschine.simuliereDeterministisch(this.baender);
+	}
 }

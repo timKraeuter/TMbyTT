@@ -2,6 +2,8 @@ package persistenz;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
+import turingmaschine.band.zeichen.BeliebigesZeichen;
+import turingmaschine.band.zeichen.BeliebigesZeichenOhneBlank;
 import turingmaschine.band.zeichen.Blank;
 
 import java.io.File;
@@ -32,6 +34,8 @@ public class TMPersistierer {
 		if (TMPersistierer.instance == null) {
             TMPersistierer.instance = new TMPersistierer();
             TMPersistierer.instance.addKonvertierer(Blank.getKonvertierer());
+            TMPersistierer.instance.addKonvertierer(BeliebigesZeichen.getKonvertierer());
+            TMPersistierer.instance.addKonvertierer(BeliebigesZeichenOhneBlank.getKonvertierer());
 		}
 		return TMPersistierer.instance;
 	}

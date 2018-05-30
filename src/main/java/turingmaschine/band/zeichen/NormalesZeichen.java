@@ -42,6 +42,11 @@ public class NormalesZeichen implements Zeichen {
             public Boolean handle(final Blank blank) {
                 return false;
             }
+
+            @Override
+            public Boolean handle(BeliebigesZeichenOhneBlank beliebigesZeichenOhneBlank) {
+                return true;
+            }
         });
     }
 

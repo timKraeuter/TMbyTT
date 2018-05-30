@@ -8,22 +8,22 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import java.util.Objects;
 
-public class Blank implements Zeichen{
-	private static Blank instance;
-	
-	private Blank() {
+public class BeliebigesZeichenOhneBlank implements Zeichen{
+	private static BeliebigesZeichenOhneBlank instance;
+
+	private BeliebigesZeichenOhneBlank() {
 	}
 	
-	public static Blank getInstance() {
-		if(Objects.isNull(Blank.instance)) {
-            Blank.instance = new Blank();
+	public static BeliebigesZeichenOhneBlank getInstance() {
+		if(Objects.isNull(BeliebigesZeichenOhneBlank.instance)) {
+            BeliebigesZeichenOhneBlank.instance = new BeliebigesZeichenOhneBlank();
 		}
-		return Blank.instance;
+		return BeliebigesZeichenOhneBlank.instance;
 	}
 	
 	@Override
 	public Character getZeichen() {
-		return Zeichen.BLANK;
+		return Zeichen.BELIEBIGES_ZEICHEN_OHNE_BLANK;
 	}
 
     @Override
@@ -33,27 +33,7 @@ public class Blank implements Zeichen{
 
     @Override
     public boolean matches(final Zeichen zeichen) {
-        return zeichen.accept(new ZeichenVisitor<Boolean>() {
-            @Override
-            public Boolean handle(final NormalesZeichen normalesZeichen) {
-                return false;
-            }
-
-            @Override
-            public Boolean handle(final BeliebigesZeichen beliebigesZeichen) {
-                return true;
-            }
-
-            @Override
-            public Boolean handle(final Blank blank) {
-                return true;
-            }
-
-            @Override
-            public Boolean handle(BeliebigesZeichenOhneBlank beliebigesZeichenOhneBlank) {
-                return false;
-            }
-        });
+        return !zeichen.equals(Blank.getInstance());
     }
 
     /**
@@ -62,17 +42,17 @@ public class Blank implements Zeichen{
      *         {@code TMPersistierer.addKonvertierer(First.getKonvertierer()) übergeben werden.
      */
     public static Converter getKonvertierer() {
-        return new BlankKonvertierer();
+        return new BeliebigesZeichenOhneBlankKonvertierer();
     }
 
     /**
      * Eine private Klasse, die es dem Singleton ermöglicht persistiert zu werden.
      */
-    private static class BlankKonvertierer implements Converter {
+    private static class BeliebigesZeichenOhneBlankKonvertierer implements Converter {
         @SuppressWarnings("rawtypes")
         @Override
         public boolean canConvert(final Class clazz) {
-            return clazz.equals(Blank.class);
+            return clazz.equals(BeliebigesZeichenOhneBlank.class);
         }
 
         @Override
@@ -86,12 +66,12 @@ public class Blank implements Zeichen{
 
         @Override
         public Object unmarshal(final HierarchicalStreamReader writer, final UnmarshallingContext context) {
-            return Blank.getInstance();
+            return BeliebigesZeichenOhneBlank.getInstance();
         }
     }
 
     @Override
     public String toString() {
-        return String.valueOf(Zeichen.BLANK);
+        return String.valueOf(Zeichen.BELIEBIGES_ZEICHEN_OHNE_BLANK);
     }
 }
