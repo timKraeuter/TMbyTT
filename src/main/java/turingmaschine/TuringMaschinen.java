@@ -8,7 +8,6 @@ import turingmaschine.band.zeichen.Blank;
 import turingmaschine.band.zeichen.Zeichen;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -92,16 +91,25 @@ public class TuringMaschinen {
 	 * Erstellt eine Turingmaschine, welche die TuringMaschine tm solang ausführt,
 	 * bis das Condition-ImmutableBand den Wert 0 hat.
 	 *
-	 * @param condition
-	 *            zu überprüfende Condition. tm wird solang wiederholt ausgeführt,
-	 *            bis das Condition-ImmutableBand den Wert 0 hat.
+	 * @param band
+	 *            tm wird solang wiederholt ausgeführt,
+	 *            bis das band den Wert 0 hat.
 	 * @param tm
 	 *            wiederholt auszuführende Turingmaschine.
 	 * @return While-Turingmaschine.
 	 */
-	public static TuringMaschineMitBand createWhile(final ImmutableBand condition, final TuringMaschineMitBand tm) {
-		// TODO noch nicht angeguckt
-		return null;
+	public static TuringMaschineMitBand createWhile(final ChangeableBand band, final TuringMaschineMitBand tm) {
+        if (! tm.getBaender().contains(band)) {
+            throw new RuntimeException("While Band muss in der while-tm enthalten sein.");
+        }
+        int stelleDes0Bandes = tm.getBaender().indexOf(band);
+        Zustand startZustand = Zustand.create("pruefeOb0");
+
+
+        Zustand ende = Zustand.create("ende");
+        Set<ElementDerUeberfuehrungsfunktion> ueberfuehrung = new HashSet<>();
+        TuringMaschine turingMaschine = TuringMaschine.create(startZustand, Collections.singleton(ende), ueberfuehrung, tm.getBaender().size());
+        return TuringMaschineMitBand.create(turingMaschine, tm.getBaender());
 	}
 
 	/**

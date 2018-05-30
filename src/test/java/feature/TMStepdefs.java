@@ -6,6 +6,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import persistenz.TMPersistierer;
 import turingmaschine.ElementDerUeberfuehrungsfunktion;
+import turingmaschine.Konfiguration;
 import turingmaschine.TuringMaschine;
 import turingmaschine.TuringMaschinenBuilder;
 import turingmaschine.Zustand;
@@ -144,7 +145,9 @@ public class TMStepdefs {
 
     private boolean zurEingabeGibtEsPassendeAusgabe(final TuringMaschine tm, final EingabeAusgabeDAO eingabeAusgabe,
                                                     final int nummerDesAusgabeBandes) {
-        return tm.simuliere(eingabeAusgabe.getEingabe().split(TMStepdefs.SEMIKOLON)).stream()
+        Set<Konfiguration> simuliere = tm.simuliere(eingabeAusgabe.getEingabe().split(TMStepdefs.SEMIKOLON));
+        System.out.println(simuliere);
+        return simuliere.stream()
                 .anyMatch(config -> config.bandContains(eingabeAusgabe.getAusgabe(), nummerDesAusgabeBandes));
     }
 
