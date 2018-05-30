@@ -412,12 +412,17 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | geheNachLinks | geheNachLinks | ~;_;~          | ~;_;~                | L;N;L                     |
       | geheNachLinks | geheNachLinks | ~;~;_          | ~;~;_                | L;L;N                     |
 
-      | geheNachLinks | Ze            | _;_;_          | _;_;_                | R;R;R                       |
+      | geheNachLinks | geheNachLinks | ~;_;_          | ~;_;_                | L;N;N                     |
+      | geheNachLinks | geheNachLinks | _;_;~          | _;_;~                | N;N;L                     |
+      | geheNachLinks | geheNachLinks | _;~;_          | _;~;_                | N;L;N                     |
+
+      | geheNachLinks | Ze            | _;_;_          | _;_;_                | R;R;R                     |
 
     And die TM mit dem Namen DezimalAddierer hat den Endzustand Ze
     Then die TM mit dem Namen DezimalAddierer hat bei folgender Eingabe die folgende Ausgabe auf Band 3:
     # Testfälle ohne Übertrag
       | eingabe          | ausgabe |
+      | 5;3;_            | 8       |
       | _;_;_            |         |
       | 0;0;_            | 0       |
       | 0;1;_            | 1       |
@@ -483,3 +488,4 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 1349;15667;_     | 17016   |
       | 1564567;173349;_ | 1737916 |
       | 173349;1564567;_ | 1737916 |
+    And persistiere die TM DezimalAddierer to decimalAdditionTM

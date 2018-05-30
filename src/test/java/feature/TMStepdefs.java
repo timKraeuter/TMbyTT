@@ -6,12 +6,15 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import persistenz.TMPersistierer;
 import turingmaschine.ElementDerUeberfuehrungsfunktion;
+import turingmaschine.Konfiguration;
 import turingmaschine.TuringMaschine;
 import turingmaschine.TuringMaschinenBuilder;
 import turingmaschine.Zustand;
 import turingmaschine.band.Lesekopfbewegung;
 import turingmaschine.band.zeichen.Zeichen;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -133,18 +136,14 @@ public class TMStepdefs {
     public void dieTMMitDemNamenHatBeiFolgenderEingabeDieFolgendeAusgabeAufBand(final String nameDerTM,
                                                                                 final int nummerDesAusgabeBandes, final List<EingabeAusgabeDAO> eingabenAusgaben) {
         final TuringMaschine tm = this.getTM(nameDerTM).build();
-//        try {
-//            TMPersistierer.getInstance().persistiere(tm, new File("src/main/resources/turingmaschinen/pruefe0Maschine.xml"));
-//        } catch (final IOException e) {
-//            e.printStackTrace();
-//        }
         assertTrue(eingabenAusgaben.stream().allMatch(
                 eingabeAusgabe -> this.zurEingabeGibtEsPassendeAusgabe(tm, eingabeAusgabe, nummerDesAusgabeBandes)));
     }
 
     private boolean zurEingabeGibtEsPassendeAusgabe(final TuringMaschine tm, final EingabeAusgabeDAO eingabeAusgabe,
                                                     final int nummerDesAusgabeBandes) {
-        return tm.simuliere(eingabeAusgabe.getEingabe().split(TMStepdefs.SEMIKOLON)).stream()
+        Set<Konfiguration> simuliere = tm.simuliere(eingabeAusgabe.getEingabe().split(TMStepdefs.SEMIKOLON));
+        return simuliere.stream()
                 .anyMatch(config -> config.bandContains(eingabeAusgabe.getAusgabe(), nummerDesAusgabeBandes));
     }
 
@@ -152,5 +151,11 @@ public class TMStepdefs {
         final List<String> result = new ArrayList<>();
         Splitter.on(TMStepdefs.SEMIKOLON).split(eingabe).forEach(result::add);
         return result;
+    }
+
+    @Given("persistiere die TM (.+) to (.+)")
+    public void persistiereDieTMDezimalAddiererToDecimalAdditionTM(String nameDerTM, String pathEnding) throws IOException {
+            final TuringMaschine tm = this.getTM(nameDerTM).build();
+            TMPersistierer.getInstance().persistiere(tm, new File("src/main/resources/turingmaschinen/" + pathEnding + ".xml"));
     }
 }
