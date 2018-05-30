@@ -47,6 +47,18 @@ public class WOperationsTest {
     }
 
     @Test
+    public void testSequenceAddReusingVars() {
+        final ChangeableBand x = ChangeableBand.create();
+        final ChangeableBand y = ChangeableBand.create();
+        final TuringMaschineMitBand xMachine = TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("3"), x);
+        final TuringMaschineMitBand yMachine = TuringMaschinen.createAdd(x, ChangeableBand.create("5"), y);
+        final TuringMaschineMitBand seqMachine = TuringMaschinen.createSeq(xMachine, yMachine);
+        seqMachine.simuliere();
+        assertEquals("8", x.toString());
+        assertEquals("13", y.toString());
+    }
+
+    @Test
     public void testCopyAndCopySequence() {
         final ChangeableBand x = ChangeableBand.create();
         final ChangeableBand y = ChangeableBand.create();
