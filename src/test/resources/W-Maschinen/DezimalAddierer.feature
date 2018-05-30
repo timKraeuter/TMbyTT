@@ -407,16 +407,10 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | keinUebertrag | geheNachLinks | _;_;_          | _;_;_                | L;L;L                     |
       | uebertrag     | geheNachLinks | _;_;_          | _;_;1                | L;L;L                     |
     # Nach Links gehen
-      | geheNachLinks | geheNachLinks | 0;*;*          | 0;*;*                | L;L;L                     |
-      | geheNachLinks | geheNachLinks | 1;*;*          | 1;*;*                | L;L;L                     |
-      | geheNachLinks | geheNachLinks | 2;*;*          | 2;*;*                | L;L;L                     |
-      | geheNachLinks | geheNachLinks | 3;*;*          | 3;*;*                | L;L;L                     |
-      | geheNachLinks | geheNachLinks | 4;*;*          | 4;*;*                | L;L;L                     |
-      | geheNachLinks | geheNachLinks | 5;*;*          | 5;*;*                | L;L;L                     |
-      | geheNachLinks | geheNachLinks | 6;*;*          | 6;*;*                | L;L;L                     |
-      | geheNachLinks | geheNachLinks | 7;*;*          | 7;*;*                | L;L;L                     |
-      | geheNachLinks | geheNachLinks | 8;*;*          | 8;*;*                | L;L;L                     |
-      | geheNachLinks | geheNachLinks | 9;*;*          | 9;*;*                | L;L;L                     |
+      | geheNachLinks | geheNachLinks | ~;~;~          | ~;~;~                | L;L;L                     |
+      | geheNachLinks | geheNachLinks | _;~;~          | _;~;~                | N;L;L                     |
+      | geheNachLinks | geheNachLinks | ~;_;~          | ~;_;~                | L;N;L                     |
+      | geheNachLinks | geheNachLinks | ~;~;_          | ~;~;_                | L;L;N                     |
 
       | geheNachLinks | Ze            | _;_;_          | _;_;_                | R;R;R                       |
 
