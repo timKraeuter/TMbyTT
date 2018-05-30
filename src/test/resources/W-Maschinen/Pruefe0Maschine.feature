@@ -17,8 +17,8 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | z0            | geheNachLinks | 8;*            | 8;1                  | R;N                       |
       | z0            | geheNachLinks | 9;*            | 9;1                  | R;N                       |
 
-      | geheNachLinks | geheNachLinks | ~;*            | ~;*                  | L;L                       |
-      | geheNachLinks | Ze            | _;*            | _;*                  | R;R                       |
+      | geheNachLinks | geheNachLinks | ~;*            | ~;*                  | L;N                       |
+      | geheNachLinks | Ze            | _;*            | _;*                  | R;N                       |
 
 
     And die TM mit dem Namen Pruefe0 hat den Endzustand Ze
