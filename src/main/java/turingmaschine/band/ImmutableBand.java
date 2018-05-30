@@ -1,6 +1,7 @@
 package turingmaschine.band;
 
 import turingmaschine.band.zeichen.BeliebigesZeichen;
+import turingmaschine.band.zeichen.BeliebigesZeichenOhneBlank;
 import turingmaschine.band.zeichen.Blank;
 import turingmaschine.band.zeichen.NormalesZeichen;
 import turingmaschine.band.zeichen.Zeichen;
@@ -12,9 +13,7 @@ import java.util.List;
 public class ImmutableBand implements Band {
 
     private final List<Zeichen> inhalteDesBands;
-    // Löwe würde jetzt BigInteger nehmen :D
     private final int positionDesSchreibLeseKopfes;
-
 
     private ImmutableBand(final List<Zeichen> inhalteDesBands, final int positionDesSchreibLeseKopfes) {
         this.inhalteDesBands = new ArrayList<>(inhalteDesBands);
@@ -35,9 +34,6 @@ public class ImmutableBand implements Band {
         return band;
     }
 
-    public void addZeichen(final Zeichen zeichenToAdd) {
-        this.inhalteDesBands.add(zeichenToAdd);
-    }
 
     @Override
     public ImmutableBand verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung, final Zeichen gelesenesZeichen) {
@@ -93,7 +89,29 @@ public class ImmutableBand implements Band {
                 inhalteDesNeuenBands.set(ImmutableBand.this.positionDesSchreibLeseKopfes, blank);
                 return null;
             }
+
+            @Override
+            public Void handle(BeliebigesZeichenOhneBlank beliebigesZeichenOhneBlank) {
+                inhalteDesNeuenBands.set(ImmutableBand.this.positionDesSchreibLeseKopfes, gelesenesZeichen);
+                return null;
+            }
         });
+    }
+
+    public void addZeichen(final Zeichen zeichenToAdd) {
+        this.inhalteDesBands.add(zeichenToAdd);
+    }
+
+    @Override
+    public Zeichen getAktuellesZeichen() {
+        if (this.inhalteDesBands.isEmpty()) {
+            return Blank.getInstance();
+        }
+        if (this.positionDesSchreibLeseKopfes >= this.inhalteDesBands.size()) {
+            System.out.println("lel");
+            this.inhalteDesBands.add(Blank.getInstance());
+        }
+        return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
     }
 
     @Override
@@ -128,17 +146,6 @@ public class ImmutableBand implements Band {
     }
 
 
-    @Override
-    public Zeichen getAktuellesZeichen() {
-        if (this.inhalteDesBands.isEmpty()) {
-            return Blank.getInstance();
-        }
-        if (this.positionDesSchreibLeseKopfes >= this.inhalteDesBands.size()) {
-            System.out.println("lel");
-            this.inhalteDesBands.add(Blank.getInstance());
-        }
-        return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
-    }
 
     @Override
     public String toString() {
@@ -158,6 +165,11 @@ public class ImmutableBand implements Band {
 
                 @Override
                 public Void handle(final Blank blank) {
+                    return null;
+                }
+
+                @Override
+                public Void handle(BeliebigesZeichenOhneBlank beliebigesZeichenOhneBlank) {
                     return null;
                 }
             });
