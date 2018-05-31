@@ -14,6 +14,20 @@
 		<cucumber.version>2.4.0</cucumber.version>
 	</properties>
 
+	<build>
+		<resources>
+			<resource>
+				<!-- Theoretisch könnte man sich was schlaueres hierfür einfallen lassen, 
+					wo die resourcen hinkommen sollen ~ ist uns aber grade mal egal -->
+				<targetPath>src/main/resources</targetPath>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>turingmaschinen/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
