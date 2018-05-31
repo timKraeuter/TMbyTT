@@ -71,7 +71,15 @@ public class TuringMaschinen {
 
 	public final static TuringMaschineMitBand createSub(final ChangeableBand minuend, final ChangeableBand subtrahend,
 			final ChangeableBand result) {
-		return null;
+		ChangeableBand minuend1 = ChangeableBand.create();
+		ChangeableBand subtrahend1 = ChangeableBand.create();
+		TuringMaschineMitBand m1 = TuringMaschinen.createCopy(minuend, minuend1);
+		TuringMaschineMitBand m2 = TuringMaschinen.createCopy(subtrahend, subtrahend1);
+
+		TuringMaschineMitBand subtrahierer = TuringMaschinen.createDecrement(minuend1);
+		TuringMaschineMitBand whileM = TuringMaschinen.createWhile(subtrahend1, subtrahierer);
+
+		return TuringMaschinen.createSeq(m1, TuringMaschinen.createSeq(m2, whileM));
 	}
 
 	private final static TuringMaschine copyMaschine() {
