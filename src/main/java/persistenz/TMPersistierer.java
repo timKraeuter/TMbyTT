@@ -2,12 +2,15 @@ package persistenz;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
+
+import turingmaschine.TuringMaschine;
 import turingmaschine.band.zeichen.BeliebigesZeichen;
 import turingmaschine.band.zeichen.BeliebigesZeichenOhneBlank;
 import turingmaschine.band.zeichen.Blank;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.Arrays;
 
@@ -91,6 +94,10 @@ public class TMPersistierer {
 	public Object lade(final File xml) {
 		return TMPersistierer.instance.xBach.fromXML(xml);
 	}
+
+	public Object lade(URL resource) {
+		return TMPersistierer.instance.xBach.fromXML(resource);
+	}
 	
 	/**
 	 * @param konvertierer
@@ -109,5 +116,6 @@ public class TMPersistierer {
 	public void verarbeiteAnnotationen(final Class<?>... klassen) {
         TMPersistierer.instance.xBach.processAnnotations(klassen);
 	}
+
 	
 }

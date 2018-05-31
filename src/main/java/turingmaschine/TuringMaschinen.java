@@ -1,6 +1,6 @@
 package turingmaschine;
 
-import java.io.File;
+import java.net.URL;
 
 import persistenz.TMPersistierer;
 import turingmaschine.band.Band;
@@ -8,11 +8,10 @@ import turingmaschine.band.ChangeableBand;
 import turingmaschine.band.ImmutableBand;
 
 public class TuringMaschinen {
-	private static final String PATH_TO_TMs = "src/main/resources/turingmaschinen/";
 
 	private final static TuringMaschine addiererMaschine() {
-		return (TuringMaschine) TMPersistierer.getInstance()
-				.lade(new File(TuringMaschinen.PATH_TO_TMs + "decimalAdditionTM.xml"));
+		URL resource = TuringMaschinen.class.getResource("decimalAdditionTM.xml");
+		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
 
 	/**
@@ -29,8 +28,8 @@ public class TuringMaschinen {
 	}
 
 	private final static TuringMaschine incrementMaschine() {
-		return (TuringMaschine) TMPersistierer.getInstance()
-				.lade(new File(TuringMaschinen.PATH_TO_TMs + "incrementerTM.xml"));
+		URL resource = TuringMaschinen.class.getResource("incrementerTM.xml");
+		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
 
 	/**
@@ -49,8 +48,8 @@ public class TuringMaschinen {
 	}
 
 	private final static TuringMaschine decrementMaschine() {
-		return (TuringMaschine) TMPersistierer.getInstance()
-				.lade(new File(TuringMaschinen.PATH_TO_TMs + "decrementerTM.xml"));
+		URL resource = TuringMaschinen.class.getResource("decrementerTM.xml");
+		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
 
 	/**
@@ -76,7 +75,8 @@ public class TuringMaschinen {
 	}
 
 	private final static TuringMaschine copyMaschine() {
-		return (TuringMaschine) TMPersistierer.getInstance().lade(new File(TuringMaschinen.PATH_TO_TMs + "copyTM.xml"));
+		URL resource = TuringMaschinen.class.getResource("copyTM.xml");
+		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
 
 	/**

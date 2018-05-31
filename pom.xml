@@ -15,17 +15,21 @@
 	</properties>
 
 	<build>
-		<resources>
-			<resource>
-				<!-- Theoretisch könnte man sich was schlaueres hierfür einfallen lassen, 
-					wo die resourcen hinkommen sollen ~ ist uns aber grade mal egal -->
-				<targetPath>src/main/resources</targetPath>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>turingmaschinen/*.xml</include>
-				</includes>
-			</resource>
-		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>de.jjt.divineBravery.Main</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 	<dependencies>

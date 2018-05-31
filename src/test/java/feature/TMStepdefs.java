@@ -156,6 +156,6 @@ public class TMStepdefs {
     @Given("persistiere die TM (.+) to (.+)")
     public void persistiereDieTMDezimalAddiererToDecimalAdditionTM(String nameDerTM, String pathEnding) throws IOException {
             final TuringMaschine tm = this.getTM(nameDerTM).build();
-            TMPersistierer.getInstance().persistiere(tm, new File("src/main/resources/turingmaschinen/" + pathEnding + ".xml"));
+            TMPersistierer.getInstance().persistiere(tm, new File("src/main/resources/turingmaschine/" + pathEnding + ".xml"));
     }
 }
