@@ -1,18 +1,10 @@
 package turingmaschine;
 
+import java.io.File;
+
 import persistenz.TMPersistierer;
 import turingmaschine.band.ChangeableBand;
 import turingmaschine.band.ImmutableBand;
-import turingmaschine.band.Lesekopfbewegung;
-import turingmaschine.band.zeichen.Blank;
-import turingmaschine.band.zeichen.Zeichen;
-
-import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class TuringMaschinen {
 	private static final String PATH_TO_TMs = "src/main/resources/turingmaschinen/";
@@ -22,9 +14,37 @@ public class TuringMaschinen {
 				.lade(new File(TuringMaschinen.PATH_TO_TMs + "decimalAdditionTM.xml"));
 	}
 
+	/**
+	 * Erstellt eine Increment Maschine, welche bei Ausführung den Wert auf dem band
+	 * um 1 erhöht.
+	 * 
+	 * @param band,
+	 *            wessen Wert bei Ausführung um 1 erhöht werden soll.
+	 * @return Increment-TuringMaschine
+	 */
+	public final static TuringMaschineMitBand createIncrement(final ChangeableBand band) {
+		final TuringMaschine incrementMaschine = incrementMaschine();
+		return TuringMaschineMitBand.create(incrementMaschine, band);
+	}
+
 	private final static TuringMaschine incrementMaschine() {
 		return (TuringMaschine) TMPersistierer.getInstance()
 				.lade(new File(TuringMaschinen.PATH_TO_TMs + "incrementerTM.xml"));
+	}
+
+	/**
+	 * Erstellt eine Decrement Maschine, welche bei Ausführung den Wert auf dem Band
+	 * um 1 verringert. Sollte auf dem Band eine oder mehrere 0 stehen, sodass der
+	 * Wert negativ werden würde, werden alle bereits beschriebenen Felder des
+	 * Bandes mit § überschrieben werden.
+	 * 
+	 * @param band,
+	 *            wessen Wert bei Ausführung um 1 verringert werden soll.
+	 * @return Decrement-TuringMaschine
+	 */
+	public final static TuringMaschineMitBand createDecrement(final ChangeableBand band) {
+		final TuringMaschine decrementMaschine = decrementMaschine();
+		return TuringMaschineMitBand.create(decrementMaschine, band);
 	}
 
 	private final static TuringMaschine decrementMaschine() {
