@@ -3,6 +3,7 @@ package turingmaschine;
 import java.io.File;
 
 import persistenz.TMPersistierer;
+import turingmaschine.band.Band;
 import turingmaschine.band.ChangeableBand;
 import turingmaschine.band.ImmutableBand;
 
@@ -69,6 +70,11 @@ public class TuringMaschinen {
 		return TuringMaschinen.createSeq(m1, TuringMaschinen.createSeq(m2, m3));
 	}
 
+	public final static TuringMaschineMitBand createSub(final ChangeableBand minuend, final ChangeableBand subtrahend,
+			final ChangeableBand result) {
+		return null;
+	}
+
 	private final static TuringMaschine copyMaschine() {
 		return (TuringMaschine) TMPersistierer.getInstance().lade(new File(TuringMaschinen.PATH_TO_TMs + "copyTM.xml"));
 	}
@@ -106,7 +112,7 @@ public class TuringMaschinen {
 	 *            wiederholt auszuführende Turingmaschine.
 	 * @return While-Turingmaschine.
 	 */
-	public static TuringMaschineMitBand createWhile(final ImmutableBand condition, final TuringMaschineMitBand tm) {
+	public static TuringMaschineMitBand createWhile(final Band condition, final TuringMaschineMitBand tm) {
 		// TODO noch nicht angeguckt
 		return null;
 	}
