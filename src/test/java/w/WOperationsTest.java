@@ -39,12 +39,6 @@ public class WOperationsTest {
         subtract3From5.simuliere();
         assertEquals("178", ret.toString());
 
-        ret.wipe();
-        final TuringMaschineMitBand subtract5From17 = TuringMaschinen.createSub(ChangeableBand.create("17"), ChangeableBand.create("5"), ret);
-        subtract5From17.simuliere();
-        assertEquals("12", ret.toString());
-
-
 		final ChangeableBand f21 = ChangeableBand.create("3");
         TuringMaschinen.createSub(f21, ChangeableBand.create("1"), f21);
         assertEquals("2", f21.toString());
