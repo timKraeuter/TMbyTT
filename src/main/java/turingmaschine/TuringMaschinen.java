@@ -62,24 +62,30 @@ public class TuringMaschinen {
 			final ChangeableBand result) {
 		ChangeableBand sum11 = ChangeableBand.create();
 		ChangeableBand sum21 = ChangeableBand.create();
-		TuringMaschineMitBand m1 = TuringMaschinen.createCopy(sum1, sum11);
-		TuringMaschineMitBand m2 = TuringMaschinen.createCopy(sum2, sum21);
+		TuringMaschineMitBand m1 = createCopy(sum1, sum11);
+		TuringMaschineMitBand m2 = createCopy(sum2, sum21);
 		TuringMaschineMitBand m3 = TuringMaschineMitBand.create(TuringMaschinen.addiererMaschine(), sum11, sum21,
 				result);
-		return TuringMaschinen.createSeq(m1, TuringMaschinen.createSeq(m2, m3));
+		return createSeq(m1, createSeq(m2, m3));
 	}
 
+
+	/**
+	 * Erstellt eine Turingmaschine mit 3 Bändern, welche bei Ausführung die Bänder
+	 * 1 und 2 subtrahiert und dabei das Ergebnis in das Band 3 schreibt.
+	 *
+	 * @return Subtraktions-Turingmaschine für Dezimalzahlen.
+	 */
 	public final static TuringMaschineMitBand createSub(final ChangeableBand minuend, final ChangeableBand subtrahend,
 			final ChangeableBand result) {
-		ChangeableBand minuend1 = ChangeableBand.create();
 		ChangeableBand subtrahend1 = ChangeableBand.create();
-		TuringMaschineMitBand m1 = TuringMaschinen.createCopy(minuend, minuend1);
-		TuringMaschineMitBand m2 = TuringMaschinen.createCopy(subtrahend, subtrahend1);
+		TuringMaschineMitBand m1 = createCopy(minuend, result);
+		TuringMaschineMitBand m2 = createCopy(subtrahend, subtrahend1);
 
-		TuringMaschineMitBand subtrahierer = TuringMaschinen.createDecrement(minuend1);
-		TuringMaschineMitBand whileM = TuringMaschinen.createWhile(subtrahend1, subtrahierer);
+		TuringMaschineMitBand subtrahierer = createDecrement(result);
+		TuringMaschineMitBand whileM = createWhile(subtrahend1, subtrahierer);
 
-		return TuringMaschinen.createSeq(m1, TuringMaschinen.createSeq(m2, whileM));
+		return createSeq(m1, createSeq(m2, whileM));
 	}
 
 	private final static TuringMaschine copyMaschine() {
@@ -95,18 +101,6 @@ public class TuringMaschinen {
 	 */
 	public static TuringMaschineMitBand createCopy(final ChangeableBand from, final ChangeableBand to) {
 		return TuringMaschineMitBand.create(TuringMaschinen.copyMaschine(), from, to);
-	}
-
-	/**
-	 * Erstellt eine Turingmaschine mit 3 Bändern, welche bei Ausführung die Bänder
-	 * 1 und 2 subtrahiert und dabei das Ergebnis in das ImmutableBand 3 schreibt.
-	 *
-	 * @return Subtraktions-Turingmaschine für Dezimalzahlen.
-	 */
-	public static TuringMaschineMitBand createSub(final ImmutableBand sub, final ImmutableBand min,
-			final ImmutableBand result) {
-		// TODO Maschine erstellen testen und hier laden.
-		return null;
 	}
 
 	/**
@@ -137,7 +131,5 @@ public class TuringMaschinen {
 	 */
 	public static TuringMaschineMitBand createSeq(final TuringMaschineMitBand t1, final TuringMaschineMitBand t2) {
 		return t1.sequence(t2);
-
 	}
-
 }

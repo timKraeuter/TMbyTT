@@ -1,11 +1,12 @@
 package w;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
+
 import turingmaschine.TuringMaschineMitBand;
 import turingmaschine.TuringMaschinen;
 import turingmaschine.band.ChangeableBand;
-
-import static org.junit.Assert.assertEquals;
 
 public class WOperationsTest {
 	@Test
@@ -14,6 +15,13 @@ public class WOperationsTest {
 		TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("3"), result).simuliere();
 		assertEquals("8", result.toString());
 
+	}
+
+	@Test
+	public void testSubtrahierer() {
+		ChangeableBand ret = ChangeableBand.create();
+		TuringMaschinen.createSub(ChangeableBand.create("5"), ChangeableBand.create("3"), ret);
+		assertEquals("2", ret.toString());
 	}
 
 	@Test
@@ -103,10 +111,10 @@ public class WOperationsTest {
 		final TuringMaschineMitBand zGleichY = TuringMaschinen.createCopy(y, z);
 		x.wipe();
 		y.wipe();
-        TuringMaschineMitBand zGleichYGleichXGleich5 = TuringMaschinen.createSeq(yGleichXGleich5, zGleichY);
-        zGleichYGleichXGleich5.simuliere();
+		TuringMaschineMitBand zGleichYGleichXGleich5 = TuringMaschinen.createSeq(yGleichXGleich5, zGleichY);
+		zGleichYGleichXGleich5.simuliere();
 
-        assertEquals("5", x.toString());
+		assertEquals("5", x.toString());
 		assertEquals("5", y.toString());
 		assertEquals("5", z.toString());
 
