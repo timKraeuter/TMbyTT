@@ -91,16 +91,25 @@ public class TuringMaschine {
     }
 
     public Konfiguration simuliereDeterministisch(final String... eingaben) {
-        // TODO überlegen, ob man hier noch prüft, dass nur eine Konfiguration
-        // herauskommt und falls nicht, ne exception?
-        final Set<Konfiguration> konfigurationSet = this.simuliere(eingaben);
-        return konfigurationSet.iterator().next();
+        final Set<Konfiguration> endKonfigurationen = this.simuliere(eingaben);
+        checkIfDeterministisch(endKonfigurationen);
+        return endKonfigurationen.iterator().next();
     }
 
     public Konfiguration simuliereDeterministisch(final List<Band> baender) {
         final Konfiguration startKonfiguration = this.createStartKonfiguration(baender);
-        return this.lasseMaschineLaufen(startKonfiguration).iterator().next();
+        Set<Konfiguration> endKonfigurationen = this.lasseMaschineLaufen(startKonfiguration);
+        checkIfDeterministisch(endKonfigurationen);
+        return endKonfigurationen.iterator().next();
 
+    }
+
+    private void checkIfDeterministisch(Set<Konfiguration> endKonfigurationen) {
+        if (endKonfigurationen.isEmpty() || endKonfigurationen.size() > 1) {
+            throw new RuntimeException(
+                    String.format("Die TM hatte folgende %s Endkonfigurationen. Dies entspricht nicht dem Verhalten einer deterministischen Maschine",
+                    endKonfigurationen));
+        }
     }
 
     private Set<Konfiguration> step(final Konfiguration konfiguration) {
@@ -132,19 +141,19 @@ public class TuringMaschine {
 
         final Set<ElementDerUeberfuehrungsfunktion> result = new HashSet<>();
         final List<Zeichen> beliebigeZeichenFuerT1 = new ArrayList<>();
-        IntStream.range(0, this.anzahlDerBaender).forEach(i -> beliebigeZeichenFuerT1.add(BeliebigesZeichen.getInstance()));
+        IntStream.range(0, t2.anzahlDerBaender).forEach(i -> beliebigeZeichenFuerT1.add(BeliebigesZeichen.getInstance()));
 
         // Überführungen der 1 Maschine übernehmen
         result.addAll(this.ueberfuehrungsfunktion.stream()
-                .map(elementDerUeberfuehrungsfunktion -> this.erstelleUeberfuhrungMitBeliebigenZeichenHinten(elementDerUeberfuehrungsfunktion, beliebigeZeichenFuerT1))
+                .map(elementDerUeberfuehrungsfunktion -> this.erstelleUeberfuhrungMitBeliebigenZeichen(elementDerUeberfuehrungsfunktion, beliebigeZeichenFuerT1, false))
                 .collect(Collectors.toSet()));
 
         final List<Zeichen> beliebigeZeichenFuerT2 = new ArrayList<>();
-        IntStream.range(0, t2.anzahlDerBaender).forEach(i -> beliebigeZeichenFuerT2.add(BeliebigesZeichen.getInstance()));
+        IntStream.range(0, this.anzahlDerBaender).forEach(i -> beliebigeZeichenFuerT2.add(BeliebigesZeichen.getInstance()));
 
         // Überführungen der 2 Maschine übernehmen
         result.addAll(t2.ueberfuehrungsfunktion.stream()
-                .map(elementDerUeberfuehrungsfunktion -> t2.erstelleUeberfuhrungMitBeliebigenZeichenVorne(elementDerUeberfuehrungsfunktion, beliebigeZeichenFuerT2))
+                .map(elementDerUeberfuehrungsfunktion -> t2.erstelleUeberfuhrungMitBeliebigenZeichen(elementDerUeberfuehrungsfunktion, beliebigeZeichenFuerT2, true))
                 .collect(Collectors.toSet()));
         // Überführungen der 1 Maschine in die 2, wenn man bei der ersten in einem Endzustand ist.
         beliebigeZeichenFuerT1.addAll(beliebigeZeichenFuerT2);
@@ -158,40 +167,34 @@ public class TuringMaschine {
         return result;
     }
 
-    private ElementDerUeberfuehrungsfunktion erstelleUeberfuhrungMitBeliebigenZeichenVorne(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion,
-                                                                                           final List<Zeichen> beliebigeZeichenFuerT2) {
-        final List<Zeichen> eingaben = elementDerUeberfuehrungsfunktion.getEingaben();
-        eingaben.addAll(0, beliebigeZeichenFuerT2);
+    /**
+     * @param elementDerUeberfuehrungsfunktion Überführungsfunktion, welche erweitert werden soll.
+     * @param beliebigeZeichen                 Zeichen, welche vorne oder hinten eingefügt werden sollen.
+     * @param vorneEinfuegen                   true, wenn die beliebigenZeichenFuerT2 vorne in die Überführungsfunktion eingefügt werden, sonst hinten.
+     * @return Überführungsfunktion entsprechend der Eingabe, jedoch erweitert um beliebigenZeichenFuerT2 als Eingabe und neutrale Schreiblesekopfbewegungen hinten oder vorne.
+     */
+    private ElementDerUeberfuehrungsfunktion erstelleUeberfuhrungMitBeliebigenZeichen(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion,
+                                                                                      final List<Zeichen> beliebigeZeichen,
+                                                                                      boolean vorneEinfuegen) {
+        final List<Zeichen> neueEingaben = new ArrayList<>(elementDerUeberfuehrungsfunktion.getEingaben());
+        final List<Zeichen> neueZuSchreibendeZeichen = new ArrayList<>(elementDerUeberfuehrungsfunktion.getZuSchreibendeZeichen());
+        final List<Lesekopfbewegung> neueLesekopfBewegungen = new ArrayList<>(elementDerUeberfuehrungsfunktion.getLesekopfBewegungen());
+        if (vorneEinfuegen) {
+            neueEingaben.addAll(0, beliebigeZeichen);
+            neueZuSchreibendeZeichen.addAll(0, beliebigeZeichen);
+            beliebigeZeichen.forEach(beliebigesZeichen -> neueLesekopfBewegungen.add(0, Lesekopfbewegung.N));
+        } else {
+            neueEingaben.addAll(beliebigeZeichen);
+            neueZuSchreibendeZeichen.addAll(beliebigeZeichen);
+            beliebigeZeichen.forEach(beliebigesZeichen -> neueLesekopfBewegungen.add(Lesekopfbewegung.N));
+        }
 
-        final List<Zeichen> zuSchreibendeZeichen = elementDerUeberfuehrungsfunktion.getZuSchreibendeZeichen();
-        zuSchreibendeZeichen.addAll(0, beliebigeZeichenFuerT2);
-
-        final List<Lesekopfbewegung> lesekopfBewegungen = elementDerUeberfuehrungsfunktion.getLesekopfBewegungen();
-        beliebigeZeichenFuerT2.forEach(beliebigesZeichen -> lesekopfBewegungen.add(0, Lesekopfbewegung.N));
-
-        return ElementDerUeberfuehrungsfunktion.create(elementDerUeberfuehrungsfunktion.getVonZustand(),
-                elementDerUeberfuehrungsfunktion.getZuZustand(),
-                eingaben,
-                zuSchreibendeZeichen,
-                lesekopfBewegungen);
-    }
-
-    private ElementDerUeberfuehrungsfunktion erstelleUeberfuhrungMitBeliebigenZeichenHinten(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion,
-                                                                                            final List<Zeichen> beliebigeZeichenFuerT1) {
-        final List<Zeichen> eingaben = elementDerUeberfuehrungsfunktion.getEingaben();
-        eingaben.addAll(beliebigeZeichenFuerT1);
-
-        final List<Zeichen> zuSchreibendeZeichen = elementDerUeberfuehrungsfunktion.getZuSchreibendeZeichen();
-        zuSchreibendeZeichen.addAll(beliebigeZeichenFuerT1);
-
-        final List<Lesekopfbewegung> lesekopfBewegungen = elementDerUeberfuehrungsfunktion.getLesekopfBewegungen();
-        beliebigeZeichenFuerT1.forEach(beliebigesZeichen -> lesekopfBewegungen.add(Lesekopfbewegung.N));
 
         return ElementDerUeberfuehrungsfunktion.create(elementDerUeberfuehrungsfunktion.getVonZustand(),
                 elementDerUeberfuehrungsfunktion.getZuZustand(),
-                eingaben,
-                zuSchreibendeZeichen,
-                lesekopfBewegungen);
+                neueEingaben,
+                neueZuSchreibendeZeichen,
+                neueLesekopfBewegungen);
     }
 
     boolean isEndzustand(final Zustand moeglicherEndzustand) {

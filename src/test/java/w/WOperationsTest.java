@@ -98,5 +98,17 @@ public class WOperationsTest {
 		yGleichXGleich5.simuliere();
 		assertEquals("5", x.toString());
 		assertEquals("5", y.toString());
+
+		final ChangeableBand z = ChangeableBand.create();
+		final TuringMaschineMitBand zGleichY = TuringMaschinen.createCopy(y, z);
+		x.wipe();
+		y.wipe();
+        TuringMaschineMitBand zGleichYGleichXGleich5 = TuringMaschinen.createSeq(yGleichXGleich5, zGleichY);
+        zGleichYGleichXGleich5.simuliere();
+
+        assertEquals("5", x.toString());
+		assertEquals("5", y.toString());
+		assertEquals("5", z.toString());
+
 	}
 }

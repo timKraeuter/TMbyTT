@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import turingmaschine.band.Lesekopfbewegung;
 import turingmaschine.band.zeichen.Zeichen;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ElementDerUeberfuehrungsfunktion {
@@ -72,7 +73,7 @@ public class ElementDerUeberfuehrungsfunktion {
      * @return liefert eingaben.
      */
     public List<Zeichen> getEingaben() {
-        return this.eingaben;
+        return Collections.unmodifiableList(this.eingaben);
     }
 
     /**
@@ -81,7 +82,7 @@ public class ElementDerUeberfuehrungsfunktion {
      * @return liefert zuSchreibendeZeichen.
      */
     public List<Zeichen> getZuSchreibendeZeichen() {
-        return this.zuSchreibendeZeichen;
+        return Collections.unmodifiableList(this.zuSchreibendeZeichen);
     }
 
     /**
@@ -90,7 +91,7 @@ public class ElementDerUeberfuehrungsfunktion {
      * @return liefert lesekopfBewegungen.
      */
     public List<Lesekopfbewegung> getLesekopfBewegungen() {
-        return this.lesekopfBewegungen;
+        return Collections.unmodifiableList(this.lesekopfBewegungen);
     }
 
     public Zeichen getZuSchreibendesZeichen(final int bandNummer) {
@@ -124,6 +125,6 @@ public class ElementDerUeberfuehrungsfunktion {
 
     @Override
     public String toString() {
-        return "(" + this.vonZustand + "),(" + this.eingaben + ")" + "=" + this.zuZustand;
+        return "(" + this.vonZustand + ")," + this.eingaben + this.lesekopfBewegungen +  "=" + this.zuZustand;
     }
 }

@@ -1,7 +1,5 @@
 package turingmaschine.band.zeichen;
 
-import java.util.List;
-
 public interface Zeichen {
 
     char BLANK = '_';
@@ -23,8 +21,8 @@ public interface Zeichen {
 
     Character getZeichen();
 
+    boolean matches(Zeichen zeichen);
+
     <T> T accept (ZeichenVisitor<T> visitor);
 
-    boolean matches(Zeichen zeichen);
-	
 }
