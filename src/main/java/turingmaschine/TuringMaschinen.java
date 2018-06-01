@@ -1,36 +1,58 @@
 package turingmaschine;
 
-import java.net.URL;
-
 import persistenz.TMPersistierer;
-import turingmaschine.band.Band;
 import turingmaschine.band.ChangeableBand;
-import turingmaschine.band.ImmutableBand;
+import turingmaschine.band.Lesekopfbewegung;
+import turingmaschine.band.zeichen.Zeichen;
+
+import java.net.URL;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TuringMaschinen {
 
-	private final static TuringMaschine addiererMaschine() {
-		URL resource = TuringMaschinen.class.getResource("decimalAdditionTM.xml");
+	private static TuringMaschine addiererMaschine() {
+		final URL resource = TuringMaschinen.class.getResource("decimalAdditionTM.xml");
 		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
 
 	/**
 	 * Erstellt eine Increment Maschine, welche bei Ausführung den Wert auf dem band
 	 * um 1 erhöht.
-	 * 
+	 *
 	 * @param band,
 	 *            wessen Wert bei Ausführung um 1 erhöht werden soll.
 	 * @return Increment-TuringMaschine
 	 */
-	public final static TuringMaschineMitBand createIncrement(final ChangeableBand band) {
-		final TuringMaschine incrementMaschine = incrementMaschine();
+	public static TuringMaschineMitBand createIncrement(final ChangeableBand band) {
+		final TuringMaschine incrementMaschine = TuringMaschinen.incrementMaschine();
 		return TuringMaschineMitBand.create(incrementMaschine, band);
 	}
 
-	private final static TuringMaschine incrementMaschine() {
-		URL resource = TuringMaschinen.class.getResource("incrementerTM.xml");
+	private static TuringMaschine incrementMaschine() {
+		final URL resource = TuringMaschinen.class.getResource("incrementerTM.xml");
 		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
+
+
+    /**
+     * Erstellt eine Increment Maschine, welche bei Ausführung den Wert auf dem band
+     * um 1 erhöht.
+     *
+     * @param band,
+     *            wessen Wert bei Ausführung um 1 erhöht werden soll.
+     * @return Increment-TuringMaschine
+     */
+    public static TuringMaschineMitBand createPruefe0Maschine(final ChangeableBand band) {
+        final TuringMaschine incrementMaschine = TuringMaschinen.incrementMaschine();
+        return TuringMaschineMitBand.create(incrementMaschine, band);
+    }
+
+    private static TuringMaschine createPruefe0Maschine() {
+        final URL resource = TuringMaschinen.class.getResource("pruefe0Maschine.xml");
+        return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
+    }
 
 	/**
 	 * Erstellt eine Decrement Maschine, welche bei Ausführung den Wert auf dem Band
@@ -43,12 +65,12 @@ public class TuringMaschinen {
 	 * @return Decrement-TuringMaschine
 	 */
 	public final static TuringMaschineMitBand createDecrement(final ChangeableBand band) {
-		final TuringMaschine decrementMaschine = decrementMaschine();
+		final TuringMaschine decrementMaschine = TuringMaschinen.decrementMaschine();
 		return TuringMaschineMitBand.create(decrementMaschine, band);
 	}
 
-	private final static TuringMaschine decrementMaschine() {
-		URL resource = TuringMaschinen.class.getResource("decrementerTM.xml");
+	private static TuringMaschine decrementMaschine() {
+		final URL resource = TuringMaschinen.class.getResource("decrementerTM.xml");
 		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
 
@@ -60,13 +82,13 @@ public class TuringMaschinen {
 	 */
 	public static TuringMaschineMitBand createAdd(final ChangeableBand sum1, final ChangeableBand sum2,
 			final ChangeableBand result) {
-		ChangeableBand sum11 = ChangeableBand.create();
-		ChangeableBand sum21 = ChangeableBand.create();
-		TuringMaschineMitBand m1 = createCopy(sum1, sum11);
-		TuringMaschineMitBand m2 = createCopy(sum2, sum21);
-		TuringMaschineMitBand m3 = TuringMaschineMitBand.create(TuringMaschinen.addiererMaschine(), sum11, sum21,
+		final ChangeableBand sum11 = ChangeableBand.create();
+		final ChangeableBand sum21 = ChangeableBand.create();
+		final TuringMaschineMitBand m1 = TuringMaschinen.createCopy(sum1, sum11);
+		final TuringMaschineMitBand m2 = TuringMaschinen.createCopy(sum2, sum21);
+		final TuringMaschineMitBand m3 = TuringMaschineMitBand.create(TuringMaschinen.addiererMaschine(), sum11, sum21,
 				result);
-		return createSeq(m1, createSeq(m2, m3));
+		return TuringMaschinen.createSeq(m1, TuringMaschinen.createSeq(m2, m3));
 	}
 
 
@@ -78,18 +100,19 @@ public class TuringMaschinen {
 	 */
 	public final static TuringMaschineMitBand createSub(final ChangeableBand minuend, final ChangeableBand subtrahend,
 			final ChangeableBand result) {
-		ChangeableBand subtrahend1 = ChangeableBand.create();
-		TuringMaschineMitBand m1 = createCopy(minuend, result);
-		TuringMaschineMitBand m2 = createCopy(subtrahend, subtrahend1);
+		final ChangeableBand minuend1 = ChangeableBand.create();
+		final ChangeableBand subtrahend1 = ChangeableBand.create();
+		final TuringMaschineMitBand m1 = TuringMaschinen.createCopy(minuend, minuend1);
+		final TuringMaschineMitBand m2 = TuringMaschinen.createCopy(subtrahend, subtrahend1);
 
-		TuringMaschineMitBand subtrahierer = createDecrement(result);
-		TuringMaschineMitBand whileM = createWhile(subtrahend1, subtrahierer);
+		final TuringMaschineMitBand subtrahierer = TuringMaschinen.createDecrement(minuend1);
+		final TuringMaschineMitBand whileM = TuringMaschinen.createWhile(subtrahend1, subtrahierer);
 
-		return createSeq(m1, createSeq(m2, whileM));
+		return TuringMaschinen.createSeq(m1, TuringMaschinen.createSeq(m2, whileM));
 	}
 
-	private final static TuringMaschine copyMaschine() {
-		URL resource = TuringMaschinen.class.getResource("copyTM.xml");
+	private static TuringMaschine copyMaschine() {
+		final URL resource = TuringMaschinen.class.getResource("copyTM.xml");
 		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
 
@@ -114,12 +137,41 @@ public class TuringMaschinen {
 	 *            wiederholt auszuführende Turingmaschine.
 	 * @return While-Turingmaschine.
 	 */
-	public static TuringMaschineMitBand createWhile(final Band condition, final TuringMaschineMitBand tm) {
-		// TODO noch nicht angeguckt
-		return null;
+	public static TuringMaschineMitBand createWhile(final ChangeableBand condition, final TuringMaschineMitBand tm) {
+        final TuringMaschinenBuilder builder = TuringMaschine.builder();
+        final Zustand stop = Zustand.create("stop");
+        final TuringMaschineMitBand pruefe0Maschine = TuringMaschinen.createPruefe0Maschine(condition);
+        builder.startZustand(pruefe0Maschine.getMaschine().getStartZustand());
+        builder.addEndZustand(stop);
+
+        builder.anzahlDerBaender(pruefe0Maschine.getBaender().size() + tm.getBaender().size());
+
+        builder.ueberfuehrungsfunktion(TuringMaschinen.ueberfuehrungVonWhileBerechnen(pruefe0Maschine, tm));
+
+        return null;
 	}
 
-	/**
+    private static Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungVonWhileBerechnen(final TuringMaschineMitBand pruefe0Maschine, final TuringMaschineMitBand tm) {
+        final HashSet<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion = new HashSet<>();
+        final Zustand endZustand = pruefe0Maschine.getMaschine().getEndZustaende().iterator().next();
+        final ElementDerUeberfuehrungsfunktion inTMMit11 = ElementDerUeberfuehrungsfunktion.create(endZustand,
+                tm.getMaschine().getStartZustand(),
+                Collections.singletonList(Zeichen.create('1')),
+                Collections.singletonList(Zeichen.create('1')),
+                Collections.singletonList(Lesekopfbewegung.N));
+        final ElementDerUeberfuehrungsfunktion inStopMit00 = ElementDerUeberfuehrungsfunktion.create(endZustand,
+                tm.getMaschine().getStartZustand(),
+                Collections.singletonList(Zeichen.create('0')),
+                Collections.singletonList(Zeichen.create('0')),
+                Collections.singletonList(Lesekopfbewegung.N));
+
+        ueberfuehrungsfunktion.add(TuringMaschine.erstelleUeberfuhrungMitBeliebigenZeichen(inTMMit11, tm.getBaender().size(), false));
+        ueberfuehrungsfunktion.add(TuringMaschine.erstelleUeberfuhrungMitBeliebigenZeichen(inStopMit00, tm.getBaender().size(), false));
+
+        return ueberfuehrungsfunktion;
+    }
+
+    /**
 	 * Erstellt eine Turingmaschine, welche die TuringMaschine t1 und t2
 	 * hintereinander ausführt.
 	 *
