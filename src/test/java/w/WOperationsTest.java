@@ -19,9 +19,9 @@ public class WOperationsTest {
 	@Test
 	public void testSubtrahierer() {
 		final ChangeableBand ret = ChangeableBand.create();
-        final TuringMaschineMitBand subtract3From5 = TuringMaschinen.createSub(ChangeableBand.create("5"), ChangeableBand.create("3"), ret);
+        final TuringMaschineMitBand subtract3From5 = TuringMaschinen.createSub(ChangeableBand.create("389"), ChangeableBand.create("211"), ret);
         subtract3From5.simuliere();
-        assertEquals("2", ret.toString());
+        assertEquals("178", ret.toString());
 	}
 
     @Test
