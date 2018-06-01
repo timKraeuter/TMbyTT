@@ -86,8 +86,7 @@ public class TuringMaschine {
                             eingabeBaender.size(), this.anzahlDerBaender));
         }
 
-        final Konfiguration startConfig = Konfiguration.create(this.startZustand, eingabeBaender, this);
-        return startConfig;
+        return Konfiguration.create(this.startZustand, eingabeBaender, this);
     }
 
     public Konfiguration simuliereDeterministisch(final String... eingaben) {
@@ -96,7 +95,7 @@ public class TuringMaschine {
         return endKonfigurationen.iterator().next();
     }
 
-    public Konfiguration simuliereDeterministisch(final List<Band> baender) {
+    Konfiguration simuliereDeterministisch(final List<Band> baender) {
         final Konfiguration startKonfiguration = this.createStartKonfiguration(baender);
         final Set<Konfiguration> endKonfigurationen = this.lasseMaschineLaufen(startKonfiguration);
         this.checkIfDeterministisch(endKonfigurationen);
@@ -122,7 +121,7 @@ public class TuringMaschine {
         return !this.simuliere(eingabe).isEmpty();
     }
 
-    public TuringMaschine sequence(final TuringMaschine t2) {
+    TuringMaschine sequence(final TuringMaschine t2) {
         final TuringMaschinenBuilder builder = TuringMaschine.builder();
         builder.startZustand(this.startZustand); // Startzustand der 1 Maschine
         t2.endZustaende.forEach(builder::addEndZustand); // Endzustände der 2 Maschine
@@ -262,7 +261,7 @@ public class TuringMaschine {
                 this.anzahlDerBaender);
     }
 
-    public Set<Zustand> getEndZustaende() {
+    Set<Zustand> getEndZustaende() {
         return Collections.unmodifiableSet(this.endZustaende);
     }
 }

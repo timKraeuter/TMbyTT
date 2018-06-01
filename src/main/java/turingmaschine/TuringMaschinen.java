@@ -64,7 +64,7 @@ public class TuringMaschinen {
 	 *            wessen Wert bei Ausführung um 1 verringert werden soll.
 	 * @return Decrement-TuringMaschine
 	 */
-	public final static TuringMaschineMitBand createDecrement(final ChangeableBand band) {
+	public static TuringMaschineMitBand createDecrement(final ChangeableBand band) {
 		final TuringMaschine decrementMaschine = TuringMaschinen.decrementMaschine();
 		return TuringMaschineMitBand.create(decrementMaschine, band);
 	}
@@ -98,7 +98,7 @@ public class TuringMaschinen {
 	 *
 	 * @return Subtraktions-Turingmaschine für Dezimalzahlen.
 	 */
-	public final static TuringMaschineMitBand createSub(final ChangeableBand minuend, final ChangeableBand subtrahend,
+	public static TuringMaschineMitBand createSub(final ChangeableBand minuend, final ChangeableBand subtrahend,
 			final ChangeableBand result) {
 		final ChangeableBand minuend1 = ChangeableBand.create();
 		final ChangeableBand subtrahend1 = ChangeableBand.create();
