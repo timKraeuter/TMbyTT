@@ -102,14 +102,16 @@ public class TuringMaschinen {
     public static TuringMaschineMitBand createSub(final ChangeableBand minuend, final ChangeableBand subtrahend,
                                                   final ChangeableBand result) {
         final ChangeableBand subtrahend1 = ChangeableBand.create();
-        final TuringMaschineMitBand m1 = TuringMaschinen.createCopy(minuend, result);
-        final TuringMaschineMitBand m2 = TuringMaschinen.createCopy(subtrahend, subtrahend1);
+        final ChangeableBand parkplatz = ChangeableBand.create();
+        final TuringMaschineMitBand einparken = TuringMaschinen.createCopy(minuend, parkplatz);
+        final TuringMaschineMitBand copy = TuringMaschinen.createCopy(subtrahend, subtrahend1);
+        final TuringMaschineMitBand ausparken = TuringMaschinen.createCopy(parkplatz, result);
 
-        final TuringMaschineMitBand subtrahierer = TuringMaschinen.createSeq(TuringMaschinen.createDecrement(result),
+        final TuringMaschineMitBand subtrahierer = TuringMaschinen.createSeq(TuringMaschinen.createDecrement(parkplatz),
                                                                                 TuringMaschinen.createDecrement(subtrahend1));
         final TuringMaschineMitBand whileM = TuringMaschinen.createWhile(subtrahend1, subtrahierer);
 
-        return TuringMaschinen.createSeq(m1, TuringMaschinen.createSeq(m2, whileM));
+        return TuringMaschinen.createSeq(TuringMaschinen.createSeq(einparken, TuringMaschinen.createSeq(copy, whileM)), ausparken);
     }
 
     private static TuringMaschine copyMaschine() {
