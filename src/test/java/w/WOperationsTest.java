@@ -39,15 +39,16 @@ public class WOperationsTest {
         subtract3From5.simuliere();
         assertEquals("178", ret.toString());
 
-		final ChangeableBand f21 = ChangeableBand.create("3");
-        TuringMaschinen.createSub(f21, ChangeableBand.create("1"), f21);
-        assertEquals("2", f21.toString());
+		final ChangeableBand xMinus1 = ChangeableBand.create("3");
+        TuringMaschinen.createSub(xMinus1, ChangeableBand.create("1"), xMinus1);
+        assertEquals("2", xMinus1.toString());
     }
 
     @Test
     public void thereIsNoProblem() {
         final ChangeableBand z = ChangeableBand.create("JJTT sind alles Spacken");
         TuringMaschinen.createSub(ChangeableBand.create("17"), ChangeableBand.create("5"), z).simuliere();
+        assertEquals("12", z.toString());
     }
 
 	@Test
