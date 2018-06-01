@@ -8,18 +8,20 @@ import turingmaschine.band.ChangeableBand;
 import static org.junit.Assert.assertEquals;
 
 public class WOperationsTest {
+
+
 	@Test
 	public void testMultiply() {
-		ChangeableBand f1 = ChangeableBand.create("5");
-		ChangeableBand f2 = ChangeableBand.create("3");
-		ChangeableBand f11 = ChangeableBand.create();
-		ChangeableBand f21 = ChangeableBand.create();
+		final ChangeableBand f1 = ChangeableBand.create("5");
+		final ChangeableBand f2 = ChangeableBand.create("3");
+		final ChangeableBand f11 = ChangeableBand.create();
+		final ChangeableBand f21 = ChangeableBand.create();
 		TuringMaschinen.createSeq(TuringMaschinen.createCopy(f1, f11),
 				TuringMaschinen.createSeq(TuringMaschinen.createCopy(f2, f21),
 						TuringMaschinen.createWhile(f21,
 								TuringMaschinen.createSeq(TuringMaschinen.createAdd(f1, f11, f1),
 										TuringMaschinen.createSub(f21, ChangeableBand.create("1"), f21))))).simuliere();
-		assertEquals(15, f1);
+		assertEquals("15", f1.toString());
 	}
 
 	@Test
@@ -36,7 +38,23 @@ public class WOperationsTest {
         final TuringMaschineMitBand subtract3From5 = TuringMaschinen.createSub(ChangeableBand.create("389"), ChangeableBand.create("211"), ret);
         subtract3From5.simuliere();
         assertEquals("178", ret.toString());
-	}
+
+        ret.wipe();
+        final TuringMaschineMitBand subtract5From17 = TuringMaschinen.createSub(ChangeableBand.create("17"), ChangeableBand.create("5"), ret);
+        subtract5From17.simuliere();
+        assertEquals("12", ret.toString());
+
+
+		final ChangeableBand f21 = ChangeableBand.create("3");
+        TuringMaschinen.createSub(f21, ChangeableBand.create("1"), f21);
+        assertEquals("2", f21.toString());
+    }
+
+    @Test
+    public void thereIsNoProblem() {
+        final ChangeableBand z = ChangeableBand.create("JJTT sind alles Spacken");
+        TuringMaschinen.createSub(ChangeableBand.create("17"), ChangeableBand.create("5"), z).simuliere();
+    }
 
 	@Test
 	public void testWhile() {
