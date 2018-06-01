@@ -29,12 +29,12 @@ Feature: Verschiedene Turingmaschinen werden getestet.
     And die TM mit dem Namen Decrement hat den Endzustand fertig
     Then die TM mit dem Namen Decrement hat bei folgender Eingabe die folgende Ausgabe auf Band 1:
       | eingabe  | ausgabe  |
+      |        5 |        4 |
       |        0 | §        |
       |        1 |        0 |
       |        2 |        1 |
       |        3 |        2 |
       |        4 |        3 |
-      |        5 |        4 |
       |        6 |        5 |
       |        7 |        6 |
       |        8 |        7 |

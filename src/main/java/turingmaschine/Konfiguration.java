@@ -9,16 +9,16 @@ import java.util.List;
 public class Konfiguration {
 
 	private final Zustand zustand;
-	private final List<Band> baender;
+	private final List<? extends Band> baender;
 	private final TuringMaschine tM;
 
-	private Konfiguration(final Zustand zustand, final List<Band> baender, final TuringMaschine tM) {
+	private Konfiguration(final Zustand zustand, final List<? extends Band> baender, final TuringMaschine tM) {
 		this.zustand = zustand;
 		this.baender = baender;
 		this.tM = tM;
 	}
 
-	public static Konfiguration create(final Zustand zustand, final List<Band> baender, final TuringMaschine tM) {
+	public static Konfiguration create(final Zustand zustand, final List<? extends Band> baender, final TuringMaschine tM) {
 		return new Konfiguration(zustand, baender, tM);
 	}
 

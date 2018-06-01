@@ -79,7 +79,7 @@ public class TuringMaschine {
         return endKonfigurationen;
     }
 
-    public Konfiguration createStartKonfiguration(final List<Band> eingabeBaender) {
+    public Konfiguration createStartKonfiguration(final List<? extends Band> eingabeBaender) {
         if (eingabeBaender.size() != this.anzahlDerBaender) {
             throw new RuntimeException(
                     String.format("Nur %s Eingabebänder erkannt, aber %s Eingabebänder sind gefordert!",
@@ -95,7 +95,7 @@ public class TuringMaschine {
         return endKonfigurationen.iterator().next();
     }
 
-    Konfiguration simuliereDeterministisch(final List<Band> baender) {
+    Konfiguration simuliereDeterministisch(final List<? extends Band> baender) {
         final Konfiguration startKonfiguration = this.createStartKonfiguration(baender);
         final Set<Konfiguration> endKonfigurationen = this.lasseMaschineLaufen(startKonfiguration);
         this.checkIfDeterministisch(endKonfigurationen);
@@ -203,6 +203,10 @@ public class TuringMaschine {
         return this.endZustaende.contains(moeglicherEndzustand);
     }
 
+    public Set<ElementDerUeberfuehrungsfunktion> getUeberfuehrungsfunktion() {
+        return Collections.unmodifiableSet(this.ueberfuehrungsfunktion);
+    }
+
     public Zustand getStartZustand() {
         return this.startZustand;
     }
@@ -264,4 +268,7 @@ public class TuringMaschine {
     Set<Zustand> getEndZustaende() {
         return Collections.unmodifiableSet(this.endZustaende);
     }
-}
+
+    public int getAnzahlDerBaender() {
+        return this.anzahlDerBaender;
+    }}

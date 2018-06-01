@@ -4,21 +4,24 @@ Feature: Verschiedene Turingmaschinen werden getestet.
     Given eine TM mit dem Namen Pruefe0 und 2 Bändern
     And die TM mit dem Namen Pruefe0 hat den Startzustand z0
     And die TM mit dem Namen Pruefe0 hat die Überführungsfunktion:
-      | vonZustand    | zuZustand     | eingabeZeichen | zuSchreibendeZeichen | schreibLesekopfBewegungen |
-      | z0            | z0            | 0;*            | 0;_                  | R;N                       |
-      | z0            | geheNachLinks | _;*            | _;0                  | R;N                       |
-      | z0            | geheNachLinks | 1;*            | 1;1                  | R;N                       |
-      | z0            | geheNachLinks | 2;*            | 2;1                  | R;N                       |
-      | z0            | geheNachLinks | 3;*            | 3;1                  | R;N                       |
-      | z0            | geheNachLinks | 4;*            | 4;1                  | R;N                       |
-      | z0            | geheNachLinks | 5;*            | 5;1                  | R;N                       |
-      | z0            | geheNachLinks | 6;*            | 6;1                  | R;N                       |
-      | z0            | geheNachLinks | 7;*            | 7;1                  | R;N                       |
-      | z0            | geheNachLinks | 8;*            | 8;1                  | R;N                       |
-      | z0            | geheNachLinks | 9;*            | 9;1                  | R;N                       |
+      | vonZustand     | zuZustand      | eingabeZeichen | zuSchreibendeZeichen | schreibLesekopfBewegungen |
+      | z0             | z0             | 0;*            | 0;_                  | R;N                       |
+      | z0             | geheNachLinks  | _;*            | _;0                  | L;N                       |
+      | z0             | geheNachRechts | 1;*            | 1;1                  | R;N                       |
+      | z0             | geheNachRechts | 2;*            | 2;1                  | R;N                       |
+      | z0             | geheNachRechts | 3;*            | 3;1                  | R;N                       |
+      | z0             | geheNachRechts | 4;*            | 4;1                  | R;N                       |
+      | z0             | geheNachRechts | 5;*            | 5;1                  | R;N                       |
+      | z0             | geheNachRechts | 6;*            | 6;1                  | R;N                       |
+      | z0             | geheNachRechts | 7;*            | 7;1                  | R;N                       |
+      | z0             | geheNachRechts | 8;*            | 8;1                  | R;N                       |
+      | z0             | geheNachRechts | 9;*            | 9;1                  | R;N                       |
 
-      | geheNachLinks | geheNachLinks | ~;*            | ~;*                  | L;N                       |
-      | geheNachLinks | Ze            | _;*            | _;*                  | R;N                       |
+      | geheNachRechts | geheNachRechts | ~;*            | ~;*                  | R;N                       |
+      | geheNachRechts | geheNachLinks  | _;*            | _;*                  | L;N                       |
+
+      | geheNachLinks  | geheNachLinks  | ~;*            | ~;*                  | L;N                       |
+      | geheNachLinks  | Ze             | _;*            | _;*                  | R;N                       |
 
 
     And die TM mit dem Namen Pruefe0 hat den Endzustand Ze
@@ -46,4 +49,4 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 10;_         | 1       |
       | 123456789;_  | 1       |
       | 436801243;_  | 1       |
-#    And persistiere die TM Pruefe0 to pruefe0Maschine
+    And persistiere die TM Pruefe0 to pruefe0Maschine

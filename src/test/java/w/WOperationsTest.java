@@ -1,12 +1,11 @@
 package w;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
-
 import turingmaschine.TuringMaschineMitBand;
 import turingmaschine.TuringMaschinen;
 import turingmaschine.band.ChangeableBand;
+
+import static org.junit.Assert.assertEquals;
 
 public class WOperationsTest {
 	@Test
@@ -19,17 +18,31 @@ public class WOperationsTest {
 
 	@Test
 	public void testSubtrahierer() {
-		ChangeableBand ret = ChangeableBand.create();
-		TuringMaschinen.createSub(ChangeableBand.create("5"), ChangeableBand.create("3"), ret);
-		assertEquals("2", ret.toString());
+		final ChangeableBand ret = ChangeableBand.create();
+        final TuringMaschineMitBand subtract3From5 = TuringMaschinen.createSub(ChangeableBand.create("5"), ChangeableBand.create("3"), ret);
+        subtract3From5.simuliere();
+        assertEquals("2", ret.toString());
 	}
 
-	@Test
+    @Test
+    public void testWhile() {
+        final ChangeableBand x = ChangeableBand.create("5");
+        final ChangeableBand y = ChangeableBand.create("0");
+        final TuringMaschineMitBand decrementX = TuringMaschinen.createDecrement(x);
+        final TuringMaschineMitBand whileYNicht0Decrement = TuringMaschinen.createWhile(y, decrementX);
+
+        whileYNicht0Decrement.simuliere();
+
+        assertEquals("0", y.toString());
+        assertEquals("5", x.toString());
+	}
+
+    @Test
 	public void testAddiererMaschineMitRecycletemBand() {
 		final ChangeableBand result = ChangeableBand.create();
-		TuringMaschineMitBand m1 = TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("3"),
+		final TuringMaschineMitBand m1 = TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("3"),
 				result);
-		TuringMaschineMitBand m2 = TuringMaschinen.createAdd(ChangeableBand.create("5"), result, result);
+		final TuringMaschineMitBand m2 = TuringMaschinen.createAdd(ChangeableBand.create("5"), result, result);
 		TuringMaschinen.createSeq(m1, m2).simuliere();
 		assertEquals("13", result.toString());
 	}
@@ -37,7 +50,7 @@ public class WOperationsTest {
 	@Test
 	public void testAddiererMaschineMitRecycletemBandEinfach() {
 		final ChangeableBand result = ChangeableBand.create("1");
-		TuringMaschineMitBand m = TuringMaschinen.createAdd(ChangeableBand.create("5"), result, result);
+		final TuringMaschineMitBand m = TuringMaschinen.createAdd(ChangeableBand.create("5"), result, result);
 		m.simuliere();
 		assertEquals("6", result.toString());
 	}
@@ -111,7 +124,7 @@ public class WOperationsTest {
 		final TuringMaschineMitBand zGleichY = TuringMaschinen.createCopy(y, z);
 		x.wipe();
 		y.wipe();
-		TuringMaschineMitBand zGleichYGleichXGleich5 = TuringMaschinen.createSeq(yGleichXGleich5, zGleichY);
+		final TuringMaschineMitBand zGleichYGleichXGleich5 = TuringMaschinen.createSeq(yGleichXGleich5, zGleichY);
 		zGleichYGleichXGleich5.simuliere();
 
 		assertEquals("5", x.toString());
