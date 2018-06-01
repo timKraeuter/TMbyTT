@@ -36,7 +36,7 @@ public class ElementDerUeberfuehrungsfunktion {
         return new ElementDerUeberfuehrungsfunktion(vonZustand, zuZustand, eingaben, zuSchreibendeZeichen, lesekopfBewegungen);
     }
 
-    public boolean istPassendeUeberfuehrungZu(final Konfiguration konfiguration) {
+    boolean istPassendeUeberfuehrungZu(final Konfiguration konfiguration) {
         return this.vonZustand.equals(konfiguration.getZustand()) && this.passendeEingaben(konfiguration);
     }
 
@@ -68,7 +68,7 @@ public class ElementDerUeberfuehrungsfunktion {
     }
 
     /**
-     * Üblicher Getter für das Attribut eingaben.
+     * Read-only Getter für das Attribut eingaben.
      *
      * @return liefert eingaben.
      */
@@ -77,7 +77,7 @@ public class ElementDerUeberfuehrungsfunktion {
     }
 
     /**
-     * Üblicher Getter für das Attribut zuSchreibendeZeichen.
+     * Read-only Getter für das Attribut zuSchreibendeZeichen.
      *
      * @return liefert zuSchreibendeZeichen.
      */
@@ -86,19 +86,19 @@ public class ElementDerUeberfuehrungsfunktion {
     }
 
     /**
-     * Üblicher Getter für das Attribut lesekopfBewegungen.
+     * Read-only Getter für das Attribut lesekopfBewegungen.
      *
      * @return liefert lesekopfBewegungen.
      */
-    public List<Lesekopfbewegung> getLesekopfBewegungen() {
+    List<Lesekopfbewegung> getLesekopfBewegungen() {
         return Collections.unmodifiableList(this.lesekopfBewegungen);
     }
 
-    public Zeichen getZuSchreibendesZeichen(final int bandNummer) {
+    Zeichen getZuSchreibendesZeichen(final int bandNummer) {
         return this.zuSchreibendeZeichen.get(bandNummer);
     }
 
-    public Lesekopfbewegung getLesekopfBewegung(final int bandNummer) {
+    Lesekopfbewegung getLesekopfBewegung(final int bandNummer) {
         return this.lesekopfBewegungen.get(bandNummer);
     }
 

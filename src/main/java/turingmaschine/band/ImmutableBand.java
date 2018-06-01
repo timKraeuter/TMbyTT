@@ -9,6 +9,7 @@ import turingmaschine.band.zeichen.ZeichenVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ImmutableBand implements Band {
 
@@ -91,7 +92,7 @@ public class ImmutableBand implements Band {
             }
 
             @Override
-            public Void handle(BeliebigesZeichenOhneBlank beliebigesZeichenOhneBlank) {
+            public Void handle(final BeliebigesZeichenOhneBlank beliebigesZeichenOhneBlank) {
                 inhalteDesNeuenBands.set(ImmutableBand.this.positionDesSchreibLeseKopfes, gelesenesZeichen);
                 return null;
             }
@@ -108,44 +109,11 @@ public class ImmutableBand implements Band {
             return Blank.getInstance();
         }
         if (this.positionDesSchreibLeseKopfes >= this.inhalteDesBands.size()) {
-            System.out.println("lel");
+            System.out.println("Should not happen :D !");
             this.inhalteDesBands.add(Blank.getInstance());
         }
         return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((this.inhalteDesBands == null) ? 0 : this.inhalteDesBands.hashCode());
-        result = prime * result + this.positionDesSchreibLeseKopfes;
-        return result;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
-        final ImmutableBand other = (ImmutableBand) obj;
-        if (this.inhalteDesBands == null) {
-            if (other.inhalteDesBands != null) {
-                return false;
-            }
-        } else if (!this.inhalteDesBands.equals(other.inhalteDesBands)) {
-            return false;
-        }
-        return this.positionDesSchreibLeseKopfes == other.positionDesSchreibLeseKopfes;
-    }
-
-
 
     @Override
     public String toString() {
@@ -169,11 +137,30 @@ public class ImmutableBand implements Band {
                 }
 
                 @Override
-                public Void handle(BeliebigesZeichenOhneBlank beliebigesZeichenOhneBlank) {
+                public Void handle(final BeliebigesZeichenOhneBlank beliebigesZeichenOhneBlank) {
                     return null;
                 }
             });
         }
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || this.getClass() != o.getClass()) {
+            return false;
+        }
+        final ImmutableBand that = (ImmutableBand) o;
+        return this.positionDesSchreibLeseKopfes == that.positionDesSchreibLeseKopfes &&
+                Objects.equals(this.inhalteDesBands, that.inhalteDesBands);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(this.inhalteDesBands, this.positionDesSchreibLeseKopfes);
     }
 }
