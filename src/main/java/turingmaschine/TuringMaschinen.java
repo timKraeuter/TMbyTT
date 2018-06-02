@@ -85,8 +85,8 @@ public class TuringMaschinen {
                                                   final ChangeableBand result) {
         final ChangeableBand sum11 = ChangeableBand.create();
         final ChangeableBand sum21 = ChangeableBand.create();
-        final TuringMaschineMitBand m1 = TuringMaschinen.createCopy(sum1, sum11);
-        final TuringMaschineMitBand m2 = TuringMaschinen.createCopy(sum2, sum21);
+        final TuringMaschineMitBand m1 = TuringMaschinen.copy(sum1, sum11);
+        final TuringMaschineMitBand m2 = TuringMaschinen.copy(sum2, sum21);
         final TuringMaschineMitBand m3 = TuringMaschineMitBand.create(TuringMaschinen.addiererMaschine(), sum11, sum21,
                 result);
         return TuringMaschinen.createSeq(m1, TuringMaschinen.createSeq(m2, m3));
@@ -103,9 +103,9 @@ public class TuringMaschinen {
                                                   final ChangeableBand result) {
         final ChangeableBand subtrahend1 = ChangeableBand.create();
         final ChangeableBand parkplatz = ChangeableBand.create();
-        final TuringMaschineMitBand einparken = TuringMaschinen.createCopy(minuend, parkplatz);
-        final TuringMaschineMitBand copy = TuringMaschinen.createCopy(subtrahend, subtrahend1);
-        final TuringMaschineMitBand ausparken = TuringMaschinen.createCopy(parkplatz, result);
+        final TuringMaschineMitBand einparken = TuringMaschinen.copy(minuend, parkplatz);
+        final TuringMaschineMitBand copy = TuringMaschinen.copy(subtrahend, subtrahend1);
+        final TuringMaschineMitBand ausparken = TuringMaschinen.copy(parkplatz, result);
 
         final TuringMaschineMitBand subtrahierer = TuringMaschinen.createSeq(TuringMaschinen.createDecrement(parkplatz),
                                                                                 TuringMaschinen.createDecrement(subtrahend1));
@@ -125,7 +125,7 @@ public class TuringMaschinen {
      *
      * @return Kopier-Turingmaschine.
      */
-    public static TuringMaschineMitBand createCopy(final ChangeableBand from, final ChangeableBand to) {
+    public static TuringMaschineMitBand copy(final ChangeableBand from, final ChangeableBand to) {
         return TuringMaschineMitBand.create(TuringMaschinen.copyMaschine(), from, to);
     }
 

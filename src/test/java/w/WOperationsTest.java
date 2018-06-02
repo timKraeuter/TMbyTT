@@ -17,8 +17,8 @@ public class WOperationsTest {
 		final ChangeableBand f11 = ChangeableBand.create("0");
 		final ChangeableBand f21 = ChangeableBand.create("0");
 
-		final TuringMaschineMitBand c1 = TuringMaschinen.createCopy(f1, f11);
-		final TuringMaschineMitBand c2 = TuringMaschinen.createCopy(f2, f21);
+		final TuringMaschineMitBand c1 = TuringMaschinen.copy(f1, f11);
+		final TuringMaschineMitBand c2 = TuringMaschinen.copy(f2, f21);
 		final TuringMaschineMitBand add1 = TuringMaschinen.createAdd(f1, f11, f1);
 		final TuringMaschineMitBand decrement = TuringMaschinen.createSub(f21, ChangeableBand.create("1"), f21);
 		final TuringMaschineMitBand w = TuringMaschinen.createWhile(f21, TuringMaschinen.createSeq(add1, decrement));
@@ -33,6 +33,7 @@ public class WOperationsTest {
 		TuringMaschinen.createAdd(x, x, x);
 		assertEquals("10", x.toString());
 	}
+
 	@Test
 	public void testKillerTestSubtrahiererTest() {
 		ChangeableBand x = ChangeableBand.create("5");
@@ -163,10 +164,10 @@ public class WOperationsTest {
 	public void testCopyAndCopySequence() {
 		final ChangeableBand x = ChangeableBand.create();
 		final ChangeableBand y = ChangeableBand.create();
-		final TuringMaschineMitBand xGleich5 = TuringMaschinen.createCopy(ChangeableBand.create("5"), x);
+		final TuringMaschineMitBand xGleich5 = TuringMaschinen.copy(ChangeableBand.create("5"), x);
 		xGleich5.simuliere();
 		assertEquals("5", x.toString());
-		final TuringMaschineMitBand yGleichX = TuringMaschinen.createCopy(x, y);
+		final TuringMaschineMitBand yGleichX = TuringMaschinen.copy(x, y);
 		yGleichX.simuliere();
 		assertEquals("5", y.toString());
 
@@ -178,7 +179,7 @@ public class WOperationsTest {
 		assertEquals("5", y.toString());
 
 		final ChangeableBand z = ChangeableBand.create();
-		final TuringMaschineMitBand zGleichY = TuringMaschinen.createCopy(y, z);
+		final TuringMaschineMitBand zGleichY = TuringMaschinen.copy(y, z);
 		x.wipe();
 		y.wipe();
 		final TuringMaschineMitBand zGleichYGleichXGleich5 = TuringMaschinen.createSeq(yGleichXGleich5, zGleichY);
@@ -188,5 +189,17 @@ public class WOperationsTest {
 		assertEquals("5", y.toString());
 		assertEquals("5", z.toString());
 
+	}
+
+	@Test
+	public void testXAdd() {
+		for (int xi = 0; xi < 100; xi++) {
+			for (int yi = 0; yi < 100; yi++) {
+				ChangeableBand x = ChangeableBand.create(Integer.toString(xi));
+				ChangeableBand y = ChangeableBand.create(Integer.toString(yi));
+				TuringMaschinen.createAdd(x, x, y).simuliere();
+				assertEquals(xi + " + " + yi, String.valueOf(xi + yi), x.toString());
+			}
+		}
 	}
 }
