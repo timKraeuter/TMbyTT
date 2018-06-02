@@ -275,8 +275,8 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | uebertrag     | uebertrag     | 9;_;_          | 9;_;0                | L;L;L                     |
 
     # Endzustand, wenn keine zeichen mehr da sind auf beiden Bändern
-      | keinUebertrag | Ze | _;_;_          | _;_;_                | R;R;R                     |
-      | uebertrag     | Ze | _;_;_          | _;_;1                | R;R;N                     |
+      | keinUebertrag | Ze            | _;_;_          | _;_;_                | R;R;R                     |
+      | uebertrag     | Ze            | _;_;_          | _;_;1                | R;R;N                     |
 
     And die TM mit dem Namen DezimalAddierer hat den Endzustand Ze
     Then die TM mit dem Namen DezimalAddierer hat bei folgender Eingabe die folgende Ausgabe auf Band 3:
@@ -348,4 +348,8 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 1349;15667;_     | 17016   |
       | 1564567;173349;_ | 1737916 |
       | 173349;1564567;_ | 1737916 |
+      | 5;3;_            | 8       |
+      | 8;3;_            | 11      |
+      | 11;3;_           | 14      |
+      | 14;3;_           | 17      |
 #    And persistiere die TM DezimalAddierer to decimalAdditionTM
