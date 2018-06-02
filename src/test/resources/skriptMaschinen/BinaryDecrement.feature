@@ -11,15 +11,16 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | sucheEnde     | sucheEnde     | 1              | 1                    | R                         |
       | sucheEnde     | dekrementiere | _              | _                    | L                         |
       | dekrementiere | dekrementiere | 0              | 1                    | L                         |
+      | dekrementiere | eingabeWar0   | _              | _                    | R                         |
+      | eingabeWar0   | fertig        | 1              | 0                    | N                         |
       | dekrementiere | fertig        | 1              | 0                    | N                         |
     And die TM mit dem Namen BinaryDecrement hat den Endzustand fertig
     Then die TM mit dem Namen BinaryDecrement hat bei folgender Eingabe die folgende Ausgabe auf Band 1:
       | eingabe    | ausgabe    |
-      | 10         | 1          |
-      | 10         | 1          |
-      | 1000100010 | 1000100001 |
-      | 10001100   | 10001011   |
+      | 0          | 0          |
       | 1          | 0          |
+      | 10         | 1          |
+      | 1011       | 1010       |
       | 1001000    | 1000111    |
-#    And persistiere die TM BinärerAddierer to binaryIncrement
-
+      | 10001100   | 10001011   |
+      | 1000100010 | 1000100001 |

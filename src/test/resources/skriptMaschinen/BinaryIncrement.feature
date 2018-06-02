@@ -19,8 +19,9 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 0          | 1          |
       | 1          | 10         |
       | 01         | 10         |
+      | 01         | 10         |
+      | 1010       | 1011       |
       | 1000100001 | 1000100010 |
       | 10001011   | 10001100   |
       | 1000111    | 1001000    |
-#    And persistiere die TM BinärerAddierer to binaryIncrement
 
