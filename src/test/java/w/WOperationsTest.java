@@ -191,12 +191,35 @@ public class WOperationsTest {
 	}
 
 	@Test
+	public void testXYSub() {
+		for (int xi = 0; xi <= 10; xi++) {
+			for (int yi = xi; yi <= 100; yi++) {
+				ChangeableBand x = ChangeableBand.create(Integer.toString(xi));
+				ChangeableBand y = ChangeableBand.create(Integer.toString(yi));
+				TuringMaschinen.createSub(y, x, x).simuliere();
+				System.out.println(yi + " - " + xi + " = " + x);
+				assertEquals(yi + " - " + xi, Integer.valueOf(yi - xi), Integer.valueOf(x.toString()));
+			}
+		}
+	}
+	@Test
+	public void testXXSub() {
+		for (int xi = 0; xi <= 100; xi++) {
+				ChangeableBand x = ChangeableBand.create(Integer.toString(xi));
+				TuringMaschinen.createSub(x, x, x).simuliere();
+				System.out.println(xi + " - " + xi + " = " + x);
+				assertEquals(xi + " - " + xi, Integer.valueOf(xi - xi), Integer.valueOf(x.toString()));
+		}
+	}
+
+	@Test
 	public void testXAdd() {
-		for (int xi = 0; xi < 100; xi++) {
+		for (int xi = 0; xi < 10; xi++) {
 			for (int yi = 0; yi < 100; yi++) {
 				ChangeableBand x = ChangeableBand.create(Integer.toString(xi));
 				ChangeableBand y = ChangeableBand.create(Integer.toString(yi));
-				TuringMaschinen.createAdd(x, x, y).simuliere();
+				TuringMaschinen.createAdd(x, y, x).simuliere();
+				System.out.println(xi + " + " + yi + " = " + x);
 				assertEquals(xi + " + " + yi, String.valueOf(xi + yi), x.toString());
 			}
 		}
