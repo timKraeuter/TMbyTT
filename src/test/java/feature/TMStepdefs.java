@@ -142,9 +142,16 @@ public class TMStepdefs {
 
     private boolean zurEingabeGibtEsPassendeAusgabe(final TuringMaschine tm, final EingabeAusgabeDAO eingabeAusgabe,
                                                     final int nummerDesAusgabeBandes) {
-        Set<Konfiguration> simuliere = tm.simuliere(eingabeAusgabe.getEingabe().split(TMStepdefs.SEMIKOLON));
-        return simuliere.stream()
+        final Set<Konfiguration> simuliere = tm.simuliere(eingabeAusgabe.getEingabe().split(TMStepdefs.SEMIKOLON));
+        final boolean eingabePasstZuAusgabe = simuliere.stream()
                 .anyMatch(config -> config.bandContains(eingabeAusgabe.getAusgabe(), nummerDesAusgabeBandes));
+        if (!eingabePasstZuAusgabe) {
+            System.out.println(String.format("Bei Eingabe von %s wurde folgende Konfiguration erreicht %s und %s als Ausgabe erwartet!",
+                    eingabeAusgabe.getEingabe(),
+                    simuliere,
+                    eingabeAusgabe.getAusgabe()));
+        }
+        return eingabePasstZuAusgabe;
     }
 
     private List<String> splitSemikolon(final String eingabe) {
@@ -154,8 +161,8 @@ public class TMStepdefs {
     }
 
     @Given("persistiere die TM (.+) to (.+)")
-    public void persistiereDieTMDezimalAddiererToDecimalAdditionTM(String nameDerTM, String pathEnding) throws IOException {
-            final TuringMaschine tm = this.getTM(nameDerTM).build();
-            TMPersistierer.getInstance().persistiere(tm, new File("src/main/resources/turingmaschine/" + pathEnding + ".xml"));
+    public void persistiereDieTMDezimalAddiererToDecimalAdditionTM(final String nameDerTM, final String pathEnding) throws IOException {
+        final TuringMaschine tm = this.getTM(nameDerTM).build();
+        TMPersistierer.getInstance().persistiere(tm, new File("src/main/resources/turingmaschine/" + pathEnding + ".xml"));
     }
 }
