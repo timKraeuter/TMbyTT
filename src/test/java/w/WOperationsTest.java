@@ -202,13 +202,14 @@ public class WOperationsTest {
 			}
 		}
 	}
+
 	@Test
 	public void testXXSub() {
 		for (int xi = 0; xi <= 100; xi++) {
-				ChangeableBand x = ChangeableBand.create(Integer.toString(xi));
-				TuringMaschinen.createSub(x, x, x).simuliere();
-				System.out.println(xi + " - " + xi + " = " + x);
-				assertEquals(xi + " - " + xi, Integer.valueOf(xi - xi), Integer.valueOf(x.toString()));
+			ChangeableBand x = ChangeableBand.create(Integer.toString(xi));
+			TuringMaschinen.createSub(x, x, x).simuliere();
+			System.out.println(xi + " - " + xi + " = " + x);
+			assertEquals(xi + " - " + xi, Integer.valueOf(xi - xi), Integer.valueOf(x.toString()));
 		}
 	}
 
@@ -223,5 +224,22 @@ public class WOperationsTest {
 				assertEquals(xi + " + " + yi, String.valueOf(xi + yi), x.toString());
 			}
 		}
+	}
+
+	@Test
+	public void multiply2() {
+		ChangeableBand f11 = ChangeableBand.create("0");
+		ChangeableBand f21 = ChangeableBand.create("0");
+		ChangeableBand f1 = ChangeableBand.create("5");
+		ChangeableBand f2 = ChangeableBand.create("3");
+		TuringMaschinen
+				.createSeq(TuringMaschinen.copy(f1, f11), TuringMaschinen.createSeq(
+						TuringMaschinen.copy(ChangeableBand.create("0"), f1),
+						TuringMaschinen.createSeq(TuringMaschinen.copy(f2, f21),
+								TuringMaschinen.createWhile(f21,
+										TuringMaschinen.createSeq(TuringMaschinen.createAdd(f1, f11, f1),
+												TuringMaschinen.createSub(f21, ChangeableBand.create("1"), f21))))))
+				.simuliere();
+		assertEquals("15", f1.toString());
 	}
 }
