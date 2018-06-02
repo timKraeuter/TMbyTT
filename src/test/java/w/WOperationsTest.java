@@ -1,12 +1,11 @@
 package w;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
-
 import turingmaschine.TuringMaschineMitBand;
 import turingmaschine.TuringMaschinen;
 import turingmaschine.band.ChangeableBand;
+
+import static org.junit.Assert.assertEquals;
 
 public class WOperationsTest {
 
@@ -29,15 +28,15 @@ public class WOperationsTest {
 
 	@Test
 	public void testKillerTestAddiererTest() {
-		ChangeableBand x = ChangeableBand.create("5");
-		TuringMaschinen.createAdd(x, x, x);
+		final ChangeableBand x = ChangeableBand.create("5");
+		TuringMaschinen.createAdd(x, x, x).simuliere();
 		assertEquals("10", x.toString());
 	}
 
 	@Test
 	public void testKillerTestSubtrahiererTest() {
-		ChangeableBand x = ChangeableBand.create("5");
-		TuringMaschinen.createSub(x, x, x);
+		final ChangeableBand x = ChangeableBand.create("5");
+		TuringMaschinen.createSub(x, x, x).simuliere();
 		assertEquals("0", x.toString());
 	}
 
