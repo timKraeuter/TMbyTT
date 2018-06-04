@@ -56,6 +56,17 @@ public class TuringMaschinen {
 	private static TuringMaschine pruefe0Maschine() {
 		final URL resource = TuringMaschinen.class.getResource("pruefe0Maschine.xml");
 		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
+	}	
+	
+	public static TuringMaschineMitBand createaPruefeEqual0Maschine(final ChangeableBand ist0Band,
+			final ChangeableBand ausgabeBand) {
+		final TuringMaschine pruefe0Maschine = TuringMaschinen.pruefeEqual0Maschine();
+		return TuringMaschineMitBand.create(pruefe0Maschine, ist0Band, ausgabeBand);
+	}
+
+	private static TuringMaschine pruefeEqual0Maschine() {
+		final URL resource = TuringMaschinen.class.getResource("pruefeEqual0Maschine.xml");
+		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
 
 	/**
@@ -177,8 +188,20 @@ public class TuringMaschinen {
 	
 	public static TuringMaschineMitBand createWhileEqual(final ChangeableBand bandWelchesAuf0GeprueftWird,
 			final TuringMaschineMitBand tm) {
-		//TODO implement
-		throw new UnsupportedOperationException("implement me!");
+		final TuringMaschinenBuilder builder = TuringMaschine.builder();
+		final Zustand stop = Zustand.create("stop");
+		final TuringMaschineMitBand pruefeEqual0Maschine = TuringMaschinen
+				.createaPruefeEqual0Maschine(bandWelchesAuf0GeprueftWird, ChangeableBand.create(""));
+		builder.startZustand(pruefeEqual0Maschine.getMaschine().getStartZustand());
+		builder.addEndZustand(stop);
+		builder.anzahlDerBaender(pruefeEqual0Maschine.getBaender().size() + tm.getBaender().size());
+		builder.ueberfuehrungsfunktion(TuringMaschinen.ueberfuehrungVonWhileNotEqualBerechnen(pruefeEqual0Maschine, tm, stop));
+		final TuringMaschine whileTM = builder.build();
+
+		final List<ChangeableBand> baender = new ArrayList<>(pruefeEqual0Maschine.getBaender());
+		baender.addAll(tm.getBaender());
+
+		return TuringMaschineMitBand.create(whileTM, baender);
 	}
 
 	private static Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungVonWhileNotEqualBerechnen(
