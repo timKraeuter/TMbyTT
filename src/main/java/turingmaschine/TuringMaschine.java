@@ -64,11 +64,25 @@ public class TuringMaschine {
 		return new TuringMaschine(startZustand, endZustaende, ueberfuehrungsfunktion, anzahlDerBaender);
 	}
 	
+	/**
+	 * Erstellt aus den übergebenen eingaben eine StartKonfiguration und lässt diese laufen.
+	 * 
+	 * @param eingaben
+	 *            initialer Inhalt der Bänder der TM
+	 * @return End-Konfigurationen
+	 */
 	public Set<Konfiguration> simuliere(final String... eingaben) {
 		final Konfiguration startConfig = this.createStartKonfiguration(Arrays.stream(eingaben).map(ImmutableBand::create).collect(Collectors.toList()));
 		return this.lasseMaschineLaufen(startConfig);
 	}
 	
+	/**
+	 * Lässt die TuringMaschine mit der übergebenen Konfiguration auf Basis der Überführungsfunktion laufen.
+	 * 
+	 * @param startConfig
+	 *            Konfiguration am Anfang
+	 * @return alle Konfigurationen, die in einen Endzustand geführt haben.
+	 */
 	public Set<Konfiguration> lasseMaschineLaufen(final Konfiguration startConfig) {
 		Set<Konfiguration> naechsteKonfigurationen = Collections.singleton(startConfig);
 		
@@ -89,6 +103,13 @@ public class TuringMaschine {
 		return endKonfigurationen;
 	}
 	
+	/**
+	 * Erstellt eine Start-Konfiguration zur TM mit den übergebenen Bändern.
+	 * 
+	 * @param eingabeBaender
+	 *            der Startkonfiguration
+	 * @return die erzeugte Start-Konfiguration
+	 */
 	public Konfiguration createStartKonfiguration(final List<? extends Band> eingabeBaender) {
 		if (eingabeBaender.size() != this.anzahlDerBaender) {
 			throw new RuntimeException(
@@ -99,12 +120,26 @@ public class TuringMaschine {
 		return Konfiguration.create(this.startZustand, eingabeBaender, this);
 	}
 	
+	/**
+	 * Gibt genau eine Endkonfiguration des Ergebnisses von {@link #simuliere(String...) simuliere} zurück.
+	 * 
+	 * @param eingaben
+	 *            initialer Inhalt der Bänder der TM
+	 * @return Endkonfiguration der TM bei der Eingabe eingaben
+	 */
 	public Konfiguration simuliereDeterministisch(final String... eingaben) {
 		final Set<Konfiguration> endKonfigurationen = this.simuliere(eingaben);
 		this.checkIfDeterministisch(endKonfigurationen);
 		return endKonfigurationen.iterator().next();
 	}
 	
+	/**
+	 * Gibt genau eine Endkonfiguration des Ergebnisses von {@link #simuliere(String...) simuliere} zurück.
+	 * 
+	 * @param baender
+	 *            initiale Bänder der TM
+	 * @return Endkonfiguration der TM bei der Eingabe baender
+	 */
 	Konfiguration simuliereDeterministisch(final List<? extends Band> baender) {
 		final Konfiguration startKonfiguration = this.createStartKonfiguration(baender);
 		final Set<Konfiguration> endKonfigurationen = this.lasseMaschineLaufen(startKonfiguration);
@@ -121,16 +156,37 @@ public class TuringMaschine {
 		}
 	}
 	
+	/**
+	 * Macht einen Schritt auf Basis der übergebenen Konfiguration und der Überführungsfunktion der TM.
+	 * 
+	 * @param konfiguration
+	 *            von der aus ein Schritt gemacht wird
+	 * @return Konfigurationen nach dem Schritt
+	 */
 	private Set<Konfiguration> step(final Konfiguration konfiguration) {
-		// TODO orgendwie muss das hier getrennt sein.
+		// TODO irgendwie muss das hier getrennt sein.
 		final List<ElementDerUeberfuehrungsfunktion> ueberfuhrungen = this.ueberfuehrungsfunktion.stream().filter(e -> e.istPassendeUeberfuehrungZu(konfiguration)).collect(Collectors.toList());
 		return ueberfuhrungen.stream().map(konfiguration::doUeberfuehrung).collect(Collectors.toSet());
 	}
 	
+	/**
+	 * Prüft, ob die TM die eingabe erkennt.
+	 * 
+	 * @param eingabe
+	 *            für die geprüft wird, ob die TM sie erkennt.
+	 * @return true, falls die TM die eingabe erkennt, false sonst
+	 */
 	public boolean erkenntEingabe(final String eingabe) {
 		return !this.simuliere(eingabe).isEmpty();
 	}
 	
+	/**
+	 * Komponiert bzw. Sequenziert zwei Turing-Maschinen.
+	 * 
+	 * @param t2
+	 *            TuringMaschine, die hinter this geschaltet wird
+	 * @return Turing-Maschine, die aus der Sequanzierung entsteht
+	 */
 	TuringMaschine sequence(final TuringMaschine t2) {
 		final TuringMaschinenBuilder builder = TuringMaschine.builder();
 		builder.startZustand(this.startZustand); // Startzustand der 1 Maschine
@@ -142,6 +198,13 @@ public class TuringMaschine {
 		return builder.build();
 	}
 	
+	/**
+	 * Berechnet die Überführung bei Sequenzierung zweier Turing-Maschinen.
+	 * 
+	 * @param t2
+	 *            TuringMaschine, die hinter this geschaltet wird
+	 * @return Kombinierte Überführungsfunnktion von this und t2
+	 */
 	private Set<ElementDerUeberfuehrungsfunktion> berechneSequenzUeberfuehrung(final TuringMaschine t2) {
 		// Change Names for Debugging
 		this.getZustaende().forEach(zustand -> zustand.addToName("1"));
