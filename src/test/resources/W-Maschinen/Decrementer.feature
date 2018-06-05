@@ -21,7 +21,7 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       #Der schlechte Fall, in dem man negativ wird, weshalb das ganze Band mit Käse beschmiert wird
       | decrement          | noNegativesAllowed | _              | _                    | R                         |
       #markieren aller felder als ungültig
-      | noNegativesAllowed | noNegativesAllowed | ~              | §                    | R                         |
+      | noNegativesAllowed | noNegativesAllowed | ~              |                    0 | R                         |
       | noNegativesAllowed | nachL              | _              | _                    | L                         |
       #Schreiberkopf nach Links resetten
       | nachL              | nachL              | ~              | ~                    | L                         |
@@ -30,7 +30,7 @@ Feature: Verschiedene Turingmaschinen werden getestet.
     Then die TM mit dem Namen Decrement hat bei folgender Eingabe die folgende Ausgabe auf Band 1:
       | eingabe  | ausgabe  |
       |        5 |        4 |
-      |        0 | §        |
+      |        0 |        0 |
       |        1 |        0 |
       |        2 |        1 |
       |        3 |        2 |
@@ -46,5 +46,5 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       |      105 |      104 |
       | 99999999 | 99999998 |
       |  1000000 |   999999 |
-      |   000000 | §§§§§§   |
+      |   000000 |   000000 |
     #And persistiere die TM Decrement to decrementerTM

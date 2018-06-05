@@ -56,6 +56,17 @@ public class TuringMaschinen {
 	private static TuringMaschine pruefe0Maschine() {
 		final URL resource = TuringMaschinen.class.getResource("pruefe0Maschine.xml");
 		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
+	}	
+	
+	public static TuringMaschineMitBand createaPruefeEqual0Maschine(final ChangeableBand ist0Band,
+			final ChangeableBand ausgabeBand) {
+		final TuringMaschine pruefe0Maschine = TuringMaschinen.pruefeEqual0Maschine();
+		return TuringMaschineMitBand.create(pruefe0Maschine, ist0Band, ausgabeBand);
+	}
+
+	private static TuringMaschine pruefeEqual0Maschine() {
+		final URL resource = TuringMaschinen.class.getResource("pruefeEqual0Maschine.xml");
+		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
 
 	/**
@@ -104,7 +115,7 @@ public class TuringMaschinen {
 
 		final TuringMaschineMitBand addierer = TuringMaschinen.createSeq(TuringMaschinen.createIncrement(sum1i),
 				TuringMaschinen.createDecrement(sum2i));
-		final TuringMaschineMitBand whileM = TuringMaschinen.createWhile(sum2i, addierer);
+		final TuringMaschineMitBand whileM = TuringMaschinen.createWhileNotEqual(sum2i, addierer);
 
 		return TuringMaschinen.createSeq(TuringMaschinen.createSeq(c1, TuringMaschinen.createSeq(c2, whileM)), cResult);
 	}
@@ -125,7 +136,7 @@ public class TuringMaschinen {
 
 		final TuringMaschineMitBand subtrahierer = TuringMaschinen.createSeq(TuringMaschinen.createDecrement(parkplatz),
 				TuringMaschinen.createDecrement(subtrahend1));
-		final TuringMaschineMitBand whileM = TuringMaschinen.createWhile(subtrahend1, subtrahierer);
+		final TuringMaschineMitBand whileM = TuringMaschinen.createWhileNotEqual(subtrahend1, subtrahierer);
 
 		return TuringMaschinen.createSeq(TuringMaschinen.createSeq(einparken, TuringMaschinen.createSeq(copy, whileM)),
 				ausparken);
@@ -157,7 +168,7 @@ public class TuringMaschinen {
 	 *            wiederholt auszuführende Turingmaschine.
 	 * @return While-Turingmaschine.
 	 */
-	public static TuringMaschineMitBand createWhile(final ChangeableBand bandWelchesAuf0GeprueftWird,
+	public static TuringMaschineMitBand createWhileNotEqual(final ChangeableBand bandWelchesAuf0GeprueftWird,
 			final TuringMaschineMitBand tm) {
 		final TuringMaschinenBuilder builder = TuringMaschine.builder();
 		final Zustand stop = Zustand.create("stop");
@@ -166,7 +177,7 @@ public class TuringMaschinen {
 		builder.startZustand(pruefe0Maschine.getMaschine().getStartZustand());
 		builder.addEndZustand(stop);
 		builder.anzahlDerBaender(pruefe0Maschine.getBaender().size() + tm.getBaender().size());
-		builder.ueberfuehrungsfunktion(TuringMaschinen.ueberfuehrungVonWhileBerechnen(pruefe0Maschine, tm, stop));
+		builder.ueberfuehrungsfunktion(TuringMaschinen.ueberfuehrungVonWhileNotEqualBerechnen(pruefe0Maschine, tm, stop));
 		final TuringMaschine whileTM = builder.build();
 
 		final List<ChangeableBand> baender = new ArrayList<>(pruefe0Maschine.getBaender());
@@ -174,8 +185,26 @@ public class TuringMaschinen {
 
 		return TuringMaschineMitBand.create(whileTM, baender);
 	}
+	
+	public static TuringMaschineMitBand createWhileEqual(final ChangeableBand bandWelchesAuf0GeprueftWird,
+			final TuringMaschineMitBand tm) {
+		final TuringMaschinenBuilder builder = TuringMaschine.builder();
+		final Zustand stop = Zustand.create("stop");
+		final TuringMaschineMitBand pruefeEqual0Maschine = TuringMaschinen
+				.createaPruefeEqual0Maschine(bandWelchesAuf0GeprueftWird, ChangeableBand.create(""));
+		builder.startZustand(pruefeEqual0Maschine.getMaschine().getStartZustand());
+		builder.addEndZustand(stop);
+		builder.anzahlDerBaender(pruefeEqual0Maschine.getBaender().size() + tm.getBaender().size());
+		builder.ueberfuehrungsfunktion(TuringMaschinen.ueberfuehrungVonWhileNotEqualBerechnen(pruefeEqual0Maschine, tm, stop));
+		final TuringMaschine whileTM = builder.build();
 
-	private static Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungVonWhileBerechnen(
+		final List<ChangeableBand> baender = new ArrayList<>(pruefeEqual0Maschine.getBaender());
+		baender.addAll(tm.getBaender());
+
+		return TuringMaschineMitBand.create(whileTM, baender);
+	}
+
+	private static Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungVonWhileNotEqualBerechnen(
 			final TuringMaschineMitBand pruefe0Maschine, final TuringMaschineMitBand tm,
 			final Zustand endZustandWhile) {
 		final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion = new HashSet<>();

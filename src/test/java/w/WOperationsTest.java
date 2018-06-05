@@ -23,7 +23,7 @@ public class WOperationsTest {
                         .createSeq(TuringMaschinen.copy(f1, f11), TuringMaschinen.createSeq(
                                 TuringMaschinen.copy(ChangeableBand.create("0"), f1),
                                 TuringMaschinen.createSeq(TuringMaschinen.copy(f2, f21),
-                                        TuringMaschinen.createWhile(f21,
+                                        TuringMaschinen.createWhileNotEqual(f21,
                                                 TuringMaschinen.createSeq(TuringMaschinen.createAdd(f1, f11, f1),
                                                         TuringMaschinen.createSub(f21, ChangeableBand.create("1"), f21))))))
                         .simuliere();
@@ -81,7 +81,7 @@ public class WOperationsTest {
         final ChangeableBand x = ChangeableBand.create("5");
         final ChangeableBand y = ChangeableBand.create("0");
         final TuringMaschineMitBand decrementX = TuringMaschinen.createDecrement(x);
-        final TuringMaschineMitBand whileYNicht0Decrement = TuringMaschinen.createWhile(y, decrementX);
+        final TuringMaschineMitBand whileYNicht0Decrement = TuringMaschinen.createWhileNotEqual(y, decrementX);
 
         whileYNicht0Decrement.simuliere();
 
