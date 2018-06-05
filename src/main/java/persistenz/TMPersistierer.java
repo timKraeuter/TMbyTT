@@ -3,7 +3,6 @@ package persistenz;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 
-import turingmaschine.TuringMaschine;
 import turingmaschine.band.zeichen.BeliebigesZeichen;
 import turingmaschine.band.zeichen.BeliebigesZeichenOhneBlank;
 import turingmaschine.band.zeichen.Blank;
@@ -14,6 +13,9 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.Arrays;
 
+/**
+ * Klasse zum Persisitieren von TuringMaschinen.
+ */
 public class TMPersistierer {
 	
 	private static TMPersistierer instance;
@@ -33,12 +35,17 @@ public class TMPersistierer {
 		};
 	}
 	
+	/**
+	 * Singleton-typisches getInstance.
+	 * 
+	 * @return die instance des TMPersistierers
+	 */
 	public static TMPersistierer getInstance() {
 		if (TMPersistierer.instance == null) {
-            TMPersistierer.instance = new TMPersistierer();
-            TMPersistierer.instance.addKonvertierer(Blank.getKonvertierer());
-            TMPersistierer.instance.addKonvertierer(BeliebigesZeichen.getKonvertierer());
-            TMPersistierer.instance.addKonvertierer(BeliebigesZeichenOhneBlank.getKonvertierer());
+			TMPersistierer.instance = new TMPersistierer();
+			TMPersistierer.instance.addKonvertierer(Blank.getKonvertierer());
+			TMPersistierer.instance.addKonvertierer(BeliebigesZeichen.getKonvertierer());
+			TMPersistierer.instance.addKonvertierer(BeliebigesZeichenOhneBlank.getKonvertierer());
 		}
 		return TMPersistierer.instance;
 	}
@@ -94,8 +101,8 @@ public class TMPersistierer {
 	public Object lade(final File xml) {
 		return TMPersistierer.instance.xBach.fromXML(xml);
 	}
-
-	public Object lade(URL resource) {
+	
+	public Object lade(final URL resource) {
 		return TMPersistierer.instance.xBach.fromXML(resource);
 	}
 	
@@ -114,8 +121,8 @@ public class TMPersistierer {
 	 *            Speichern/ Laden gesetzt werden.
 	 */
 	public void verarbeiteAnnotationen(final Class<?>... klassen) {
-        TMPersistierer.instance.xBach.processAnnotations(klassen);
+		TMPersistierer.instance.xBach.processAnnotations(klassen);
 	}
-
+	
 	
 }

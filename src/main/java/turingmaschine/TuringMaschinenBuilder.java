@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Klasse nach dem Builder-Pattern zum Erstellen von {@link TuringMaschine TuringMaschinen}.
+ */
 public class TuringMaschinenBuilder {
 	
 	private Zustand startZustand;

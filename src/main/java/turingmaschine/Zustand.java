@@ -2,6 +2,9 @@ package turingmaschine;
 
 import java.math.BigInteger;
 
+/**
+ * Repräsentation des Zustandes einer TuringMaschine.
+ */
 public class Zustand {
 	
 	private static BigInteger counter = BigInteger.ZERO;
@@ -17,16 +20,16 @@ public class Zustand {
 	
 	public static Zustand create() {
 		final String generierterName = "z" + Zustand.counter;
-        Zustand.counter = Zustand.counter.add(BigInteger.ONE);
+		Zustand.counter = Zustand.counter.add(BigInteger.ONE);
 		return new Zustand(generierterName);
 	}
 	
-    void addToName(final String appendix) {
-	    this.name = this.name + appendix;
-    }
-
-    @Override
-    public String toString() {
-        return this.name ;
-    }
+	void addToName(final String appendix) {
+		this.name = this.name + appendix;
+	}
+	
+	@Override
+	public String toString() {
+		return this.name ;
+	}
 }
