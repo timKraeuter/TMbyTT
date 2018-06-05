@@ -1,6 +1,6 @@
-Feature: Verschiedene Turingmaschinen werden getestet.
+Feature: Turing-Maschine als Dezimal-Inkrementierer.
 
-  Scenario: TM kopiert das Eingabeband auf das Ausgabeband.
+  Scenario: TM kann dezimal inkrementieren.
     Given eine TM mit dem Namen Increment und 1 Bändern
     And die TM mit dem Namen Increment hat den Startzustand nachR
     And die TM mit dem Namen Increment hat die Überführungsfunktion:

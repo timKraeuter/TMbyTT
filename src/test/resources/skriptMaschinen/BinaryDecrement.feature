@@ -1,6 +1,4 @@
-Feature: Verschiedene Turingmaschinen werden getestet.
-
-Feature: Verschiedene Turingmaschinen werden getestet.
+Feature: Turing-Maschine als Binärer-Dekremtierer.
 
   Scenario: TM kann binäre Zahlen inkrementieren.
     Given eine TM mit dem Namen BinaryDecrement und 1 Bändern

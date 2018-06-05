@@ -1,6 +1,6 @@
-Feature: Verschiedene Turingmaschinen werden getestet.
+Feature: TM prüft das Eingabeband auf Gleichheit mit 0.
 
-  Scenario: TM kopiert das Eingabeband auf das Ausgabeband.
+  Scenario: TM prüft das Eingabeband auf 0.
     Given eine TM mit dem Namen PruefeEqual0 und 2 Bändern
     And die TM mit dem Namen PruefeEqual0 hat den Startzustand z0
     And die TM mit dem Namen PruefeEqual0 hat die Überführungsfunktion:

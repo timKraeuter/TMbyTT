@@ -1,6 +1,6 @@
-Feature: Verschiedene Turingmaschinen werden getestet.
+Feature: Turing-Maschine als Dezimal-Dekrementierer.
 
-  Scenario: TM kopiert das Eingabeband auf das Ausgabeband.
+  Scenario: TM kann Dezimalzahlen dekrementieren.
     Given eine TM mit dem Namen Decrement und 1 Bändern
     And die TM mit dem Namen Decrement hat den Startzustand nachR
     And die TM mit dem Namen Decrement hat die Überführungsfunktion:

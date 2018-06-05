@@ -1,4 +1,4 @@
-Feature: Verschiedene Turingmaschinen werden getestet.
+Feature: Turing-Maschine zum Kopieren von Eingaben.
 
   Scenario: TM kopiert das Eingabeband auf das Ausgabeband.
     Given eine TM mit dem Namen CopyNumbers und 2 Bändern

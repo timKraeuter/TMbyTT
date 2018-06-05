@@ -1,4 +1,4 @@
-Feature: Verschiedene Turingmaschinen werden getestet.
+Feature: Turing-Maschine als Dezimal-Addierer.
 
   Scenario: Dezimal addieren mit einer TM.
     Given eine TM mit dem Namen DezimalAddierer und 3 Bändern
