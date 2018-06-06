@@ -171,6 +171,6 @@ public class TMStepdefs {
 		final TuringMaschine tm = this.getTM(nameDerTM).build();
 		assertTrue(eingaben.stream().allMatch(tm::erkenntEingabe));
 		final Konfiguration konfiguration = tm.simuliereDeterministisch(eingaben.toArray(new String[eingaben.size()]));
-		konfiguration.erzeugeKonsolenAusgabe();
+		konfiguration.printKonfigurationsfolge();
 	}
 }

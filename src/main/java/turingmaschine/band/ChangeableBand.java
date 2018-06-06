@@ -33,8 +33,13 @@ public class ChangeableBand implements Band {
 		this.update(this.band.verarbeite(zuSchreibendesZeichen, lesekopfBewegung, gelesenesZeichen));
 		return this;
 	}
-	
-	public void update(final ImmutableBand band) {
+
+    @Override
+    public String getBandInhalt() {
+        return this.band.getBandInhalt();
+    }
+
+    public void update(final ImmutableBand band) {
 		this.band = band;
 	}
 	

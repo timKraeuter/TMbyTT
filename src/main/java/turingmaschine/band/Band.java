@@ -33,7 +33,9 @@ public interface Band {
 	 * @return Ergebnis der Prüfung
 	 */
 	default boolean bandContains(final String bandInhalt) {
-		return this.toString().contains(bandInhalt);
+		return this.getBandInhalt().contains(bandInhalt);
 	}
+
+	String getBandInhalt();
 	
 }

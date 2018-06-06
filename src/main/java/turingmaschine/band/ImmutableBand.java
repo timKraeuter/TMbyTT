@@ -73,8 +73,8 @@ public class ImmutableBand implements Band {
 		return ImmutableBand.create(inhalteDesNeuenBands, positionDesNeuenSchreibLeseKopfes);
 		// TODO: Sonderfälle wenn die position bei 0 oder der Länge der Liste bzw. offset bei 1 ist.
 	}
-	
-	private void schreibeZeichen(final List<Zeichen> inhalteDesNeuenBands, final Zeichen zuSchreibendesZeichen, final Zeichen gelesenesZeichen) {
+
+    private void schreibeZeichen(final List<Zeichen> inhalteDesNeuenBands, final Zeichen zuSchreibendesZeichen, final Zeichen gelesenesZeichen) {
 		zuSchreibendesZeichen.accept(new ZeichenVisitor<Void>() {
 			@Override
 			public Void handle(final NormalesZeichen normalesZeichen) {
@@ -154,7 +154,40 @@ public class ImmutableBand implements Band {
 				builder.append("]");
 			}
 		}
+		builder.append(" | ");
 		return builder.toString();
+	}
+
+
+    @Override
+    public String getBandInhalt() {
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < this.inhalteDesBands.size(); i++) {
+            final Zeichen zeichen = this.inhalteDesBands.get(i);
+            zeichen.accept(new ZeichenVisitor<Void>() {
+                @Override
+                public Void handle(final NormalesZeichen normalesZeichen) {
+                    builder.append(normalesZeichen.getZeichen());
+                    return null;
+                }
+
+                @Override
+                public Void handle(final BeliebigesZeichen beliebigesZeichen) {
+                    return null;
+                }
+
+                @Override
+                public Void handle(final Blank blank) {
+                    return null;
+                }
+
+                @Override
+                public Void handle(final BeliebigesZeichenOhneBlank beliebigesZeichenOhneBlank) {
+                    return null;
+                }
+            });
+        }
+        return builder.toString();
 	}
 	
 	@Override

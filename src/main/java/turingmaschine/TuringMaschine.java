@@ -165,7 +165,9 @@ public class TuringMaschine {
 	 */
 	private Set<Konfiguration> step(final Konfiguration konfiguration) {
 		// TODO irgendwie muss das hier getrennt sein.
-		final List<ElementDerUeberfuehrungsfunktion> ueberfuhrungen = this.ueberfuehrungsfunktion.stream().filter(e -> e.istPassendeUeberfuehrungZu(konfiguration)).collect(Collectors.toList());
+		final List<ElementDerUeberfuehrungsfunktion> ueberfuhrungen = this.ueberfuehrungsfunktion.stream()
+                .filter(e -> e.istPassendeUeberfuehrungZu(konfiguration)).collect(Collectors.toList());
+
 		return ueberfuhrungen.stream().map(konfiguration::doUeberfuehrung).collect(Collectors.toSet());
 	}
 	
