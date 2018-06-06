@@ -27,7 +27,7 @@ public class WOperationsTest {
                                                 TuringMaschinen.createSeq(TuringMaschinen.createAdd(f1, f11, f1),
                                                         TuringMaschinen.createSub(f21, ChangeableBand.create("1"), f21))))))
                         .simuliere();
-                assertEquals(Integer.toString(xi*yi), f1.toString());
+                assertEquals(Integer.toString(xi*yi), f1.getBandInhalt());
             }
         }
         System.out.println((System.currentTimeMillis() - start) + "ms");
@@ -37,14 +37,14 @@ public class WOperationsTest {
     public void testKomplexeAddition() {
         final ChangeableBand x = ChangeableBand.create("5");
         TuringMaschinen.createAdd(x, x, x).simuliere();
-        assertEquals("10", x.toString());
+        assertEquals("10", x.getBandInhalt());
     }
 
     @Test
     public void testKomplexeSubtraction() {
         final ChangeableBand x = ChangeableBand.create("5");
         TuringMaschinen.createSub(x, x, x).simuliere();
-        assertEquals("0", x.toString());
+        assertEquals("0", x.getBandInhalt());
     }
 
 
@@ -52,7 +52,7 @@ public class WOperationsTest {
     public void testAddierer() {
         final ChangeableBand result = ChangeableBand.create();
         TuringMaschinen.createAdd(ChangeableBand.create("5"), ChangeableBand.create("3"), result).simuliere();
-        assertEquals("8", result.toString());
+        assertEquals("8", result.getBandInhalt());
 
     }
 
@@ -62,18 +62,18 @@ public class WOperationsTest {
         final TuringMaschineMitBand subtract3From5 = TuringMaschinen.createSub(ChangeableBand.create("389"),
                 ChangeableBand.create("211"), ret);
         subtract3From5.simuliere();
-        assertEquals("178", ret.toString());
+        assertEquals("178", ret.getBandInhalt());
 
         final ChangeableBand xMinus7 = ChangeableBand.create("17");
         TuringMaschinen.createSub(xMinus7, ChangeableBand.create("7"), xMinus7).simuliere();
-        assertEquals("10", xMinus7.toString());
+        assertEquals("10", xMinus7.getBandInhalt());
     }
 
     @Test
     public void thereIsNoProblem() {
         final ChangeableBand z = ChangeableBand.create("JJTT sind alles Spacken");
         TuringMaschinen.createSub(ChangeableBand.create("17"), ChangeableBand.create("5"), z).simuliere();
-        assertEquals("12", z.toString());
+        assertEquals("12", z.getBandInhalt());
     }
 
     @Test
@@ -85,8 +85,8 @@ public class WOperationsTest {
 
         whileYNicht0Decrement.simuliere();
 
-        assertEquals("0", y.toString());
-        assertEquals("5", x.toString());
+        assertEquals("0", y.getBandInhalt());
+        assertEquals("5", x.getBandInhalt());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class WOperationsTest {
                 ChangeableBand.create("3"), result);
         final TuringMaschineMitBand m2 = TuringMaschinen.createAdd(ChangeableBand.create("5"), result, result);
         TuringMaschinen.createSeq(m1, m2).simuliere();
-        assertEquals("13", result.toString());
+        assertEquals("13", result.getBandInhalt());
     }
 
     @Test
@@ -104,7 +104,7 @@ public class WOperationsTest {
         final ChangeableBand result = ChangeableBand.create("1");
         final TuringMaschineMitBand m = TuringMaschinen.createAdd(ChangeableBand.create("5"), result, result);
         m.simuliere();
-        assertEquals("6", result.toString());
+        assertEquals("6", result.getBandInhalt());
     }
 
     @Test
@@ -117,8 +117,8 @@ public class WOperationsTest {
                 ChangeableBand.create("5"), y);
         final TuringMaschineMitBand seqMachine = TuringMaschinen.createSeq(xMachine, yMachine);
         seqMachine.simuliere();
-        assertEquals("8", x.toString());
-        assertEquals("10", y.toString());
+        assertEquals("8", x.getBandInhalt());
+        assertEquals("10", y.getBandInhalt());
     }
 
     @Test
@@ -133,12 +133,12 @@ public class WOperationsTest {
         final TuringMaschineMitBand yMachine = TuringMaschinen.createAdd(c3, c4, y);
         final TuringMaschineMitBand seqMachine = TuringMaschinen.createSeq(xMachine, yMachine);
         seqMachine.simuliere();
-        assertEquals("3", x.toString());
-        assertEquals("7", y.toString());
-        assertEquals("1", c1.toString());
-        assertEquals("2", c2.toString());
-        assertEquals("3", c3.toString());
-        assertEquals("4", c4.toString());
+        assertEquals("3", x.getBandInhalt());
+        assertEquals("7", y.getBandInhalt());
+        assertEquals("1", c1.getBandInhalt());
+        assertEquals("2", c2.getBandInhalt());
+        assertEquals("3", c3.getBandInhalt());
+        assertEquals("4", c4.getBandInhalt());
     }
 
     @Test
@@ -150,8 +150,8 @@ public class WOperationsTest {
         final TuringMaschineMitBand yMachine = TuringMaschinen.createAdd(x, ChangeableBand.create("888"), y);
         final TuringMaschineMitBand seqMachine = TuringMaschinen.createSeq(xMachine, yMachine);
         seqMachine.simuliere();
-        assertEquals("376", x.toString());
-        assertEquals("1264", y.toString());
+        assertEquals("376", x.getBandInhalt());
+        assertEquals("1264", y.getBandInhalt());
     }
 
     @Test
@@ -160,17 +160,17 @@ public class WOperationsTest {
         final ChangeableBand y = ChangeableBand.create();
         final TuringMaschineMitBand xGleich5 = TuringMaschinen.copy(ChangeableBand.create("5"), x);
         xGleich5.simuliere();
-        assertEquals("5", x.toString());
+        assertEquals("5", x.getBandInhalt());
         final TuringMaschineMitBand yGleichX = TuringMaschinen.copy(x, y);
         yGleichX.simuliere();
-        assertEquals("5", y.toString());
+        assertEquals("5", y.getBandInhalt());
 
         x.wipe();
         y.wipe();
         final TuringMaschineMitBand yGleichXGleich5 = TuringMaschinen.createSeq(xGleich5, yGleichX);
         yGleichXGleich5.simuliere();
-        assertEquals("5", x.toString());
-        assertEquals("5", y.toString());
+        assertEquals("5", x.getBandInhalt());
+        assertEquals("5", y.getBandInhalt());
 
         final ChangeableBand z = ChangeableBand.create();
         final TuringMaschineMitBand zGleichY = TuringMaschinen.copy(y, z);
@@ -179,9 +179,9 @@ public class WOperationsTest {
         final TuringMaschineMitBand zGleichYGleichXGleich5 = TuringMaschinen.createSeq(yGleichXGleich5, zGleichY);
         zGleichYGleichXGleich5.simuliere();
 
-        assertEquals("5", x.toString());
-        assertEquals("5", y.toString());
-        assertEquals("5", z.toString());
+        assertEquals("5", x.getBandInhalt());
+        assertEquals("5", y.getBandInhalt());
+        assertEquals("5", z.getBandInhalt());
 
     }
 
@@ -192,8 +192,7 @@ public class WOperationsTest {
                 final ChangeableBand x = ChangeableBand.create(Integer.toString(xi));
                 final ChangeableBand y = ChangeableBand.create(Integer.toString(yi));
                 TuringMaschinen.createSub(y, x, x).simuliere();
-                System.out.println(yi + " - " + xi + " = " + x);
-                assertEquals(yi + " - " + xi, Integer.valueOf(yi - xi), Integer.valueOf(x.toString()));
+                assertEquals(yi + " - " + xi, Integer.valueOf(yi - xi), Integer.valueOf(x.getBandInhalt()));
             }
         }
     }
@@ -203,8 +202,7 @@ public class WOperationsTest {
         for (int xi = 0; xi <= 100; xi++) {
             final ChangeableBand x = ChangeableBand.create(Integer.toString(xi));
             TuringMaschinen.createSub(x, x, x).simuliere();
-            System.out.println(xi + " - " + xi + " = " + x);
-            assertEquals(xi + " - " + xi, Integer.valueOf(0), Integer.valueOf(x.toString()));
+            assertEquals(xi + " - " + xi, Integer.valueOf(0), Integer.valueOf(x.getBandInhalt()));
         }
     }
 
@@ -215,8 +213,7 @@ public class WOperationsTest {
                 final ChangeableBand x = ChangeableBand.create(Integer.toString(xi));
                 final ChangeableBand y = ChangeableBand.create(Integer.toString(yi));
                 TuringMaschinen.createAdd(x, y, x).simuliere();
-                System.out.println(xi + " + " + yi + " = " + x);
-                assertEquals(xi + " + " + yi, String.valueOf(xi + yi), x.toString());
+                assertEquals(xi + " + " + yi, String.valueOf(xi + yi), x.getBandInhalt());
             }
         }
     }

@@ -21,14 +21,14 @@ import java.util.stream.IntStream;
  * Repräsentation einer Turing-Maschine.
  */
 public class TuringMaschine {
-	
+
 	private final Zustand startZustand;
 	private final Set<Zustand> endZustaende;
-	
+
 	private final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion;
-	
+
 	private final int anzahlDerBaender;
-	
+
 	private TuringMaschine(final Zustand startZustand, final Set<Zustand> endZustaende,
 			final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion, final int anzahlDerBaender) {
 		this.startZustand = startZustand;
@@ -41,10 +41,10 @@ public class TuringMaschine {
 		}
 		this.ueberfuehrungsfunktion = ueberfuehrungsfunktion;
 	}
-	
+
 	/**
 	 * Prüft, ob die Anzahl der Elemente in den Elementen der Überführungsfunktion zu der Anzahl der Bänder der TuringMaschine passt.
-	 * 
+	 *
 	 * @param ueberfuehrungsfunktion
 	 *            zu prüfende Überführungsfunktion
 	 * @return true, wenn prüfung positiv, false falls nicht
@@ -56,17 +56,17 @@ public class TuringMaschine {
 						.size() == this.anzahlDerBaender
 						&& elementDerUeberfuehrungsfunktion.getZuSchreibendeZeichen().size() == this.anzahlDerBaender
 						&& elementDerUeberfuehrungsfunktion.getEingaben().size() == this.anzahlDerBaender);
-		
+
 	}
-	
+
 	public static TuringMaschine create(final Zustand startZustand, final Set<Zustand> endZustaende,
 			final Set<ElementDerUeberfuehrungsfunktion> ueberfuehrungsfunktion, final int anzahlDerBaender) {
 		return new TuringMaschine(startZustand, endZustaende, ueberfuehrungsfunktion, anzahlDerBaender);
 	}
-	
+
 	/**
 	 * Erstellt aus den übergebenen eingaben eine StartKonfiguration und lässt diese laufen.
-	 * 
+	 *
 	 * @param eingaben
 	 *            initialer Inhalt der Bänder der TM
 	 * @return End-Konfigurationen
@@ -75,21 +75,21 @@ public class TuringMaschine {
 		final Konfiguration startConfig = this.createStartKonfiguration(Arrays.stream(eingaben).map(ImmutableBand::create).collect(Collectors.toList()));
 		return this.lasseMaschineLaufen(startConfig);
 	}
-	
+
 	/**
 	 * Lässt die TuringMaschine mit der übergebenen Konfiguration auf Basis der Überführungsfunktion laufen.
-	 * 
+	 *
 	 * @param startConfig
 	 *            Konfiguration am Anfang
 	 * @return alle Konfigurationen, die in einen Endzustand geführt haben.
 	 */
 	public Set<Konfiguration> lasseMaschineLaufen(final Konfiguration startConfig) {
 		Set<Konfiguration> naechsteKonfigurationen = Collections.singleton(startConfig);
-		
+
 		final Set<Konfiguration> endKonfigurationen = new HashSet<>();
 		while (!naechsteKonfigurationen.isEmpty()) {
 			final HashSet<Konfiguration> neueNaechsteConfigs = new HashSet<>();
-			
+
 			for (final Konfiguration config : naechsteKonfigurationen) {
 				if (config.isEndKonfiguration()) {
 					endKonfigurationen.add(config);
@@ -97,15 +97,15 @@ public class TuringMaschine {
 					neueNaechsteConfigs.addAll(this.step(config));
 				}
 			}
-			
+
 			naechsteKonfigurationen = neueNaechsteConfigs;
 		}
 		return endKonfigurationen;
 	}
-	
+
 	/**
 	 * Erstellt eine Start-Konfiguration zur TM mit den übergebenen Bändern.
-	 * 
+	 *
 	 * @param eingabeBaender
 	 *            der Startkonfiguration
 	 * @return die erzeugte Start-Konfiguration
@@ -116,13 +116,13 @@ public class TuringMaschine {
 					String.format("Nur %s Eingabebänder erkannt, aber %s Eingabebänder sind gefordert!",
 							eingabeBaender.size(), this.anzahlDerBaender));
 		}
-		
+
 		return Konfiguration.create(this.startZustand, eingabeBaender, this);
 	}
-	
+
 	/**
 	 * Gibt genau eine Endkonfiguration des Ergebnisses von {@link #simuliere(String...) simuliere} zurück.
-	 * 
+	 *
 	 * @param eingaben
 	 *            initialer Inhalt der Bänder der TM
 	 * @return Endkonfiguration der TM bei der Eingabe eingaben
@@ -132,10 +132,10 @@ public class TuringMaschine {
 		this.checkIfDeterministisch(endKonfigurationen);
 		return endKonfigurationen.iterator().next();
 	}
-	
+
 	/**
 	 * Gibt genau eine Endkonfiguration des Ergebnisses von {@link #simuliere(String...) simuliere} zurück.
-	 * 
+	 *
 	 * @param baender
 	 *            initiale Bänder der TM
 	 * @return Endkonfiguration der TM bei der Eingabe baender
@@ -145,9 +145,9 @@ public class TuringMaschine {
 		final Set<Konfiguration> endKonfigurationen = this.lasseMaschineLaufen(startKonfiguration);
 		this.checkIfDeterministisch(endKonfigurationen);
 		return endKonfigurationen.iterator().next();
-		
+
 	}
-	
+
 	private void checkIfDeterministisch(final Set<Konfiguration> endKonfigurationen) {
 		if (endKonfigurationen.isEmpty() || endKonfigurationen.size() > 1) {
 			throw new RuntimeException(
@@ -155,10 +155,10 @@ public class TuringMaschine {
 							endKonfigurationen));
 		}
 	}
-	
+
 	/**
 	 * Macht einen Schritt auf Basis der übergebenen Konfiguration und der Überführungsfunktion der TM.
-	 * 
+	 *
 	 * @param konfiguration
 	 *            von der aus ein Schritt gemacht wird
 	 * @return Konfigurationen nach dem Schritt
@@ -170,10 +170,10 @@ public class TuringMaschine {
 
 		return ueberfuhrungen.stream().map(konfiguration::doUeberfuehrung).collect(Collectors.toSet());
 	}
-	
+
 	/**
 	 * Prüft, ob die TM die eingabe erkennt.
-	 * 
+	 *
 	 * @param eingabe
 	 *            für die geprüft wird, ob die TM sie erkennt.
 	 * @return true, falls die TM die eingabe erkennt, false sonst
@@ -181,10 +181,10 @@ public class TuringMaschine {
 	public boolean erkenntEingabe(final String eingabe) {
 		return !this.simuliere(eingabe).isEmpty();
 	}
-	
+
 	/**
 	 * Komponiert bzw. Sequenziert zwei Turing-Maschinen.
-	 * 
+	 *
 	 * @param t2
 	 *            TuringMaschine, die hinter this geschaltet wird
 	 * @return Turing-Maschine, die aus der Sequanzierung entsteht
@@ -194,15 +194,15 @@ public class TuringMaschine {
 		builder.startZustand(this.startZustand); // Startzustand der 1 Maschine
 		t2.endZustaende.forEach(builder::addEndZustand); // Endzustände der 2 Maschine
 		builder.anzahlDerBaender(this.anzahlDerBaender + t2.anzahlDerBaender);
-		
+
 		builder.ueberfuehrungsfunktion(this.berechneSequenzUeberfuehrung(t2));
-		
+
 		return builder.build();
 	}
-	
+
 	/**
 	 * Berechnet die Überführung bei Sequenzierung zweier Turing-Maschinen.
-	 * 
+	 *
 	 * @param t2
 	 *            TuringMaschine, die hinter this geschaltet wird
 	 * @return Kombinierte Überführungsfunnktion von this und t2
@@ -211,35 +211,35 @@ public class TuringMaschine {
 		// Change Names for Debugging
 		this.getZustaende().forEach(zustand -> zustand.addToName("1"));
 		t2.getZustaende().forEach(zustand -> zustand.addToName("2"));
-		
-		
+
+
 		final Set<ElementDerUeberfuehrungsfunktion> result = new HashSet<>();
-		
+
 		// Überführungen der 1 Maschine übernehmen
 		result.addAll(this.ueberfuehrungsfunktion.stream()
 				.map(elementDerUeberfuehrungsfunktion -> TuringMaschine.erstelleUeberfuhrungMitBeliebigenZeichen(elementDerUeberfuehrungsfunktion, t2.anzahlDerBaender, false))
 				.collect(Collectors.toSet()));
-		
-		
+
+
 		// Überführungen der 2 Maschine übernehmen
 		result.addAll(t2.ueberfuehrungsfunktion.stream()
 				.map(elementDerUeberfuehrungsfunktion -> TuringMaschine.erstelleUeberfuhrungMitBeliebigenZeichen(elementDerUeberfuehrungsfunktion, this.anzahlDerBaender, true))
 				.collect(Collectors.toSet()));
-		
+
 		final List<Zeichen> beliebigeZeichen = new ArrayList<>();
 		IntStream.range(0, this.anzahlDerBaender + t2.anzahlDerBaender).forEach(i -> beliebigeZeichen.add(BeliebigesZeichen.getInstance()));
 		// Überführungen der 1 Maschine in die 2, wenn man bei der ersten in einem Endzustand ist.
-		
+
 		this.endZustaende.forEach(endzustandAusT1 -> result.add(ElementDerUeberfuehrungsfunktion.create(endzustandAusT1,
 				t2.startZustand,
 				beliebigeZeichen,
 				beliebigeZeichen,
 				beliebigeZeichen.stream().map(beliebigesZeichen -> Lesekopfbewegung.N).collect(Collectors.toList()
 						))));
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * @param elementDerUeberfuehrungsfunktion Überführungsfunktion, welche erweitert werden soll.
 	 * @param anzahlBeliebigeZeichen           Anzahl der beliebigen Zeichen, die Vorne oder Hinten eingefügt werden sollen.
@@ -249,10 +249,10 @@ public class TuringMaschine {
 	static ElementDerUeberfuehrungsfunktion erstelleUeberfuhrungMitBeliebigenZeichen(final ElementDerUeberfuehrungsfunktion elementDerUeberfuehrungsfunktion,
 			final int anzahlBeliebigeZeichen,
 			final boolean vorneEinfuegen) {
-		
+
 		final List<Zeichen> beliebigeZeichen = new ArrayList<>();
 		IntStream.range(0, anzahlBeliebigeZeichen).forEach(i -> beliebigeZeichen.add(BeliebigesZeichen.getInstance()));
-		
+
 		final List<Zeichen> neueEingaben = new ArrayList<>(elementDerUeberfuehrungsfunktion.getEingaben());
 		final List<Zeichen> neueZuSchreibendeZeichen = new ArrayList<>(elementDerUeberfuehrungsfunktion.getZuSchreibendeZeichen());
 		final List<Lesekopfbewegung> neueLesekopfBewegungen = new ArrayList<>(elementDerUeberfuehrungsfunktion.getLesekopfBewegungen());
@@ -265,27 +265,27 @@ public class TuringMaschine {
 			neueZuSchreibendeZeichen.addAll(beliebigeZeichen);
 			beliebigeZeichen.forEach(beliebigesZeichen -> neueLesekopfBewegungen.add(Lesekopfbewegung.N));
 		}
-		
-		
+
+
 		return ElementDerUeberfuehrungsfunktion.create(elementDerUeberfuehrungsfunktion.getVonZustand(),
 				elementDerUeberfuehrungsfunktion.getZuZustand(),
 				neueEingaben,
 				neueZuSchreibendeZeichen,
 				neueLesekopfBewegungen);
 	}
-	
+
 	boolean isEndzustand(final Zustand moeglicherEndzustand) {
 		return this.endZustaende.contains(moeglicherEndzustand);
 	}
-	
+
 	public Set<ElementDerUeberfuehrungsfunktion> getUeberfuehrungsfunktion() {
 		return Collections.unmodifiableSet(this.ueberfuehrungsfunktion);
 	}
-	
+
 	public Zustand getStartZustand() {
 		return this.startZustand;
 	}
-	
+
 	public Set<Zeichen> getArbeitsalphabet() {
 		final Set<Zeichen> arbeitsalphabet = this.ueberfuehrungsfunktion.stream().flatMap(
 				elementDerUeberfuehrungsfunktion -> elementDerUeberfuehrungsfunktion.getZuSchreibendeZeichen().stream())
@@ -294,7 +294,7 @@ public class TuringMaschine {
 		arbeitsalphabet.add(Blank.getInstance());
 		return arbeitsalphabet;
 	}
-	
+
 	// TODO was bringt das Eingabealphabet und der Blank darf hier eigentlich nicht
 	// rein. siehe def. seite 4 und 5
 	public Set<Zeichen> getEingabealphabet() {
@@ -302,7 +302,7 @@ public class TuringMaschine {
 				.flatMap(elementDerUeberfuehrungsfunktion -> elementDerUeberfuehrungsfunktion.getEingaben().stream())
 				.collect(Collectors.toSet());
 	}
-	
+
 	/**
 	 * @return alle Zustände des Automaten einschließlich Anfangs- und Endzustand.
 	 */
@@ -315,11 +315,11 @@ public class TuringMaschine {
 		}
 		return result;
 	}
-	
+
 	public static TuringMaschinenBuilder builder() {
 		return TuringMaschinenBuilder.create();
 	}
-	
+
 	@Override
 	public boolean equals(final Object o) {
 		if (this == o) {
@@ -333,17 +333,17 @@ public class TuringMaschine {
 				&& Objects.equal(this.endZustaende, that.endZustaende)
 				&& Objects.equal(this.ueberfuehrungsfunktion, that.ueberfuehrungsfunktion);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(this.startZustand, this.endZustaende, this.ueberfuehrungsfunktion,
 				this.anzahlDerBaender);
 	}
-	
+
 	Set<Zustand> getEndZustaende() {
 		return Collections.unmodifiableSet(this.endZustaende);
 	}
-	
+
 	public int getAnzahlDerBaender() {
 		return this.anzahlDerBaender;
 	}}
