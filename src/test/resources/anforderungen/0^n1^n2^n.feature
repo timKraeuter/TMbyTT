@@ -42,5 +42,7 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 0112  |
       | 0012  |
       | 0122  |
+    And die TM 0^n1^n2^n erkennt die Wörter und erzeugt dabei eine Konsolenausgabe:
+      | 000011112222 |
 #    And persistiere die TM 0^n1^n2^n to 0^n1^n2^n
 

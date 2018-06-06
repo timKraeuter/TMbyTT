@@ -352,4 +352,6 @@ Feature: Turing-Maschine als Dezimal-Addierer.
       | 8;3;_            | 11      |
       | 11;3;_           | 14      |
       | 14;3;_           | 17      |
+  And die TM DezimalAddierer erkennt die Wörter und erzeugt dabei eine Konsolenausgabe:
+    |173349;1564567;_|
 #    And persistiere die TM DezimalAddierer to decimalAdditionTM

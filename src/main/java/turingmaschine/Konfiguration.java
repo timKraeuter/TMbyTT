@@ -93,7 +93,7 @@ public class Konfiguration {
             baenderString.append(System.lineSeparator());
         }
         final String s = "Zustand= " + this.zustand.toString() + ", "
-                + "Bänder= " + baenderString.toString();
+                + "Bänder= " + System.lineSeparator() + baenderString.toString();
         System.out.println(s);
     }
 }
