@@ -151,7 +151,7 @@ public class TuringMaschine {
 	private void checkIfDeterministisch(final Set<Konfiguration> endKonfigurationen) {
 		if (endKonfigurationen.isEmpty() || endKonfigurationen.size() > 1) {
 			throw new RuntimeException(
-					String.format("Die TM hatte folgende %s Endkonfigurationen. Dies entspricht nicht dem Verhalten einer deterministischen Maschine",
+					String.format("Die TM hatte folgende %s Endkonfigurationen. Das Eingabewort wurde nicht deterministisch erkannt.",
 							endKonfigurationen));
 		}
 	}
