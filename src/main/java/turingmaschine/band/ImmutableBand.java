@@ -117,7 +117,9 @@ public class ImmutableBand implements Band {
 		}
 		return this.inhalteDesBands.get(this.positionDesSchreibLeseKopfes);
 	}
-	
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_RED = "\u001B[31m";
+
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
@@ -126,7 +128,7 @@ public class ImmutableBand implements Band {
 			final boolean istAktuellesZeichen = i == this.positionDesSchreibLeseKopfes;
 			final Zeichen zeichen = this.inhalteDesBands.get(i);
 			if (istAktuellesZeichen) {
-				builder.append("[");
+				builder.append(ImmutableBand.ANSI_RED + "[" + ImmutableBand.ANSI_RESET);
 			}
 			zeichen.accept(new ZeichenVisitor<Void>() {
 				@Override
@@ -142,6 +144,7 @@ public class ImmutableBand implements Band {
 				
 				@Override
 				public Void handle(final Blank blank) {
+				    builder.append(Blank.getInstance().getZeichen());
 					return null;
 				}
 				
@@ -151,7 +154,7 @@ public class ImmutableBand implements Band {
 				}
 			});
 			if (istAktuellesZeichen) {
-				builder.append("]");
+				builder.append(ImmutableBand.ANSI_RED + "]" + ImmutableBand.ANSI_RESET);
 			}
 		}
 		builder.append(" | ");

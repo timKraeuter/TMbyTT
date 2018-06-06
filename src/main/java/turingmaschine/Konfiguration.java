@@ -92,8 +92,8 @@ public class Konfiguration {
             baenderString.append(b.toString());
             baenderString.append(System.lineSeparator());
         }
-        final String s = "Zustand= " + this.zustand.toString() + ", " + System.lineSeparator()
-                + "	Bänder= " + baenderString.toString();
+        final String s = "Zustand= " + this.zustand.toString() + ", "
+                + "Bänder= " + baenderString.toString();
         System.out.println(s);
     }
 }
