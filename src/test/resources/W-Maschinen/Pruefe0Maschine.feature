@@ -26,7 +26,8 @@ Feature: Turing-Maschine zum Prüfen auf 0.
 
     And die TM mit dem Namen Pruefe0 hat den Endzustand Ze
     Then die TM mit dem Namen Pruefe0 hat bei folgender Eingabe die folgende Ausgabe auf Band 2:
-    # Testfälle ohne Übertrag
+    # 1 == false
+    # 0 == true
       | eingabe      | ausgabe |
       | 0;_          | 0       |
       | 00;_         | 0       |
