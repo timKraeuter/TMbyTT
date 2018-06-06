@@ -121,7 +121,13 @@ public class ImmutableBand implements Band {
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		for (final Zeichen zeichen : this.inhalteDesBands) {
+		for (int i = 0; i < this.inhalteDesBands.size(); i++) {
+			builder.append(" | ");
+			final boolean istAktuellesZeichen = i == this.positionDesSchreibLeseKopfes;
+			final Zeichen zeichen = this.inhalteDesBands.get(i);
+			if (istAktuellesZeichen) {
+				builder.append("[");
+			}
 			zeichen.accept(new ZeichenVisitor<Void>() {
 				@Override
 				public Void handle(final NormalesZeichen normalesZeichen) {
@@ -144,6 +150,9 @@ public class ImmutableBand implements Band {
 					return null;
 				}
 			});
+			if (istAktuellesZeichen) {
+				builder.append("]");
+			}
 		}
 		return builder.toString();
 	}

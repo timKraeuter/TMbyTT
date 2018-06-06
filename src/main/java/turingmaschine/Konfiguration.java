@@ -70,4 +70,17 @@ public class Konfiguration {
 	public String toString() {
 		return "zustand=" + this.zustand + ", baender=" + this.baender;
 	}
+	
+	public void erzeugeKonsolenAusgabe() {
+		final StringBuilder baenderString = new StringBuilder();
+		for (int i = 0; i < this.baender.size(); i++) {
+			baenderString.append("Band" + i + ": ");
+			final Band b = this.baender.get(i);
+			baenderString.append(b.toString());
+			baenderString.append(System.lineSeparator());
+		}
+		final String s = "Konfiguration= {" + System.lineSeparator() + "	Zustand= " + this.zustand.toString() + ", " + System.lineSeparator()
+				+ "	Bänder= " + baenderString.toString() + "}";
+		System.out.println(s);
+	}
 }
