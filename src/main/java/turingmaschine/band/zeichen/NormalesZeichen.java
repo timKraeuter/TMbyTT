@@ -27,7 +27,12 @@ public class NormalesZeichen implements Zeichen {
 	public <T> T accept(final ZeichenVisitor<T> visitor) {
 		return visitor.handle(this);
 	}
-	
+
+	@Override
+	public String toXML() {
+		return this.zeichen.toString();
+	}
+
 	@Override
 	public boolean matches(final Zeichen zeichen) {
 		return zeichen.accept(new ZeichenVisitor<Boolean>() {

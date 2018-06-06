@@ -44,5 +44,6 @@ public interface Zeichen {
 	 * @return Rückgabe vom Typ des TypeParameters des Visitors
 	 */
 	<T> T accept (ZeichenVisitor<T> visitor);
-	
+
+    String toXML();
 }

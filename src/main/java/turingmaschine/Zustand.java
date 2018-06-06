@@ -32,4 +32,8 @@ public class Zustand {
 	public String toString() {
 		return this.name ;
 	}
+
+    public String toXML() {
+		return "<state>" + this.name + "</state>";
+    }
 }
