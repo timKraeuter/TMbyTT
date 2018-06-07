@@ -299,7 +299,7 @@ public class TuringMaschine {
     }
 
     /**
-     * @return alle Zustände des Automaten einschließlich Anfangs- und Endzustand.
+     * @return alle Zustände des Automaten einschließlich Anfangszustand und Endzustände.
      */
     public Set<Zustand> getZustaende() {
         final Set<Zustand> result = new HashSet<>(this.endZustaende);
