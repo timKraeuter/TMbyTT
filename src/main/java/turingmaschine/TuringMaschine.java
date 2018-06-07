@@ -71,16 +71,17 @@ public class TuringMaschine {
      */
     public Set<Konfiguration> simuliere(final String... eingaben) {
         final Konfiguration startConfig = this.createStartKonfiguration(Arrays.stream(eingaben).map(ImmutableBand::create).collect(Collectors.toList()));
-        return this.lasseMaschineLaufen(startConfig);
+        return this.lasseMaschineLaufen(startConfig, false);
     }
 
     /**
      * Lässt die TuringMaschine mit der übergebenen Konfiguration auf Basis der Überführungsfunktion laufen.
      *
      * @param startConfig Konfiguration am Anfang
+     * @param ausgabe true, wenn sofort eine Ausgabe der Konfiguration gemacht werden soll.
      * @return alle Konfigurationen, die in einen Endzustand geführt haben.
      */
-    public Set<Konfiguration> lasseMaschineLaufen(final Konfiguration startConfig) {
+    private Set<Konfiguration> lasseMaschineLaufen(final Konfiguration startConfig, final boolean ausgabe) {
         Set<Konfiguration> naechsteKonfigurationen = Collections.singleton(startConfig);
 
         final Set<Konfiguration> endKonfigurationen = new HashSet<>();
@@ -88,13 +89,15 @@ public class TuringMaschine {
             final HashSet<Konfiguration> neueNaechsteConfigs = new HashSet<>();
 
             for (final Konfiguration config : naechsteKonfigurationen) {
+                if (ausgabe) {
+                    config.printKonfigurationToConsole();
+                }
                 if (config.isEndKonfiguration()) {
                     endKonfigurationen.add(config);
                 } else {
                     neueNaechsteConfigs.addAll(this.step(config));
                 }
             }
-
             naechsteKonfigurationen = neueNaechsteConfigs;
         }
         return endKonfigurationen;
@@ -106,7 +109,7 @@ public class TuringMaschine {
      * @param eingabeBaender der Startkonfiguration
      * @return die erzeugte Start-Konfiguration
      */
-    public Konfiguration createStartKonfiguration(final List<? extends Band> eingabeBaender) {
+    private Konfiguration createStartKonfiguration(final List<? extends Band> eingabeBaender) {
         if (eingabeBaender.size() != this.anzahlDerBaender) {
             throw new RuntimeException(
                     String.format("Nur %s Eingabebänder erkannt, aber %s Eingabebänder sind gefordert!",
@@ -134,9 +137,9 @@ public class TuringMaschine {
      * @param baender initiale Bänder der TM
      * @return Endkonfiguration der TM bei der Eingabe baender
      */
-    Konfiguration simuliereDeterministisch(final List<? extends Band> baender) {
+    Konfiguration simuliereDeterministisch(final List<? extends Band> baender, final boolean ausgabe) {
         final Konfiguration startKonfiguration = this.createStartKonfiguration(baender);
-        final Set<Konfiguration> endKonfigurationen = this.lasseMaschineLaufen(startKonfiguration);
+        final Set<Konfiguration> endKonfigurationen = this.lasseMaschineLaufen(startKonfiguration, ausgabe);
         this.checkIfDeterministisch(endKonfigurationen);
         return endKonfigurationen.iterator().next();
 
@@ -339,7 +342,7 @@ public class TuringMaschine {
     }
 
     public String toXML() {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append("<machine>");
         builder.append("<start>").append(this.startZustand.toXML()).append("</start>");
         builder.append("<end>");

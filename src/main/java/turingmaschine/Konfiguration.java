@@ -59,11 +59,6 @@ public class Konfiguration {
         return this.baender.get(nummerDesBandes - 1).bandContains(bandInhalt);
     }
 
-    /**
-     * Üblicher Getter für das Attribut zustand.
-     *
-     * @return liefert zustand.
-     */
     Zustand getZustand() {
         return this.zustand;
     }
@@ -84,7 +79,7 @@ public class Konfiguration {
         this.printKonfigurationToConsole();
     }
 
-    private void printKonfigurationToConsole() {
+    public void printKonfigurationToConsole() {
         final StringBuilder baenderString = new StringBuilder();
         for (int i = 0; i < this.baender.size(); i++) {
             baenderString.append("Band" + i + ": ");

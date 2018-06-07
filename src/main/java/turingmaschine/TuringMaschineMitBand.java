@@ -41,11 +41,15 @@ public class TuringMaschineMitBand {
 	public TuringMaschineMitBand sequence(final TuringMaschineMitBand turingMaschineMitBand) {
 		final List<ChangeableBand> changeableBaender = new ArrayList<>(this.baender);
 		changeableBaender.addAll(turingMaschineMitBand.baender);
-		return TuringMaschineMitBand.create(this.maschine.sequence(turingMaschineMitBand.maschine),changeableBaender);
+		return TuringMaschineMitBand.create(this.maschine.sequence(turingMaschineMitBand.maschine), changeableBaender);
 	}
 	
 	public void simuliere() {
-		this.maschine.simuliereDeterministisch(this.baender);
+		this.maschine.simuliereDeterministisch(this.baender, false);
+	}
+
+	public void simuliereMitAusgabe() {
+		this.maschine.simuliereDeterministisch(this.baender, true);
 	}
 	
 	public TuringMaschine getMaschine() {
