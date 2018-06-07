@@ -50,4 +50,4 @@ Feature: TM prüft das Eingabeband auf Gleichheit mit 0.
       | 10;_         | 0       |
       | 123456789;_  | 0       |
       | 436801243;_  | 0       |
-    And persistiere die TM PruefeEqual0 to pruefeEqual0Maschine
+#    And persistiere die TM PruefeEqual0 to pruefeEqual0Maschine
