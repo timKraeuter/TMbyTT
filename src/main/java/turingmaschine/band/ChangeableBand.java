@@ -16,10 +16,6 @@ public class ChangeableBand extends Band {
 	    super(inhalteDesBands, positionDesSchreibLeseKopfes);
 	}
 	
-	public static ChangeableBand create(final ImmutableBand band) {
-		return new ChangeableBand(band.getInhalteDesBands(), band.getPositionDesSchreibLeseKopfes());
-	}
-	
 	public static ChangeableBand create(final String eingabe) {
         final ChangeableBand band = new ChangeableBand(new ArrayList<>(), 0);
         eingabe.chars().forEach(c -> band.addInitialeZeichen(Zeichen.create((char) c)));
