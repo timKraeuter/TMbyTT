@@ -6,8 +6,8 @@ import java.math.BigInteger;
  * Repräsentation des Zustandes einer TuringMaschine.
  */
 public class Zustand {
-	
 	private static BigInteger counter = BigInteger.ZERO;
+
 	private String name;
 	
 	private Zustand(final String name) {
