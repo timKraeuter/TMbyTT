@@ -20,14 +20,6 @@ import java.util.stream.Collectors;
 public class TuringMaschinen {
 	
 	/**
-	 * @return Dezimal-Addierer-TuringMaschine
-	 */
-	private static TuringMaschine addiererMaschine() {
-		final URL resource = TuringMaschinen.class.getResource("decimalAdditionTM.xml");
-		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
-	}
-	
-	/**
 	 * Erstellt eine Increment Maschine, welche bei Ausführung den Wert auf dem band
 	 * um 1 erhöht.
 	 *
@@ -40,7 +32,7 @@ public class TuringMaschinen {
 		return TuringMaschineMitBand.create(incrementMaschine, band);
 	}
 	
-	private static TuringMaschine incrementMaschine() {
+	public static TuringMaschine incrementMaschine() {
 		final URL resource = TuringMaschinen.class.getResource("incrementerTM.xml");
 		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
@@ -102,17 +94,8 @@ public class TuringMaschinen {
 	 */
 	public static TuringMaschineMitBand createAdd(final ChangeableBand sum1, final ChangeableBand sum2,
 			final ChangeableBand result) {
-		// final ChangeableBand sum11 = ChangeableBand.create();
-		// final ChangeableBand sum21 = ChangeableBand.create();
-		// final TuringMaschineMitBand m1 = TuringMaschinen.copy(sum1, sum11);
-		// final TuringMaschineMitBand m2 = TuringMaschinen.copy(sum2, sum21);
-		// final TuringMaschineMitBand m3 =
-		// TuringMaschineMitBand.create(TuringMaschinen.addiererMaschine(), sum11,
-		// sum21,
-		// result);
-		// return TuringMaschinen.createSeq(m1, TuringMaschinen.createSeq(m2, m3));
-		
-		final ChangeableBand sum1i = ChangeableBand.create();
+
+	    final ChangeableBand sum1i = ChangeableBand.create();
 		final ChangeableBand sum2i = ChangeableBand.create();
 		final TuringMaschineMitBand c1 = TuringMaschinen.copy(sum1, sum1i);
 		final TuringMaschineMitBand c2 = TuringMaschinen.copy(sum2, sum2i);

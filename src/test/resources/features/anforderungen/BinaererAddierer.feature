@@ -46,5 +46,5 @@ Feature: Verschiedene Turingmaschinen werden getestet.
       | 110;1100;_  | 10010   |
     And die TM BinärerAddierer erkennt die Wörter und erzeugt dabei eine Konsolenausgabe:
       | 110;1100;_ |
-#    And persistiere die TM BinärerAddierer to binaryAddition
+    And persistiere die TM BinärerAddierer to binaryAddition
 
