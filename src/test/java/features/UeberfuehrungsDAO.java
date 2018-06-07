@@ -1,4 +1,4 @@
-package feature;
+package features;
 
 public class UeberfuehrungsDAO {
 	

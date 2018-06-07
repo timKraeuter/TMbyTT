@@ -1,5 +1,4 @@
 import org.junit.Test;
-import persistenz.TMPersistierer;
 import turingmaschine.ElementDerUeberfuehrungsfunktion;
 import turingmaschine.TuringMaschine;
 import turingmaschine.Zustand;
@@ -11,30 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 public class PersistenzTest {
-
-    @Test
-    public void testElementDerUeberFuehrungsfunktion() {
-        final Zustand vonZustand = Zustand.create("vonZustand");
-        final Zustand endZustand = Zustand.create("endZustand");
-        final Zeichen zuLesendesZeichen = Zeichen.create('a');
-        final List<Zeichen> zuLesendeZeichen = new ArrayList<>();
-        zuLesendeZeichen.add(zuLesendesZeichen);
-        final Zeichen zuSchreibendesZeichen = Zeichen.create('b');
-        final List<Zeichen> zuSchreibendeZeichen = new ArrayList<>();
-        zuSchreibendeZeichen.add(zuSchreibendesZeichen);
-        final Lesekopfbewegung lesekopfbewegung = Lesekopfbewegung.N;
-        final List<Lesekopfbewegung> lesekopfBewegungen = new ArrayList<>();
-        lesekopfBewegungen.add(lesekopfbewegung);
-
-        final ElementDerUeberfuehrungsfunktion e =
-                ElementDerUeberfuehrungsfunktion.create(vonZustand, endZustand, zuLesendeZeichen, zuSchreibendeZeichen, lesekopfBewegungen);
-        final ElementDerUeberfuehrungsfunktion eVonXML =
-                (ElementDerUeberfuehrungsfunktion) TMPersistierer.getInstance().vonXML(TMPersistierer.getInstance().zuXML(e));
-        assertEquals(e, eVonXML);
-    }
 
     @Test
     public void testPersistTristan() {
@@ -72,11 +48,11 @@ public class PersistenzTest {
                         zuSchreibendeZeichen,
                         lesekopfBewegungen);
 
-        Set<Zustand> end = new HashSet<>();
+        final Set<Zustand> end = new HashSet<>();
         end.add(Zustand.create("ende1"));
         end.add(Zustand.create("ende2"));
 
-        Set<ElementDerUeberfuehrungsfunktion> es = new HashSet<>();
+        final Set<ElementDerUeberfuehrungsfunktion> es = new HashSet<>();
         es.add(e);
         es.add(e2);
 

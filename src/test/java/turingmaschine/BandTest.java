@@ -20,9 +20,9 @@ public class BandTest {
 	public void testBandCreation() {
 		final ImmutableBand actualBand = ImmutableBand.create("abc");
 		final ImmutableBand expectedBand = ImmutableBand.create();
-		expectedBand.addZeichen(Zeichen.create('a'));
-		expectedBand.addZeichen(Zeichen.create('b'));
-		expectedBand.addZeichen(Zeichen.create('c'));
+		expectedBand.addInitialeZeichen(Zeichen.create('a'));
+		expectedBand.addInitialeZeichen(Zeichen.create('b'));
+		expectedBand.addInitialeZeichen(Zeichen.create('c'));
 		assertEquals(expectedBand, actualBand);
 	}
 }

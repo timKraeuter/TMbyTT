@@ -165,8 +165,8 @@ public class WOperationsTest {
         yGleichX.simuliere();
         assertEquals("5", y.getBandInhalt());
 
-        x.wipe();
-        y.wipe();
+        x.reset();
+        y.reset();
         final TuringMaschineMitBand yGleichXGleich5 = TuringMaschinen.createSeq(xGleich5, yGleichX);
         yGleichXGleich5.simuliere();
         assertEquals("5", x.getBandInhalt());
@@ -174,8 +174,8 @@ public class WOperationsTest {
 
         final ChangeableBand z = ChangeableBand.create();
         final TuringMaschineMitBand zGleichY = TuringMaschinen.copy(y, z);
-        x.wipe();
-        y.wipe();
+        x.reset();
+        y.reset();
         final TuringMaschineMitBand zGleichYGleichXGleich5 = TuringMaschinen.createSeq(yGleichXGleich5, zGleichY);
         zGleichYGleichXGleich5.simuliere();
 

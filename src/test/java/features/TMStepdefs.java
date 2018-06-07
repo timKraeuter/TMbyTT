@@ -1,4 +1,4 @@
-package feature;
+package features;
 
 import com.google.common.base.Splitter;
 import cucumber.api.java.Before;

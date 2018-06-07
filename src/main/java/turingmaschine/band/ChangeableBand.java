@@ -1,24 +1,29 @@
 package turingmaschine.band;
 
+import turingmaschine.band.zeichen.Blank;
 import turingmaschine.band.zeichen.Zeichen;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Band einer TM, das verändert werden kann bzw. Band, dessen Attribut band umgesetzt werden kann.
  */
-public class ChangeableBand implements Band {
+public class ChangeableBand extends Band {
 	
-	private ImmutableBand band;
-	
-	private ChangeableBand(final ImmutableBand band) {
-		this.band = band;
+
+	private ChangeableBand(final List<Zeichen> inhalteDesBands, final int positionDesSchreibLeseKopfes) {
+	    super(inhalteDesBands, positionDesSchreibLeseKopfes);
 	}
 	
 	public static ChangeableBand create(final ImmutableBand band) {
-		return new ChangeableBand(band);
+		return new ChangeableBand(band.getInhalteDesBands(), band.getPositionDesSchreibLeseKopfes());
 	}
 	
 	public static ChangeableBand create(final String eingabe) {
-		return new ChangeableBand(ImmutableBand.create(eingabe));
+        final ChangeableBand band = new ChangeableBand(new ArrayList<>(), 0);
+        eingabe.chars().forEach(c -> band.addInitialeZeichen(Zeichen.create((char) c)));
+        return band;
 	}
 	
 	public static ChangeableBand create() {
@@ -30,30 +35,36 @@ public class ChangeableBand implements Band {
 	 */
 	@Override
 	public Band verarbeite(final Zeichen zuSchreibendesZeichen, final Lesekopfbewegung lesekopfBewegung, final Zeichen gelesenesZeichen) {
-		this.update(this.band.verarbeite(zuSchreibendesZeichen, lesekopfBewegung, gelesenesZeichen));
+        if (this.getInhalteDesBands().isEmpty()) {
+            this.getInhalteDesBands().add(0, zuSchreibendesZeichen);
+        } else {
+            this.schreibeZeichen(this.getInhalteDesBands(), zuSchreibendesZeichen, gelesenesZeichen);
+        }
+        switch (lesekopfBewegung) {
+            case R:
+                this.setPositionDesSchreibLeseKopfes(this.getPositionDesSchreibLeseKopfes() + 1);
+                if (this.getInhalteDesBands().size() == this.getPositionDesSchreibLeseKopfes()) { // Rechts raus laufen
+                    this.getInhalteDesBands().add(Blank.getInstance());
+                }
+                break;
+            case L:
+                this.setPositionDesSchreibLeseKopfes(this.getPositionDesSchreibLeseKopfes() - 1);
+                if (this.getPositionDesSchreibLeseKopfes() == -1) { // Links raus laufen.
+                    this.getInhalteDesBands().add(0, Blank.getInstance());
+                    this.setPositionDesSchreibLeseKopfes(this.getPositionDesSchreibLeseKopfes() + 1);
+                }
+                break;
+            case N:
+                break;
+            default:
+                throw new RuntimeException();
+        }
 		return this;
 	}
 
-    @Override
-    public String getBandInhalt() {
-        return this.band.getBandInhalt();
+    public void reset() {
+        this.getInhalteDesBands().clear();
+        this.setPositionDesSchreibLeseKopfes(0);
     }
 
-    public void update(final ImmutableBand band) {
-		this.band = band;
-	}
-	
-	public void wipe() {
-		this.band = ImmutableBand.create("");
-	}
-	
-	@Override
-	public Zeichen getAktuellesZeichen() {
-		return this.band.getAktuellesZeichen();
-	}
-	
-	@Override
-	public String toString() {
-		return this.band.toString();
-	}
 }
