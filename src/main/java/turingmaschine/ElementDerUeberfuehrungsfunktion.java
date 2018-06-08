@@ -30,6 +30,13 @@ public class ElementDerUeberfuehrungsfunktion {
         this.eingaben = eingaben;
         this.zuSchreibendeZeichen = zuSchreibendesZeichen;
         this.lesekopfBewegungen = lesekopfbewegungen;
+        this.checkKonsistenz();
+    }
+
+    private void checkKonsistenz() {
+        if (!(this.eingaben.size() == this.zuSchreibendeZeichen.size() && this.zuSchreibendeZeichen.size() == this.lesekopfBewegungen.size())) {
+            throw new RuntimeException("Überführungsfunktion muss gleich viele Zeichen lesen, schreiben und SchreibeLeseKopfbewegungen haben");
+        }
     }
 
     public static ElementDerUeberfuehrungsfunktion create(final Zustand vonZustand,
@@ -138,7 +145,6 @@ public class ElementDerUeberfuehrungsfunktion {
     }
 
     public String toXML() {
-
         final StringBuilder builder = new StringBuilder();
         builder.append("<transition>");
         builder.append("<from>").append(this.vonZustand.toString()).append("</from>");

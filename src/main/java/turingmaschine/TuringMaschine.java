@@ -70,7 +70,9 @@ public class TuringMaschine {
      * @return End-Konfigurationen
      */
     public Set<Konfiguration> simuliere(final String... eingaben) {
-        final Konfiguration startConfig = this.createStartKonfiguration(Arrays.stream(eingaben).map(ImmutableBand::create).collect(Collectors.toList()));
+        final Konfiguration startConfig = this.createStartKonfiguration(Arrays.stream(eingaben)
+                .map(ImmutableBand::create)
+                .collect(Collectors.toList()));
         return this.lasseMaschineLaufen(startConfig, false);
     }
 
@@ -140,7 +142,9 @@ public class TuringMaschine {
     Konfiguration simuliereDeterministisch(final List<? extends Band> baender, final boolean ausgabe) {
         final Konfiguration startKonfiguration = this.createStartKonfiguration(baender);
         final Set<Konfiguration> endKonfigurationen = this.lasseMaschineLaufen(startKonfiguration, ausgabe);
+
         this.checkIfDeterministisch(endKonfigurationen);
+
         return endKonfigurationen.iterator().next();
 
     }
@@ -160,7 +164,6 @@ public class TuringMaschine {
      * @return Konfigurationen nach dem Schritt
      */
     private Set<Konfiguration> step(final Konfiguration konfiguration) {
-        // TODO irgendwie muss das hier getrennt sein.
         final List<ElementDerUeberfuehrungsfunktion> ueberfuhrungen = this.ueberfuehrungsfunktion.stream()
                 .filter(e -> e.istPassendeUeberfuehrungZu(konfiguration)).collect(Collectors.toList());
 
@@ -220,8 +223,8 @@ public class TuringMaschine {
 
         final List<Zeichen> beliebigeZeichen = new ArrayList<>();
         IntStream.range(0, this.anzahlDerBaender + t2.anzahlDerBaender).forEach(i -> beliebigeZeichen.add(BeliebigesZeichen.getInstance()));
-        // Überführungen der 1 Maschine in die 2, wenn man bei der ersten in einem Endzustand ist.
 
+        // Überführungen der 1 Maschine in die 2, wenn man bei der ersten in einem Endzustand ist.
         this.endZustaende.forEach(endzustandAusT1 -> result.add(ElementDerUeberfuehrungsfunktion.create(
                 endzustandAusT1,
                 t2.startZustand,
@@ -323,6 +326,9 @@ public class TuringMaschine {
         return this.anzahlDerBaender;
     }
 
+    /**
+     * @return XML-String, um das ganze bei Tristan importieren zu können von Tristan.
+     */
     public String toXML() {
         final StringBuilder builder = new StringBuilder();
         builder.append("<machine>");

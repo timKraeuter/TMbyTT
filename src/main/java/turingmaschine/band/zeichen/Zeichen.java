@@ -45,5 +45,9 @@ public interface Zeichen {
 	 */
 	<T> T accept (ZeichenVisitor<T> visitor);
 
+
+    /**
+     * @return XML-String, um das ganze bei Tristan importieren zu können von Tristan.
+     */
     String toXML();
 }

@@ -6,6 +6,10 @@ import java.math.BigInteger;
  * Repräsentation des Zustandes einer TuringMaschine.
  */
 public class Zustand {
+
+    /**
+     * Counter für generische Zustandsnamen mit aufsteigender Zahl z0, z1, ...
+     */
 	private static BigInteger counter = BigInteger.ZERO;
 
 	private String name;
@@ -33,6 +37,9 @@ public class Zustand {
 		return this.name ;
 	}
 
+    /**
+     * @return XML-String, um das ganze bei Tristan importieren zu können von Tristan.
+     */
     public String toXML() {
 		return "<state>" + this.name + "</state>";
     }
