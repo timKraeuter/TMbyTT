@@ -48,6 +48,9 @@ public class TuringMaschineMitBand {
 		this.maschine.simuliereDeterministisch(this.baender, false);
 	}
 
+    /**
+     * Simuliert mit live Ausgabe der erreichten Konfigurationen.
+     */
 	public void simuliereMitAusgabe() {
 		this.maschine.simuliereDeterministisch(this.baender, true);
 	}

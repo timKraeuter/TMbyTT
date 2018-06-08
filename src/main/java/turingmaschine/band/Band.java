@@ -92,8 +92,8 @@ public abstract class Band {
         this.inhalteDesBands.add(zeichenToAdd);
     }
 
-    private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_RESET = ""; //Farbcodes welche leider nicht in Eclipse funktionieren "\u001B[0m";
+    private static final String ANSI_RED = ""; //Farbcodes welche leider nicht in Eclipse funktionieren "\u001B[31m";
 
     @Override
     public String toString() {
