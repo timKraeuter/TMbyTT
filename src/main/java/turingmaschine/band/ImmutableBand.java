@@ -58,10 +58,9 @@ public class ImmutableBand extends Band {
                 positionDesNeuenSchreibLeseKopfes = this.getPositionDesSchreibLeseKopfes();
                 break;
             default:
-                throw new RuntimeException();
+                throw new RuntimeException("Should not happen");
         }
 
         return ImmutableBand.create(inhalteDesNeuenBands, positionDesNeuenSchreibLeseKopfes);
-        // TODO: Sonderfälle wenn die position bei 0 oder der Länge der Liste bzw. offset bei 1 ist.
     }
 }

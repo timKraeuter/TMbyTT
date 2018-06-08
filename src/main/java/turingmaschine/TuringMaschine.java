@@ -1,10 +1,10 @@
 package turingmaschine;
 
-import com.google.common.base.Objects;
 import turingmaschine.band.Band;
 import turingmaschine.band.ImmutableBand;
 import turingmaschine.band.Lesekopfbewegung;
 import turingmaschine.band.zeichen.BeliebigesZeichen;
+import turingmaschine.band.zeichen.BeliebigesZeichenOhneBlank;
 import turingmaschine.band.zeichen.Blank;
 import turingmaschine.band.zeichen.Zeichen;
 
@@ -70,7 +70,9 @@ public class TuringMaschine {
      * @return End-Konfigurationen
      */
     public Set<Konfiguration> simuliere(final String... eingaben) {
-        final Konfiguration startConfig = this.createStartKonfiguration(Arrays.stream(eingaben).map(ImmutableBand::create).collect(Collectors.toList()));
+        final Konfiguration startConfig = this.createStartKonfiguration(Arrays.stream(eingaben)
+                .map(ImmutableBand::create)
+                .collect(Collectors.toList()));
         return this.lasseMaschineLaufen(startConfig, false);
     }
 
@@ -140,7 +142,9 @@ public class TuringMaschine {
     Konfiguration simuliereDeterministisch(final List<? extends Band> baender, final boolean ausgabe) {
         final Konfiguration startKonfiguration = this.createStartKonfiguration(baender);
         final Set<Konfiguration> endKonfigurationen = this.lasseMaschineLaufen(startKonfiguration, ausgabe);
+
         this.checkIfDeterministisch(endKonfigurationen);
+
         return endKonfigurationen.iterator().next();
 
     }
@@ -160,7 +164,6 @@ public class TuringMaschine {
      * @return Konfigurationen nach dem Schritt
      */
     private Set<Konfiguration> step(final Konfiguration konfiguration) {
-        // TODO irgendwie muss das hier getrennt sein.
         final List<ElementDerUeberfuehrungsfunktion> ueberfuhrungen = this.ueberfuehrungsfunktion.stream()
                 .filter(e -> e.istPassendeUeberfuehrungZu(konfiguration)).collect(Collectors.toList());
 
@@ -213,7 +216,6 @@ public class TuringMaschine {
                 .map(elementDerUeberfuehrungsfunktion -> TuringMaschine.erstelleUeberfuhrungMitBeliebigenZeichen(elementDerUeberfuehrungsfunktion, t2.anzahlDerBaender, false))
                 .collect(Collectors.toSet()));
 
-
         // Überführungen der 2 Maschine übernehmen
         result.addAll(t2.ueberfuehrungsfunktion.stream()
                 .map(elementDerUeberfuehrungsfunktion -> TuringMaschine.erstelleUeberfuhrungMitBeliebigenZeichen(elementDerUeberfuehrungsfunktion, this.anzahlDerBaender, true))
@@ -221,9 +223,10 @@ public class TuringMaschine {
 
         final List<Zeichen> beliebigeZeichen = new ArrayList<>();
         IntStream.range(0, this.anzahlDerBaender + t2.anzahlDerBaender).forEach(i -> beliebigeZeichen.add(BeliebigesZeichen.getInstance()));
-        // Überführungen der 1 Maschine in die 2, wenn man bei der ersten in einem Endzustand ist.
 
-        this.endZustaende.forEach(endzustandAusT1 -> result.add(ElementDerUeberfuehrungsfunktion.create(endzustandAusT1,
+        // Überführungen der 1 Maschine in die 2, wenn man bei der ersten in einem Endzustand ist.
+        this.endZustaende.forEach(endzustandAusT1 -> result.add(ElementDerUeberfuehrungsfunktion.create(
+                endzustandAusT1,
                 t2.startZustand,
                 beliebigeZeichen,
                 beliebigeZeichen,
@@ -288,16 +291,18 @@ public class TuringMaschine {
         return arbeitsalphabet;
     }
 
-    // TODO was bringt das Eingabealphabet und der Blank darf hier eigentlich nicht
-    // rein. siehe def. seite 4 und 5
     public Set<Zeichen> getEingabealphabet() {
-        return this.ueberfuehrungsfunktion.stream()
+        final Set<Zeichen> eingabenMitBlank = this.ueberfuehrungsfunktion.stream()
                 .flatMap(elementDerUeberfuehrungsfunktion -> elementDerUeberfuehrungsfunktion.getEingaben().stream())
                 .collect(Collectors.toSet());
+        eingabenMitBlank.remove(Blank.getInstance());
+        eingabenMitBlank.remove(BeliebigesZeichen.getInstance());
+        eingabenMitBlank.remove(BeliebigesZeichenOhneBlank.getInstance());
+        return eingabenMitBlank;
     }
 
     /**
-     * @return alle Zustände des Automaten einschließlich Anfangs- und Endzustand.
+     * @return alle Zustände des Automaten einschließlich Anfangszustand und Endzustände.
      */
     public Set<Zustand> getZustaende() {
         final Set<Zustand> result = new HashSet<>(this.endZustaende);
@@ -313,26 +318,6 @@ public class TuringMaschine {
         return TuringMaschinenBuilder.create();
     }
 
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof TuringMaschine)) {
-            return false;
-        }
-        final TuringMaschine that = (TuringMaschine) o;
-        return this.anzahlDerBaender == that.anzahlDerBaender && Objects.equal(this.startZustand, that.startZustand)
-                && Objects.equal(this.endZustaende, that.endZustaende)
-                && Objects.equal(this.ueberfuehrungsfunktion, that.ueberfuehrungsfunktion);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(this.startZustand, this.endZustaende, this.ueberfuehrungsfunktion,
-                this.anzahlDerBaender);
-    }
-
     Set<Zustand> getEndZustaende() {
         return Collections.unmodifiableSet(this.endZustaende);
     }
@@ -341,6 +326,9 @@ public class TuringMaschine {
         return this.anzahlDerBaender;
     }
 
+    /**
+     * @return XML-String, um das ganze bei Tristan importieren zu können von Tristan.
+     */
     public String toXML() {
         final StringBuilder builder = new StringBuilder();
         builder.append("<machine>");

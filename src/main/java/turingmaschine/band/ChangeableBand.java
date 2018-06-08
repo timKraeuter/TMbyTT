@@ -53,7 +53,7 @@ public class ChangeableBand extends Band {
             case N:
                 break;
             default:
-                throw new RuntimeException();
+                throw new RuntimeException("Should not happen!");
         }
 		return this;
 	}

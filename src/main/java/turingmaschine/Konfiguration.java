@@ -15,6 +15,7 @@ public class Konfiguration {
     private final Zustand zustand;
     private final List<? extends Band> baender;
     private final TuringMaschine tM;
+
     private final Konfiguration vorKonfiguration;
 
     private Konfiguration(final Zustand zustand, final List<? extends Band> baender, final TuringMaschine tM, final Konfiguration vorKonfiguration) {
@@ -65,11 +66,6 @@ public class Konfiguration {
 
     Zeichen getAktuellesZeichen(final int bandNummer) {
         return this.baender.get(bandNummer).getAktuellesZeichen();
-    }
-
-    @Override
-    public String toString() {
-        return "zustand=" + this.zustand + ", baender=" + this.baender;
     }
 
     public void printKonfigurationsfolge() {

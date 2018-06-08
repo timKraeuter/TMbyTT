@@ -65,7 +65,7 @@ public class Blank implements Zeichen {
     }
 
     /**
-     * @return Liefert den First-Konvertierer, welcher benötigt wird, damit ein First-Objekt persistiert werden kann.
+     * @return Liefert den Blank-Konvertierer, welcher benötigt wird, damit ein Blank-Objekt persistiert werden kann.
      * Dieses Objekt muss dem TMPersistierer vor dem Speichern/ Laden mittels
      * {@code TMPersistierer.addKonvertierer(First.getKonvertierer()) übergeben werden.
      */
@@ -77,7 +77,6 @@ public class Blank implements Zeichen {
      * Eine private Klasse, die es dem Singleton ermöglicht persistiert zu werden.
      */
     private static class BlankKonvertierer implements Converter {
-        @SuppressWarnings("rawtypes")
         @Override
         public boolean canConvert(final Class clazz) {
             return clazz.equals(Blank.class);

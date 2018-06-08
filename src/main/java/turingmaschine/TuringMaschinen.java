@@ -47,7 +47,7 @@ public class TuringMaschinen {
 	 *         {@link TuringMaschinen#createIncrement(ChangeableBand)} verwendet
 	 *         wird.
 	 */
-	private static TuringMaschine incrementMaschine() {
+	public static TuringMaschine incrementMaschine() {
 		final URL resource = TuringMaschinen.class.getResource("incrementerTM.xml");
 		return (TuringMaschine) TMPersistierer.getInstance().lade(resource);
 	}
@@ -143,7 +143,7 @@ public class TuringMaschinen {
 	 */
 	public static TuringMaschineMitBand createAdd(final ChangeableBand sum1, final ChangeableBand sum2,
 			final ChangeableBand result) {
-		final ChangeableBand sum1i = ChangeableBand.create();
+	    final ChangeableBand sum1i = ChangeableBand.create();
 		final ChangeableBand sum2i = ChangeableBand.create();
 		final TuringMaschineMitBand c1 = TuringMaschinen.copy(sum1, sum1i);
 		final TuringMaschineMitBand c2 = TuringMaschinen.copy(sum2, sum2i);

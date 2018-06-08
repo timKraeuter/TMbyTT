@@ -30,6 +30,13 @@ public class ElementDerUeberfuehrungsfunktion {
         this.eingaben = eingaben;
         this.zuSchreibendeZeichen = zuSchreibendesZeichen;
         this.lesekopfBewegungen = lesekopfbewegungen;
+        this.checkKonsistenz();
+    }
+
+    private void checkKonsistenz() {
+        if (!(this.eingaben.size() == this.zuSchreibendeZeichen.size() && this.zuSchreibendeZeichen.size() == this.lesekopfBewegungen.size())) {
+            throw new RuntimeException("Überführungsfunktion muss gleich viele Zeichen lesen, schreiben und SchreibeLeseKopfbewegungen haben");
+        }
     }
 
     public static ElementDerUeberfuehrungsfunktion create(final Zustand vonZustand,
@@ -137,14 +144,8 @@ public class ElementDerUeberfuehrungsfunktion {
         return Objects.hashCode(this.vonZustand, this.zuZustand, this.eingaben, this.zuSchreibendeZeichen, this.lesekopfBewegungen);
     }
 
-    @Override
-    public String toString() {
-        return "(" + this.vonZustand + ")," + this.eingaben + this.lesekopfBewegungen + "=" + this.zuZustand;
-    }
-
     public String toXML() {
-
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append("<transition>");
         builder.append("<from>").append(this.vonZustand.toString()).append("</from>");
         builder.append("<inputs>");
@@ -157,8 +158,8 @@ public class ElementDerUeberfuehrungsfunktion {
         builder.append("<to>").append(this.zuZustand.toXML()).append("/to");
 
         builder.append("<tasks>");
-        Iterator<Zeichen> zI = this.zuSchreibendeZeichen.iterator();
-        Iterator<Lesekopfbewegung> bI = this.lesekopfBewegungen.iterator();
+        final Iterator<Zeichen> zI = this.zuSchreibendeZeichen.iterator();
+        final Iterator<Lesekopfbewegung> bI = this.lesekopfBewegungen.iterator();
 
         while (zI.hasNext() && bI.hasNext()) {
             builder.append("<task>");

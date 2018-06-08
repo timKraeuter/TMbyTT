@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Klasse nach dem Builder-Pattern zum Erstellen von {@link TuringMaschine TuringMaschinen}.
+ * Klasse nach dem Builder-Pattern zum Erstellen von {@link TuringMaschine TuringMaschinen}, da diese immutable sind.
  */
 public class TuringMaschinenBuilder {
 	

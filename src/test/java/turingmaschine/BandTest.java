@@ -10,7 +10,6 @@ public class BandTest {
 	
 	@Test
 	public void testEmptyBandCreation() {
-		
 		final ImmutableBand actualBand = ImmutableBand.create("");
 		final ImmutableBand expectedBand = ImmutableBand.create();
 		assertEquals(expectedBand, actualBand);

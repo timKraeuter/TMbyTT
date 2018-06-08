@@ -2,7 +2,6 @@ package persistenz;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
-
 import turingmaschine.band.zeichen.BeliebigesZeichen;
 import turingmaschine.band.zeichen.BeliebigesZeichenOhneBlank;
 import turingmaschine.band.zeichen.Blank;
@@ -114,15 +113,4 @@ public class TMPersistierer {
 	public void addKonvertierer(final Converter... konvertierer) {
 		Arrays.stream(konvertierer).forEach(TMPersistierer.instance.xBach::registerConverter);
 	}
-	
-	/**
-	 * @param klassen
-	 *            Klassen, zu welchen Annotationen wie bspw {@code @XStreamAlias("lulu")} verarbeitet werden sollen. Diese müssen bereits vor dem
-	 *            Speichern/ Laden gesetzt werden.
-	 */
-	public void verarbeiteAnnotationen(final Class<?>... klassen) {
-		TMPersistierer.instance.xBach.processAnnotations(klassen);
-	}
-	
-	
 }
